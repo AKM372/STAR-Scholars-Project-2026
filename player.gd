@@ -111,3 +111,5 @@ func pick_up_object(object):
 		await get_tree().create_timer(0.1).timeout
 		object.global_position = %HandMarker.global_position
 		pickedObject = object
+
+#this is a comment to test my github respository!
