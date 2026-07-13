@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2u6qd73ts14s"]
+
+[ext_resource type="PackedScene" uid="uid://dsy42utnjd7xx" path="res://player.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://dfq2x8qcjmxh8" path="res://sponge.tscn" id="3_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://36bodevpebph" path="res://plate.tscn" id="4_036b0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(40, 0, 0, 0, 0.5, 0, 0, 0, 40, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_gv5m4")
+debug_color = Color(0.12941177, 0.5137255, 0.7294118, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(40, 0, 0, 0, 0.5, 0, 0, 0, 40, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_f3sb7")
+
+[node name="player" parent="." instance=ExtResource("2_tlwt5")]
+
+[node name="Plate" parent="." instance=ExtResource("4_036b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.726321, 0, -2.9065943)
+
+[node name="sponge" parent="." instance=ExtResource("3_aqk2v")]
+transform = Transform3D(-0.007853948, 0, -0.9999692, 0, 1, 0, 0.9999692, 0, -0.007853948, -2.7667038, 0, -2.6911285)
