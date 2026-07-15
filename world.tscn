@@ -25,10 +25,10 @@ debug_color = Color(0.12941177, 0.5137255, 0.7294118, 1)
 transform = Transform3D(40, 0, 0, 0, 0.5, 0, 0, 0, 40, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_f3sb7")
 
-[node name="player" parent="." instance=ExtResource("2_tlwt5")]
-
 [node name="Plate" parent="." instance=ExtResource("4_036b0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.726321, 0, -2.9065943)
 
+[node name="player" parent="." instance=ExtResource("2_tlwt5")]
+
 [node name="sponge" parent="." instance=ExtResource("3_aqk2v")]
-transform = Transform3D(-0.007853948, 0, -0.9999692, 0, 1, 0, 0.9999692, 0, -0.007853948, -2.7667038, 0, -2.6911285)
+transform = Transform3D(-0.007853948, 0, -0.9999692, 0, 1, 0, 0.9999692, 0, -0.007853948, -3.0273283, 0, -2.8755882)

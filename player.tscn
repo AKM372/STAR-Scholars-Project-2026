@@ -22,11 +22,12 @@ target_position = Vector3(0, 0, -2)
 
 [node name="HandMarker" type="Marker3D" parent="Head/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20674288, -0.18848181, -0.8213899)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13545424, -0.26660764, -0.84549886)
 
 [node name="SpongeMarker" type="Marker3D" parent="Head/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9329461, -0.62440085, -0.60134983)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64435244, -0.3109206, -0.60134983)
 
 [node name="ScrubMarker" type="Marker3D" parent="Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7243652)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08293533, -0.19401729, -0.9416443)

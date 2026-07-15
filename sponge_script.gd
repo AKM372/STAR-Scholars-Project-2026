@@ -5,10 +5,9 @@ var selected = false
 var outlineWidth = 0.05
 var player
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed('interact') and selected:
-		player.pick_up_object(self)
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed('interact') and selected:
+		#player.pick_up_object(self)
 	
 	
 
@@ -25,7 +24,6 @@ func _set_selected(object):
 
 func _process(delta):
 	outlineMesh.visible = selected
-	collision_shape_3d.disabled = player == get_parent()
 	
 	if selected:
 		sponge.position.y = outlineWidth

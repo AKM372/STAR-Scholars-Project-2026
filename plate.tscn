@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://36bodevpebph"]
+[gd_scene load_steps=8 format=4 uid="uid://36bodevpebph"]
 
 [ext_resource type="Script" uid="uid://bp58fokg7exlq" path="res://plate_script.gd" id="1_s5yhh"]
 [ext_resource type="Texture2D" uid="uid://b1ab7gjs7i8bo" path="res://icon.svg" id="2_uw33f"]
@@ -24,11 +24,17 @@ _surfaces = [{
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ffgcv"]
 height = 0.1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uw33f"]
+
 [node name="Plate" type="RigidBody3D"]
+top_level = true
+freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_s5yhh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.030846179, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 0.030846179, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_uw33f")
 surface_material_override/0 = SubResource("StandardMaterial3D_g4jty")
 
@@ -36,15 +42,20 @@ surface_material_override/0 = SubResource("StandardMaterial3D_g4jty")
 mesh = SubResource("ArrayMesh_jcf13")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_ffgcv")
 
-[node name="Dirt" type="Sprite3D" parent="." groups=["dirt"]]
-transform = Transform3D(0.27, 0, 0, 0, -1.1802075e-08, -0.27, 0, 0.27, -1.1802075e-08, 0.0776481, 0.53446066, 0.21529734)
+[node name="Dirt" type="Node3D" parent="." groups=["dirt"]]
+transform = Transform3D(0.25060862, 0, 0, 0, 0.11985808, 0, 0, 0, 0.25736696, -0.18370616, 0.034743726, -0.03638649)
+
+[node name="DirtSprite" type="Sprite3D" parent="Dirt"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 texture = ExtResource("2_uw33f")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Dirt"]
+[node name="Area3D" type="Area3D" parent="Dirt"]
 
-[node name="Dirt2" type="Sprite3D" parent="." groups=["dirt"]]
-transform = Transform3D(0.27, 0, 0, 0, -1.1802075e-08, -0.27, 0, 0.27, -1.1802075e-08, -0.10226363, 0.53446066, -0.16245341)
-texture = ExtResource("2_uw33f")
+[node name="DirtCollision" type="CollisionShape3D" parent="Dirt/Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_uw33f")
+
+[connection signal="area_entered" from="Dirt/Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_exited" from="Dirt/Area3D" to="." method="_on_area_3d_body_exited"]
