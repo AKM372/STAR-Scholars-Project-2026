@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dfq2x8qcjmxh8"]
+[gd_scene load_steps=8 format=4 uid="uid://dfq2x8qcjmxh8"]
 
 [ext_resource type="Script" uid="uid://3i74tjwqf1fk" path="res://sponge_script.gd" id="1_s48kf"]
 
@@ -26,6 +26,8 @@ albedo_color = Color(18.892157, 18.892157, 18.892157, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_st82r"]
 size = Vector3(0.62, 0.18, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_s48kf"]
+
 [node name="sponge" type="RigidBody3D" groups=["sponge"]]
 transform = Transform3D(-0.007853948, 0, -0.9999692, 0, 1, 0, 0.9999692, 0, -0.007853948, 0, 0, 0)
 freeze_mode = 1
@@ -44,10 +46,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7m5fo")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["sponge"]]
 shape = SubResource("BoxShape3D_st82r")
 
-[node name="DirtDetectingArea" type="Area3D" parent="."]
-visible = false
+[node name="DirtDetectingArea" type="Area3D" parent="." groups=["sponge"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtDetectingArea"]
-visible = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtDetectingArea" groups=["sponge"]]
+transform = Transform3D(0.6982605, 0, 0, 0, 0.23664477, 0, 0, 0, 1.00237, 0, 0, 0)
+shape = SubResource("BoxShape3D_s48kf")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

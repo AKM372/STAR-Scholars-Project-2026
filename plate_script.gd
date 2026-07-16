@@ -39,13 +39,12 @@ func _process(_delta):
 		
 	if selected:
 		plate.position.y = outlineWidth
-	else:
-		plate.position.y = 0
+	#else:
+		#plate.position.y = 0
 		
-		
-
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	if area.is_in_group('sponge') and player.scrubbing:
+	print('the areas are touching')
+	if area.is_in_group('sponge'):
 		print('cleaning the dirt')
 		#cleaned.emit()
 		DirtSprite.visible = false

@@ -58,4 +58,3 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 shape = SubResource("BoxShape3D_uw33f")
 
 [connection signal="area_entered" from="Dirt/Area3D" to="." method="_on_area_3d_area_entered"]
-[connection signal="body_exited" from="Dirt/Area3D" to="." method="_on_area_3d_body_exited"]
