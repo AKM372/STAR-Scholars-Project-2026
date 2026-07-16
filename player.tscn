@@ -30,4 +30,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62867326, -0.34486938, -0.6
 
 [node name="ScrubMarker" type="Marker3D" parent="Head/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3099671, -0.09117079, -0.9416443)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3099671, -0.16427958, -0.9416443)

@@ -5,6 +5,7 @@ var selected = false
 var outlineWidth = 0.05
 var player
 var sponge
+var sponge_touching
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
 @onready var DirtSprite: Sprite3D = $Dirt/DirtSprite
@@ -22,6 +23,7 @@ func _set_selected(object):
 	selected = self == object
 
 func _process(_delta):
+	print("touching: ", sponge_touching, " scrubbing: ", player.scrubbing, " dirt visible: ", DirtSprite.visible)
 	#checks to see if the plate is being held
 	var held = (player.pickedObject == self)
 	
@@ -29,16 +31,26 @@ func _process(_delta):
 	outlineMesh.visible = selected and not held
 	collision_shape_3d.disabled = held
 	
+	if sponge_touching and player.scrubbing and DirtSprite.visible:
+		print('cleaning the dirt')
+		DirtSprite.visible = false
+		DirtCollision.disabled = true
+	
 	if held:
 		return
-		
 	if selected:
 		plate.position.y = outlineWidth
 	else:
 		plate.position.y = 0
+	
 
 #makes the dirt dissapear on sponge interaction!!
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	if area.is_in_group('sponge'):
-		DirtSprite.visible = false
-		DirtCollision.disabled = true
+	if area.get_parent().is_in_group('sponge'):
+		print('area entered')
+		sponge_touching = true
+
+func _on_area_3d_area_exited(area: Area3D) -> void:
+	if area.get_parent().is_in_group('sponge'):
+		print('area exited')
+		sponge_touching = false
