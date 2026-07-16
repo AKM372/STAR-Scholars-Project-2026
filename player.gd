@@ -84,6 +84,20 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
+	
+	var random_float = randf()
+	
+	if random_float < 0.8:
+		# 80% chance of being returned.
+		pass
+	elif random_float < 0.95:
+		# 15% chance of being returned.
+		pass
+	else:
+		# 5% chance of being returned.
+		pass
+		
+	
 
 func pick_up_object(object):
 	#sponge vs plate pickup mechanics! makes the physics not glitch out (in the wrong ways!)

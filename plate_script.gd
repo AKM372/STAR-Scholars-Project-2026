@@ -23,7 +23,6 @@ func _set_selected(object):
 	selected = self == object
 
 func _process(_delta):
-	print("touching: ", sponge_touching, " scrubbing: ", player.scrubbing, " dirt visible: ", DirtSprite.visible)
 	#checks to see if the plate is being held
 	var held = (player.pickedObject == self)
 	
@@ -32,9 +31,14 @@ func _process(_delta):
 	collision_shape_3d.disabled = held
 	
 	if sponge_touching and player.scrubbing and DirtSprite.visible:
-		print('cleaning the dirt')
-		DirtSprite.visible = false
-		DirtCollision.disabled = true
+		var random_float = randf()
+	
+		if random_float < 0.5:
+			print('cleaning the dirt')
+			DirtSprite.visible = false
+			DirtCollision.disabled = true
+		else:
+			print('ha')
 	
 	if held:
 		return
@@ -47,10 +51,8 @@ func _process(_delta):
 #makes the dirt dissapear on sponge interaction!!
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area.get_parent().is_in_group('sponge'):
-		print('area entered')
 		sponge_touching = true
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	if area.get_parent().is_in_group('sponge'):
-		print('area exited')
 		sponge_touching = false
