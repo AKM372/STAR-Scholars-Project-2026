@@ -10,27 +10,22 @@ var sponge
 @onready var DirtSprite: Sprite3D = $Dirt/DirtSprite
 @onready var DirtCollision: CollisionShape3D = $Dirt/Area3D/DirtCollision
 
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed('interact') and selected:
-		#player.pick_up_object(self)
 
 func _ready():
+	#connects raycast to selection
 	player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.interact_object.connect(_set_selected)
-	else:
-		print('not connected')
 	outlineMesh.visible = false
-	
-	#sponge = get_tree().get_first_node_in_group("sponge")
-	#sponge.cleaned.connect()
 	
 func _set_selected(object):
 	selected = self == object
 
 func _process(_delta):
+	#checks to see if the plate is being held
 	var held = (player.pickedObject == self)
-		
+	
+	#makes outline not visible when raycast is hitting the plate and it's not held
 	outlineMesh.visible = selected and not held
 	collision_shape_3d.disabled = held
 	
@@ -39,13 +34,11 @@ func _process(_delta):
 		
 	if selected:
 		plate.position.y = outlineWidth
-	#else:
-		#plate.position.y = 0
-		
+	else:
+		plate.position.y = 0
+
+#makes the dirt dissapear on sponge interaction!!
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	print('the areas are touching')
 	if area.is_in_group('sponge'):
-		print('cleaning the dirt')
-		#cleaned.emit()
 		DirtSprite.visible = false
 		DirtCollision.disabled = true
