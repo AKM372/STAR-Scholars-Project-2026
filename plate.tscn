@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://36bodevpebph"]
 
 [ext_resource type="Script" uid="uid://bp58fokg7exlq" path="res://plate_script.gd" id="1_s5yhh"]
-[ext_resource type="Texture2D" uid="uid://b1ab7gjs7i8bo" path="res://icon.svg" id="2_uw33f"]
+[ext_resource type="Texture2D" uid="uid://ceadqrc7dxv61" path="res://Dirt-PNG-Image-HD.png" id="2_uw33f"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uw33f"]
 
@@ -48,7 +48,7 @@ shape = SubResource("CylinderShape3D_ffgcv")
 transform = Transform3D(0.25060862, 0, 0, 0, 0.11985808, 0, 0, 0, 0.25736696, -0.18370616, 0.034743726, -0.03638649)
 
 [node name="DirtSprite" type="Sprite3D" parent="Dirt"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(0.49560636, 0, 0, 0, -2.367259e-08, -1, 0, 0.54156536, -4.3711385e-08, 0.45383018, 0, 0.3592792)
 texture = ExtResource("2_uw33f")
 
 [node name="Area3D" type="Area3D" parent="Dirt"]

@@ -20,6 +20,17 @@ var scrub_radius := 0.3
 var scrub_speed := 6.0
 @onready var scrub_marker: Marker3D = $Head/Camera3D/ScrubMarker
 
+# for the glitches
+var glitch_offset := Vector3.ZERO
+var is_glitched := false
+var glitch_check_timer := 0.0
+var glitch_recover_timer := 0.0
+@export var glitch_check_interval := 3.0   # how often we re-roll while NOT glitched
+@export var glitch_min_radius := 0.5       # must be > scrub_radius (0.3)
+@export var glitch_max_radius := 0.8
+@export var glitch_recover_min := 2.0      # seconds before auto-reset
+@export var glitch_recover_max := 6.0
+
 func _ready() -> void:
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -30,7 +41,7 @@ func _process(delta):
 
 	# keep held objects glued to their markers every frame
 	if pickedObject:
-		pickedObject.global_transform = hand_marker.global_transform
+		pickedObject.global_transform = hand_marker.global_transform.translated_local(glitch_offset)
 
 #animates the scrub animation
 	if offhandObject:
@@ -85,19 +96,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
 	
-	var random_float = randf()
-	
-	if random_float < 0.8:
-		# 80% chance of being returned.
-		pass
-	elif random_float < 0.95:
-		# 15% chance of being returned.
-		pass
+	if pickedObject:
+		#if is_glitched is true, starts timer until reset
+		if is_glitched:
+			glitch_recover_timer -= delta
+			if glitch_recover_timer <= 0.0:
+				_reset_glitch()
+	#if is_glitched is false, rolls to apply glitch
 	else:
-		# 5% chance of being returned.
-		pass
-		
-	
+		glitch_check_timer += delta
+		if glitch_check_timer >= glitch_check_interval:
+			glitch_check_timer = 0.0
+			_roll_glitch()
 
 func pick_up_object(object):
 	#sponge vs plate pickup mechanics! makes the physics not glitch out (in the wrong ways!)
@@ -115,3 +125,31 @@ func pick_up_object(object):
 		object.freeze = true
 		object.collision_shape_3d.disabled = true
 		pickedObject = object
+		
+#random float generation for weighted chance
+func _roll_glitch() -> void:
+	var random_float = randf()
+
+	if random_float < 0.8:
+		# 80% chance: nothing happens, plate stays put
+		pass
+	elif random_float < 0.95:
+		# 15% chance: mild drift
+		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
+	else:
+		# 5% chance: bad drift
+		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
+
+#defines the glitch offset
+func _start_glitch(min_r: float, max_r: float) -> void:
+	var angle := randf() * TAU
+	var radius := randf_range(min_r, max_r)
+	glitch_offset = Vector3(cos(angle), 0, sin(angle)) * radius
+	is_glitched = true
+	glitch_recover_timer = randf_range(glitch_recover_min, glitch_recover_max)
+
+func _reset_glitch() -> void:
+	glitch_offset = Vector3.ZERO
+	is_glitched = false
+	glitch_check_timer = 0.0
+	glitch_recover_timer = 0.0
