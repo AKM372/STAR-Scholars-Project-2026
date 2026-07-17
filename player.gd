@@ -49,7 +49,8 @@ func _process(delta):
 	if offhandObject:
 		if scrubbing:
 			scrub_progress += scrub_speed * delta
-			var offset = Vector3(cos(scrub_progress), 0, sin(scrub_progress)) * scrub_radius
+			var offset = Vector3(-cos(scrub_progress), 0, sin(scrub_progress)) * scrub_radius
+			#offset = offset.rotated(Vector3.RIGHT, deg_to_rad(45))
 			offhandObject.global_transform = scrub_marker.global_transform.translated_local(offset)
 			if scrub_progress >= TAU:
 				scrubbing = false
@@ -138,11 +139,11 @@ func pick_up_object(object):
 func _roll_glitch() -> void:
 	var random_float = randf()
 
-	if random_float < 0.8:
-		# 80% chance: nothing happens, plate stays put
+	if random_float < 0.5:
+		# 50% chance: nothing happens, plate stays put
 		pass
-	elif random_float < 0.95:
-		# 15% chance: mild drift
+	elif random_float < 0.8:
+		# 80% chance: mild drift
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
 	else:
 		# 5% chance: bad drift

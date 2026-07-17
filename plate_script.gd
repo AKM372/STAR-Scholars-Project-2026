@@ -54,7 +54,6 @@ func _process(delta):
 	
 func reduce_dirt(amount: float) -> void:
 	dirt_amount = clamp(dirt_amount - amount, 0.0, 1.0)
-	print("reduce_dirt called, dirt_amount now: ", dirt_amount)
 	if dirt_amount <= 0.0:
 		_on_fully_clean()
 
