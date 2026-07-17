@@ -19,6 +19,8 @@ var scrub_progress := 0.0
 var scrub_radius := 0.3
 var scrub_speed := 6.0
 @onready var scrub_marker: Marker3D = $Head/Camera3D/ScrubMarker
+@export var dirt_removed_per_scrub := 0.25
+var scrub_held := false
 
 # for the glitches
 var glitch_offset := Vector3.ZERO
@@ -51,6 +53,9 @@ func _process(delta):
 			offhandObject.global_transform = scrub_marker.global_transform.translated_local(offset)
 			if scrub_progress >= TAU:
 				scrubbing = false
+				scrub_progress = 0.0
+				if pickedObject and pickedObject.has_method("reduce_dirt"):
+						pickedObject.reduce_dirt(dirt_removed_per_scrub)
 		else:
 			offhandObject.global_transform = sponge_marker.global_transform
 
@@ -78,6 +83,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('scrub') and offhandObject and not scrubbing:
 		scrubbing = true
 		scrub_progress = 0.0
+		scrub_held = true
+	if event.is_action_released('scrub'):
+		scrub_held = false
 
 func _physics_process(delta: float) -> void:
 	#basic gravity for jumping and falling
@@ -103,11 +111,11 @@ func _physics_process(delta: float) -> void:
 			if glitch_recover_timer <= 0.0:
 				_reset_glitch()
 	#if is_glitched is false, rolls to apply glitch
-	else:
-		glitch_check_timer += delta
-		if glitch_check_timer >= glitch_check_interval:
-			glitch_check_timer = 0.0
-			_roll_glitch()
+		else:
+			glitch_check_timer += delta
+			if glitch_check_timer >= glitch_check_interval:
+				glitch_check_timer = 0.0
+				_roll_glitch()
 
 func pick_up_object(object):
 	#sponge vs plate pickup mechanics! makes the physics not glitch out (in the wrong ways!)
