@@ -19,7 +19,12 @@ var dirt_amount := 1.0       # actual cleanliness state, drops in discrete steps
 var displayed_dirt := 1.0    # what's shown, eases toward dirt_amount
 @export var fade_speed := 8.0
 
+#sfx
+@onready var drop_sound: AudioStreamPlayer3D = $DropSound
+
 func _ready():
+	print(get_tree_string_pretty())
+	body_entered.connect(_on_body_entered)
 	#connects raycast to selection
 	player = get_tree().get_first_node_in_group("player")
 	if player:
@@ -69,3 +74,9 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	if area.get_parent().is_in_group('sponge'):
 		sponge_touching = false
+
+
+func _on_body_entered(body: Node) -> void:
+	if linear_velocity.length() > 1.0 and body.get_parent().is_in_group('world'):
+	#drop_sound.play()
+		print('drop sound')

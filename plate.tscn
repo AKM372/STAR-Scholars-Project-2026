@@ -28,6 +28,7 @@ height = 0.1
 
 [node name="Plate" type="RigidBody3D"]
 top_level = true
+collision_layer = 2
 freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 1
