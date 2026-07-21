@@ -1,5 +1,9 @@
 extends RigidBody3D
 @onready var plate: RigidBody3D = $"."
+@onready var plate_color: MeshInstance3D = $MeshInstance3D
+var normal_color:= Color(1,0.8,0.6)
+var glitch_color := Color(1.0, 0.2, 0.2)
+var plate_material: StandardMaterial3D
 
 #selection variables
 @onready var outlineMesh: MeshInstance3D = $MeshInstance3D/outlineMesh
@@ -29,6 +33,8 @@ func _ready():
 		player.interact_object.connect(_set_selected)
 	outlineMesh.visible = false
 	
+	_setup_material()
+	
 func _set_selected(object):
 	selected = self == object
 
@@ -40,6 +46,11 @@ func _process(delta):
 	outlineMesh.visible = selected and not held
 	collision_shape_3d.disabled = held
 	
+	# glitch visual + sponge-detection lockout
+	if held and player.is_glitched:
+		_set_plate_color(glitch_color)
+	else:
+		_set_plate_color(normal_color)
 			
 	if displayed_dirt != dirt_amount and DirtSprite.visible and player.scrubbing:
 		displayed_dirt = move_toward(displayed_dirt, dirt_amount, fade_speed * delta)
@@ -76,3 +87,21 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 func _on_ground_detector_body_entered(body: Node3D) -> void:
 	if linear_velocity.length() > 1.0 and (body.is_in_group("world") or body.is_in_group("dish")):
 		impact_sound.play()
+
+func _setup_material() -> void:
+	var mat = plate_color.get_surface_override_material(0)
+	if mat == null:
+		# no override yet — pull the mesh's own material and duplicate it so we can edit it safely
+		mat = plate_color.mesh.surface_get_material(0)
+		if mat:
+			mat = mat.duplicate()
+		else:
+			mat = StandardMaterial3D.new()
+		plate_color.set_surface_override_material(0, mat)
+	plate_material = mat
+	normal_color = plate_material.albedo_color
+
+func _set_plate_color(color: Color) -> void:
+	var mat = plate_color.get_surface_override_material(0)
+	if mat:
+		mat.albedo_color = color

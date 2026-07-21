@@ -1,13 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://36bodevpebph"]
+[gd_scene load_steps=8 format=4 uid="uid://36bodevpebph"]
 
 [ext_resource type="Script" uid="uid://bp58fokg7exlq" path="res://plate_script.gd" id="1_s5yhh"]
 [ext_resource type="Texture2D" uid="uid://ceadqrc7dxv61" path="res://Dirt-PNG-Image-HD.png" id="2_uw33f"]
 [ext_resource type="AudioStream" uid="uid://bptvv5ye5gyuk" path="res://sfx/dish_dropping.mp3" id="3_g4jty"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uw33f"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4jty"]
-albedo_color = Color(0.95434946, 0.6480656, 0.41214395, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jcf13"]
 _surfaces = [{
@@ -34,12 +31,10 @@ freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_s5yhh")
-fade_speed = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.030846179, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_uw33f")
-surface_material_override/0 = SubResource("StandardMaterial3D_g4jty")
 
 [node name="outlineMesh" type="MeshInstance3D" parent="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_jcf13")

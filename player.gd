@@ -32,8 +32,8 @@ var is_glitched := false
 var glitch_check_timer := 0.0
 var glitch_recover_timer := 0.0
 @export var glitch_check_interval := 3.0   # how often we re-roll while NOT glitched
-@export var glitch_min_radius := 0.5       # must be > scrub_radius (0.3)
-@export var glitch_max_radius := 0.8
+@export var glitch_min_radius := 0.8       # must be > scrub_radius (0.3)
+@export var glitch_max_radius := 1.4
 @export var glitch_recover_min := 2.0      # seconds before auto-reset
 @export var glitch_recover_max := 6.0
 
