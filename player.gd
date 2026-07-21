@@ -28,8 +28,8 @@ var is_glitched := false
 var glitch_check_timer := 0.0
 var glitch_recover_timer := 0.0
 @export var glitch_check_interval := 3.0   # how often we re-roll while NOT glitched
-@export var glitch_min_radius := 0.8       # must be > scrub_radius (0.3)
-@export var glitch_max_radius := 1.5
+@export var glitch_min_radius := 0.5       # must be > scrub_radius (0.3)
+@export var glitch_max_radius := 0.8
 @export var glitch_recover_min := 2.0      # seconds before auto-reset
 @export var glitch_recover_max := 6.0
 
@@ -79,8 +79,6 @@ func _input(event: InputEvent) -> void:
 			pickedObject = null
 		elif ray_cast_3d.is_colliding():
 			pick_up_object(ray_cast_3d.get_collider())
-		else: 
-			return
 
 	#initiates scrubbing animation for the scrub click
 	if event.is_action_pressed('scrub') and offhandObject and not scrubbing:
@@ -141,15 +139,15 @@ func pick_up_object(object):
 func _roll_glitch() -> void:
 	var random_float = randf()
 
-	if random_float < 0.8:
-		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
-		#80% glitch
-	elif random_float < 0.9:
+	if random_float < 0.5:
+		# 50% chance: nothing happens, plate stays put
 		pass
-		#10% nothing
+	elif random_float < 0.8:
+		# 80% chance: mild drift
+		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
 	else:
+		# 5% chance: bad drift
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
-		#10% worse glitch
 
 #defines the glitch offset
 func _start_glitch(min_r: float, max_r: float) -> void:

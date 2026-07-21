@@ -19,7 +19,6 @@ fov = 88.616035
 
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -2)
-collision_mask = 3
 
 [node name="HandMarker" type="Marker3D" parent="Head/Camera3D"]
 unique_name_in_owner = true
