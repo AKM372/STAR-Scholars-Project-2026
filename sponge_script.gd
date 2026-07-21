@@ -24,8 +24,7 @@ func _process(delta):
 	
 	if held:
 		return
-	
 	if selected:
-		sponge.position.y = outlineWidth
+		outlineMesh.position.y = outlineWidth
 	else:
-		sponge.position.y = 0
+		outlineMesh.position.y = 0

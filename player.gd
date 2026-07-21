@@ -139,14 +139,11 @@ func pick_up_object(object):
 func _roll_glitch() -> void:
 	var random_float = randf()
 
-	if random_float < 0.5:
-		# 50% chance: nothing happens, plate stays put
-		pass
-	elif random_float < 0.8:
-		# 80% chance: mild drift
+	if random_float < 0.8:
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
+	elif random_float < 0.9:
+		pass
 	else:
-		# 5% chance: bad drift
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
 
 #defines the glitch offset
