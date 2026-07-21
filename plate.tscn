@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://36bodevpebph"]
 
-[ext_resource type="Script" uid="uid://bp58fokg7exlq" path="res://plate_script.gd" id="1_s5yhh"]
+[ext_resource type="Script" path="res://plate_script.gd" id="1_s5yhh"]
 [ext_resource type="Texture2D" uid="uid://ceadqrc7dxv61" path="res://Dirt-PNG-Image-HD.png" id="2_uw33f"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uw33f"]
@@ -28,6 +28,7 @@ height = 0.1
 
 [node name="Plate" type="RigidBody3D"]
 top_level = true
+collision_layer = 3
 freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 1
