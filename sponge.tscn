@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://dfq2x8qcjmxh8"]
 
-[ext_resource type="Script" uid="uid://3i74tjwqf1fk" path="res://sponge_script.gd" id="1_s48kf"]
+[ext_resource type="Script" path="res://sponge_script.gd" id="1_s48kf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dgjir"]
 
@@ -30,6 +30,7 @@ size = Vector3(0.62, 0.18, 1)
 
 [node name="sponge" type="RigidBody3D" groups=["sponge"]]
 transform = Transform3D(-0.007853948, 0, -0.9999692, 0, 1, 0, 0.9999692, 0, -0.007853948, 0, 0, 0)
+collision_layer = 2
 freeze_mode = 1
 contact_monitor = true
 script = ExtResource("1_s48kf")
