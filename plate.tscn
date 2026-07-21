@@ -27,13 +27,14 @@ height = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uw33f"]
 
-[node name="Plate" type="RigidBody3D"]
+[node name="Plate" type="RigidBody3D" groups=["dish"]]
 top_level = true
 can_sleep = false
 freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_s5yhh")
+fade_speed = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.030846179, 0, 0, 0, 1, 0, 0, 0)
@@ -62,9 +63,9 @@ shape = SubResource("BoxShape3D_uw33f")
 [node name="ImpactSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_g4jty")
 
-[node name="GroundDetector" type="Area3D" parent="."]
+[node name="GroundDetector" type="Area3D" parent="." groups=["dish"]]
 
-[node name="GroundDetectorCollision" type="CollisionShape3D" parent="GroundDetector"]
+[node name="GroundDetectorCollision" type="CollisionShape3D" parent="GroundDetector" groups=["dish"]]
 shape = SubResource("CylinderShape3D_ffgcv")
 
 [connection signal="area_entered" from="Dirt/Area3D" to="." method="_on_area_3d_area_entered"]

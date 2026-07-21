@@ -5,6 +5,8 @@ signal interact_object
 @onready var sponge_marker: Marker3D = %SpongeMarker
 var pickedObject
 var offhandObject #the sponge
+@onready var pick_up_sound: AudioStreamPlayer3D = $PickUpSound
+
 
 #stuff for 1st person pov basic controls
 @export var mouse_sensitivity := 0.003
@@ -19,8 +21,10 @@ var scrub_progress := 0.0
 var scrub_radius := 0.3
 var scrub_speed := 6.0
 @onready var scrub_marker: Marker3D = $Head/Camera3D/ScrubMarker
-@export var dirt_removed_per_scrub := 0.25
+@export var dirt_removed_per_scrub := 0.35
 var scrub_held := false
+@onready var scrubbing_sound: AudioStreamPlayer3D = $ScrubbingSound
+
 
 # for the glitches
 var glitch_offset := Vector3.ZERO
@@ -54,12 +58,14 @@ func _process(delta):
 			offhandObject.global_transform = scrub_marker.global_transform.translated_local(offset)
 			if scrub_progress >= TAU:
 				scrubbing = false
+				scrubbing_sound.stop()
 				scrub_progress = 0.0
 				if pickedObject and pickedObject.has_method("reduce_dirt"):
 						pickedObject.reduce_dirt(dirt_removed_per_scrub)
 		else:
 			offhandObject.global_transform = sponge_marker.global_transform
-
+			
+	
 func _input(event: InputEvent) -> void:
 	#looking around
 	if event is InputEventMouseMotion:
@@ -83,6 +89,7 @@ func _input(event: InputEvent) -> void:
 	#initiates scrubbing animation for the scrub click
 	if event.is_action_pressed('scrub') and offhandObject and not scrubbing:
 		scrubbing = true
+		scrubbing_sound.play()
 		scrub_progress = 0.0
 		scrub_held = true
 	if event.is_action_released('scrub'):
@@ -119,6 +126,7 @@ func _physics_process(delta: float) -> void:
 				_roll_glitch()
 
 func pick_up_object(object):
+	pick_up_sound.play()
 	#sponge vs plate pickup mechanics! makes the physics not glitch out (in the wrong ways!)
 	if object.is_in_group('sponge'):
 		if offhandObject:

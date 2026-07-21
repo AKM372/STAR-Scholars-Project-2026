@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsy42utnjd7xx"]
+[gd_scene load_steps=5 format=3 uid="uid://dsy42utnjd7xx"]
 
 [ext_resource type="Script" uid="uid://ofutcl58k8m" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="AudioStream" uid="uid://cg2ob3vcsq6hu" path="res://sfx/scrubbing.mp3" id="2_onrkg"]
+[ext_resource type="AudioStream" uid="uid://dg2kl7xq10gkh" path="res://sfx/pick_up.mp3" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 
@@ -32,3 +34,9 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70
 [node name="ScrubMarker" type="Marker3D" parent="Head/Camera3D"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -0.3099671, -0.16427958, -0.9416443)
+
+[node name="ScrubbingSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_onrkg")
+
+[node name="PickUpSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_i3pqv")

@@ -74,6 +74,5 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		sponge_touching = false
 
 func _on_ground_detector_body_entered(body: Node3D) -> void:
-	if linear_velocity.length() > 1.0 and body.is_in_group("world"):
+	if linear_velocity.length() > 1.0 and (body.is_in_group("world") or body.is_in_group("dish")):
 		impact_sound.play()
-		print('drop sound')
