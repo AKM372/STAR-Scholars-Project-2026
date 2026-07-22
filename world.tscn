@@ -144,3 +144,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.237, 1.295, -8.486)
 
 [node name="Marker3D3" type="Marker3D" parent="PlateMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43, 0.783, -8.505)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="CanvasLayer"]
+offset_left = 79.0
+offset_top = 88.0
+offset_right = 303.0
+offset_bottom = 163.0
+text = "WASD / arrrows
+right click to scrub
+left click to pick up/put down"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 83.0
+offset_top = 89.0
+offset_right = 209.0
+offset_bottom = 112.0
+text = "Wash the dishes"

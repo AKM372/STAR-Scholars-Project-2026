@@ -4,9 +4,14 @@ extends Node3D
 @onready var plate_markers: Node3D = $PlateMarkers
 var spawn_points: Array[Node3D] = []
 var plates_cleaned := 0
-
+@onready var instructions: Label = $CanvasLayer/Instructions
+@onready var label: Label = $CanvasLayer/Label
 
 func _ready() -> void:
+	label.hide()
+	await get_tree().create_timer(3.0).timeout
+	instructions.hide()
+	label.show()
 	for child in plate_markers.get_children():
 		if child is Marker3D:
 			spawn_points.append(child)
@@ -15,7 +20,6 @@ func _ready() -> void:
 
 func _on_plate_cleaned():
 	plates_cleaned += 1
-	print("plates cleaned: ", plates_cleaned)
 	if plates_cleaned >= 3:
 		_spawn_new_plates()
 
