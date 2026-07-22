@@ -111,6 +111,3 @@ func _set_plate_color(color: Color) -> void:
 	var mat = plate_color.get_surface_override_material(0)
 	if mat:
 		mat.albedo_color = color
-
-func _on_cleaned() -> void:
-	cleaned_num += 1

@@ -124,6 +124,7 @@ func _physics_process(delta: float) -> void:
 			if glitch_check_timer >= glitch_check_interval:
 				glitch_check_timer = 0.0
 				_roll_glitch()
+		
 
 func pick_up_object(object):
 	pick_up_sound.play()
