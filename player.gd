@@ -135,13 +135,15 @@ func pick_up_object(object):
 		object.freeze = true
 		object.collision_shape_3d.disabled = true
 		offhandObject = object
-	else:
+	elif object.is_in_group('dish'):
 		if pickedObject:
 			return
 		object.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 		object.freeze = true
 		object.collision_shape_3d.disabled = true
 		pickedObject = object
+	else:
+		return
 		
 #random float generation for weighted chance
 func _roll_glitch() -> void:

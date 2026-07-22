@@ -26,6 +26,10 @@ var displayed_dirt := 1.0    # what's shown, eases toward dirt_amount
 #sfx 
 @onready var impact_sound: AudioStreamPlayer3D = $ImpactSound
 
+#glitch mechanics
+signal cleaned
+var cleaned_num: int = 0
+
 func _ready():
 	#connects raycast to selection
 	player = get_tree().get_first_node_in_group("player")
@@ -74,6 +78,8 @@ func reduce_dirt(amount: float) -> void:
 func _on_fully_clean() -> void:
 	DirtSprite.visible = false
 	DirtCollision.disabled = true
+	cleaned.emit()
+	
 
 #makes the dirt dissapear on sponge interaction!!
 func _on_area_3d_area_entered(area: Area3D) -> void:
@@ -105,3 +111,6 @@ func _set_plate_color(color: Color) -> void:
 	var mat = plate_color.get_surface_override_material(0)
 	if mat:
 		mat.albedo_color = color
+
+func _on_cleaned() -> void:
+	cleaned_num += 1

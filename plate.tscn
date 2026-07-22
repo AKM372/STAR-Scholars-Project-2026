@@ -63,6 +63,7 @@ stream = ExtResource("3_g4jty")
 [node name="GroundDetectorCollision" type="CollisionShape3D" parent="GroundDetector" groups=["dish"]]
 shape = SubResource("CylinderShape3D_ffgcv")
 
+[connection signal="cleaned" from="." to="." method="_on_cleaned"]
 [connection signal="area_entered" from="Dirt/Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Dirt/Area3D" to="." method="_on_area_3d_area_exited"]
 [connection signal="body_entered" from="GroundDetector" to="." method="_on_ground_detector_body_entered"]
