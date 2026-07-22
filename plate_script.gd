@@ -71,6 +71,8 @@ func _process(delta):
 	
 	
 func reduce_dirt(amount: float) -> void:
+	if not sponge_touching or player.is_glitched:
+		return
 	dirt_amount = clamp(dirt_amount - amount, 0.0, 1.0)
 	if dirt_amount <= 0.0:
 		_on_fully_clean()

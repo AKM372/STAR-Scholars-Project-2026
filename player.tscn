@@ -35,6 +35,11 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -0.3099671, -0.16427958, -0.9416443)
 
+[node name="PlaceRayCast" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9603814, -0.2786894, 0, 0.2786894, 0.9603814, 0, 0.3849033, -0.51668763)
+target_position = Vector3(0, -1, -2)
+hit_back_faces = false
+
 [node name="ScrubbingSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_onrkg")
 

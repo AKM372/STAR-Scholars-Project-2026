@@ -1,6 +1,7 @@
 extends CharacterBody3D
 signal interact_object
 @onready var ray_cast_3d: RayCast3D = $Head/Camera3D/RayCast3D
+@onready var place_ray_cast: RayCast3D = $Head/Camera3D/PlaceRayCast
 @onready var hand_marker: Marker3D = %HandMarker
 @onready var sponge_marker: Marker3D = %SpongeMarker
 var pickedObject
@@ -80,8 +81,7 @@ func _input(event: InputEvent) -> void:
 	#makes the pick up action happen?
 	if event.is_action_pressed('interact'):
 		if pickedObject:
-			pickedObject.collision_shape_3d.disabled = false
-			pickedObject.freeze = false
+			_place_object(pickedObject)
 			pickedObject = null
 		elif ray_cast_3d.is_colliding():
 			pick_up_object(ray_cast_3d.get_collider())
@@ -170,3 +170,17 @@ func _reset_glitch() -> void:
 	is_glitched = false
 	glitch_check_timer = 0.0
 	glitch_recover_timer = 0.0
+
+func _place_object(object) -> void:
+	object.collision_shape_3d.disabled = false
+	
+	if place_ray_cast.is_colliding():
+		var hit_point = place_ray_cast.get_collision_point()
+		var hit_normal = place_ray_cast.get_collision_normal()
+		# lift it slightly off the surface so it doesn't clip into it
+		object.global_position = hit_point + hit_normal * 0.05
+	else:
+		# fallback: just drop it a bit in front if the ray finds nothing
+		object.global_position = place_ray_cast.global_position
+	
+	object.freeze = false

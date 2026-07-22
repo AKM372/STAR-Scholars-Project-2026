@@ -20,10 +20,8 @@ func _on_plate_cleaned():
 		_spawn_new_plates()
 
 func _spawn_new_plates():
-	print('spawning')
 	plates_cleaned = 0
 	for point in spawn_points:
-		print('plate')
 		var new_plate = plate.instantiate()
 		add_child(new_plate)
 		new_plate.global_position = point.global_position
