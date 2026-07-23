@@ -17,7 +17,7 @@ func _ready():
 func _set_selected(object):
 	selected = self == object
 
-func _process(delta):
+func _process(_delta):
 	var held = (player.offhandObject == self)
 	
 	outlineMesh.visible = selected and not held
