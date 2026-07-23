@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://36bodevpebph" path="res://plate.tscn" id="4_036b0"]
 [ext_resource type="ArrayMesh" uid="uid://qu5poco0g2h7" path="res://sink.obj" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://c6tyrltih4m8m" path="res://door.gd" id="6_dwbse"]
+[ext_resource type="PackedScene" uid="uid://bhtyy3p8e0sks" path="res://background_music.tscn" id="7_pkg7o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 
@@ -212,3 +213,5 @@ mesh = SubResource("BoxMesh_554ww")
 
 [node name="DoorCollision" type="CollisionShape3D" parent="Door" unique_id=1860246482]
 shape = SubResource("BoxShape3D_ulpex")
+
+[node name="BackgroundMusic" parent="." unique_id=1967050840 instance=ExtResource("7_pkg7o")]

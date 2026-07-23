@@ -1,7 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhtyy3p8e0sks"]
+[gd_scene format=3 uid="uid://bhtyy3p8e0sks"]
 
-[ext_resource type="AudioStream" uid="uid://1n3bswgbvkuh" path="res://sfx/sink_running.mp3" id="1_4m5bw"]
+[ext_resource type="Script" uid="uid://leqq8mduy2ub" path="res://background_music.gd" id="1_l3d1b"]
+[ext_resource type="AudioStream" uid="uid://ofxtggw7m0r1" path="res://sfx/sink_running2.mp3" id="2_kqdjy"]
 
-[node name="BackgroundMusic" type="AudioStreamPlayer3D"]
-stream = ExtResource("1_4m5bw")
-autoplay = true
+[node name="BackgroundMusic" type="Node3D" unique_id=1967050840]
+script = ExtResource("1_l3d1b")
+
+[node name="SinkRunning" type="AudioStreamPlayer3D" parent="." unique_id=548264689]
+stream = ExtResource("2_kqdjy")
+
+[connection signal="finished" from="SinkRunning" to="." method="_on_sink_running_finished"]

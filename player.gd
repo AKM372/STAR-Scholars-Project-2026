@@ -169,12 +169,16 @@ func _throw_object(object) -> void:
 func _roll_glitch() -> void:
 	var random_float = randf()
 
-	if random_float < 0.7:
+	if random_float < 0.6:
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
+		print('little glitch')
 	elif random_float < 0.8:
 		_throw_object(pickedObject)
+		pickedObject = null
+		print('throw glitch')
 	elif random_float < 0.9:
 		pass
+		print('passing')
 	else:
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
 
