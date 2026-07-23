@@ -20,7 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 fov = 88.616035
 
 [node name="PlaceRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=1287670593]
-transform = Transform3D(1, 0, 0, 0, 0.8348036, 0.55054784, 0, -0.55054784, 0.8348036, 0, 0.96858776, -0.51668763)
+transform = Transform3D(1, 0, 0, 0, 0.9990387, 0.04383695, 0, -0.04383695, 0.9990387, 0, 0.58991325, 0.077390075)
 target_position = Vector3(0, -1, -2)
 hit_back_faces = false
 

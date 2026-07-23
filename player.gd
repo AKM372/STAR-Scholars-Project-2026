@@ -16,6 +16,10 @@ var offhandObject #the sponge
 @export var jump_velocity := 4.5
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+#throwing
+@export var throw_force := 8.0
+@export var throw_upward_boost := 1.5
+
 #for the scrub animation
 var scrubbing := false
 var scrub_progress := 0.0
@@ -95,6 +99,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released('scrub'):
 		scrub_held = false
 	
+	if event.is_action_pressed('throw') and pickedObject:
+		_throw_object(pickedObject)
+		pickedObject = null
 	
 func _physics_process(delta: float) -> void:
 	#basic gravity for jumping and falling
@@ -146,7 +153,18 @@ func pick_up_object(object):
 		pickedObject = object
 	else:
 		return
-		
+
+func _throw_object(object) -> void:
+	object.collision_shape_3d.disabled = false
+	object.freeze = false
+
+	# throw in the direction the camera is facing, with a slight upward arc
+	var throw_direction = -head.get_node("Camera3D").global_transform.basis.z
+	throw_direction.y += throw_upward_boost * 0.1  # nudge trajectory upward
+	throw_direction = throw_direction.normalized()
+
+	object.linear_velocity = throw_direction * throw_force
+	
 #random float generation for weighted chance
 func _roll_glitch() -> void:
 	var random_float = randf()
@@ -154,7 +172,7 @@ func _roll_glitch() -> void:
 	if random_float < 0.7:
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
 	elif random_float < 0.8:
-		_place_object(pickedObject)
+		_throw_object(pickedObject)
 	elif random_float < 0.9:
 		pass
 	else:
