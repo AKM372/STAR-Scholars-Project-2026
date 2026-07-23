@@ -26,7 +26,6 @@ var scrub_speed := 6.0
 var scrub_held := false
 @onready var scrubbing_sound: AudioStreamPlayer3D = $ScrubbingSound
 
-
 # for the glitches
 var glitch_offset := Vector3.ZERO
 var is_glitched := false
@@ -94,7 +93,8 @@ func _input(event: InputEvent) -> void:
 		scrub_held = true
 	if event.is_action_released('scrub'):
 		scrub_held = false
-
+	
+	
 func _physics_process(delta: float) -> void:
 	#basic gravity for jumping and falling
 	if not is_on_floor():

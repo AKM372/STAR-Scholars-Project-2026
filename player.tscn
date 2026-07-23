@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsy42utnjd7xx"]
+[gd_scene format=3 uid="uid://dsy42utnjd7xx"]
 
 [ext_resource type="Script" uid="uid://ofutcl58k8m" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="AudioStream" uid="uid://cg2ob3vcsq6hu" path="res://sfx/scrubbing.mp3" id="2_onrkg"]
@@ -6,42 +6,42 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 
-[node name="player" type="CharacterBody3D" groups=["player"]]
+[node name="player" type="CharacterBody3D" unique_id=1722317622 groups=["player"]]
 script = ExtResource("1_4flbx")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1618573191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_onrkg")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=1203842243]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1215454605]
 fov = 88.616035
 
-[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=886031629]
 target_position = Vector3(0, 0, -2)
 collision_mask = 3
 
-[node name="HandMarker" type="Marker3D" parent="Head/Camera3D"]
+[node name="HandMarker" type="Marker3D" parent="Head/Camera3D" unique_id=199728203]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -0.42268106, -0.26660764, -0.84549886)
 
-[node name="SpongeMarker" type="Marker3D" parent="Head/Camera3D"]
+[node name="SpongeMarker" type="Marker3D" parent="Head/Camera3D" unique_id=121061786]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0.62867326, -0.34486938, -0.60134983)
 
-[node name="ScrubMarker" type="Marker3D" parent="Head/Camera3D"]
+[node name="ScrubMarker" type="Marker3D" parent="Head/Camera3D" unique_id=187435172]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -0.3099671, -0.16427958, -0.9416443)
 
-[node name="PlaceRayCast" type="RayCast3D" parent="Head/Camera3D"]
+[node name="PlaceRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=1287670593]
 transform = Transform3D(1, 0, 0, 0, 0.9603814, -0.2786894, 0, 0.2786894, 0.9603814, 0, 0.3849033, -0.51668763)
 target_position = Vector3(0, -1, -2)
 hit_back_faces = false
 
-[node name="ScrubbingSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_onrkg")
-
-[node name="PickUpSound" type="AudioStreamPlayer3D" parent="."]
+[node name="PickUpSound" type="AudioStreamPlayer3D" parent="." unique_id=19912423]
 stream = ExtResource("3_i3pqv")
+
+[node name="ScrubbingSound" type="AudioStreamPlayer3D" parent="." unique_id=1723501482]
+stream = ExtResource("2_onrkg")

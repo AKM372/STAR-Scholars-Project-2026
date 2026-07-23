@@ -28,5 +28,15 @@ func _spawn_new_plates():
 	for point in spawn_points:
 		var new_plate = plate.instantiate()
 		add_child(new_plate)
+		new_plate.add_to_group("dish")
 		new_plate.global_position = point.global_position
 		new_plate.cleaned.connect(_on_plate_cleaned)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("reset"):
+		var dishes
+		dishes = get_tree().get_nodes_in_group('dish')
+		for dish in dishes:
+			dish.queue_free()
+		_spawn_new_plates()
