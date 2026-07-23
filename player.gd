@@ -171,16 +171,14 @@ func _roll_glitch() -> void:
 
 	if random_float < 0.6:
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
-		print('little glitch')
 	elif random_float < 0.8:
+		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
+	elif random_float < 0.95:
+		pass
+	else:
 		_throw_object(pickedObject)
 		pickedObject = null
-		print('throw glitch')
-	elif random_float < 0.9:
-		pass
-		print('passing')
-	else:
-		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
+		
 
 #defines the glitch offset
 func _start_glitch(min_r: float, max_r: float) -> void:
