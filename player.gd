@@ -208,29 +208,44 @@ func _drop_sponge() -> void:
 func _roll_glitch() -> void:
 	var random_float = randf()
 
-	if random_float < 0.05:
-		world._spawn_new_plates()
-	elif random_float < 0.5:
+	if random_float < 0.55:
+		# small glitch offset — most common outcome
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
-	elif random_float < 0.8:
+	elif random_float < 0.75:
+		# bigger glitch offset — still fairly common
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
-	elif random_float < 0.90:
-		_blackout_and_drop()
-	elif random_float < 0.95:
+	elif random_float < 0.85:
+		# nothing happens this roll
 		pass
+	elif random_float < 0.92:
+		# blackout + drop — disruptive, less frequent
+		_blackout_and_drop()
+	elif random_float < 0.97:
+		# throw — disruptive, rare
+		if pickedObject:
+			_throw_object(pickedObject)
+			pickedObject = null
 	else:
-		_throw_object(pickedObject)
-		pickedObject = null
-		
+		# plate rain — rarest, most disruptive
+		world._plate_rain()
+
+	# randomize the wait until the next roll, so glitches feel irregular
+	glitch_check_interval = randf_range(1.5, 6.0)
 
 #defines the glitch offset
 func _start_glitch(min_r: float, max_r: float) -> void:
 	var angle := randf() * TAU
 	var radius := randf_range(min_r, max_r)
-	glitch_offset = Vector3(cos(angle), 0, sin(angle)) * radius
+	var target_offset = Vector3(cos(angle), 0, sin(angle)) * radius
+
 	is_glitched = true
 	glitch_recover_timer = randf_range(glitch_recover_min, glitch_recover_max)
 
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "glitch_offset", target_offset, 0.6)
+	
 func _reset_glitch() -> void:
 	glitch_offset = Vector3.ZERO
 	is_glitched = false
