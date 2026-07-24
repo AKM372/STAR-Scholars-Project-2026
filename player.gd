@@ -1,4 +1,6 @@
 extends CharacterBody3D
+
+#interact with objects
 signal interact_object
 @onready var ray_cast_3d: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var place_ray_cast: RayCast3D = $Head/Camera3D/PlaceRayCast
@@ -40,11 +42,13 @@ var glitch_recover_timer := 0.0
 @export var glitch_max_radius := 1.4
 @export var glitch_recover_min := 2.0      # seconds before auto-reset
 @export var glitch_recover_max := 6.0
-
+@export var world: PackedScene
+@onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
 
 func _ready() -> void:
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	color_rect.color.a = 0.0
 
 func _process(delta):
 	# selection raycast
@@ -70,7 +74,8 @@ func _process(delta):
 		else:
 			offhandObject.global_transform = sponge_marker.global_transform
 			
-	
+####------------------INPUTS-------------------------------------###
+
 func _input(event: InputEvent) -> void:
 	#looking around
 	if event is InputEventMouseMotion:
@@ -133,6 +138,7 @@ func _physics_process(delta: float) -> void:
 				glitch_check_timer = 0.0
 				_roll_glitch()
 		
+######-----------------------INTERACTION FUNCTIONS---------------####
 
 func pick_up_object(object):
 	pick_up_sound.play()
@@ -164,15 +170,48 @@ func _throw_object(object) -> void:
 	throw_direction = throw_direction.normalized()
 
 	object.linear_velocity = throw_direction * throw_force
+
+func _place_object(object) -> void:
+	object.collision_shape_3d.disabled = false
 	
+	if place_ray_cast.is_colliding():
+		var hit_point = place_ray_cast.get_collision_point()
+		var hit_normal = place_ray_cast.get_collision_normal()
+		# lift it slightly off the surface so it doesn't clip into it
+		object.global_position = hit_point + hit_normal * 0.05
+	else:
+		# fallback: just drop it a bit in front if the ray finds nothing
+		object.global_position = place_ray_cast.global_position
+	
+	object.freeze = false
+	
+func _drop_object() -> void:
+	if not pickedObject:
+		return
+	pickedObject.collision_shape_3d.disabled = false
+	pickedObject.freeze = false
+	pickedObject = null
+	
+func _drop_sponge() -> void:
+	if not offhandObject:
+		return
+	offhandObject.collision_shape_3d.disabled = false
+	offhandObject.freeze = false
+	offhandObject = null
+	
+#####--------------GLITCH INPUTS AND CHANCE----------######
 #random float generation for weighted chance
 func _roll_glitch() -> void:
 	var random_float = randf()
 
-	if random_float < 0.6:
+	if random_float < 0.05:
+		world._spawn_new_plates()
+	elif random_float < 0.5:
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
 	elif random_float < 0.8:
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
+	elif random_float < 0.90:
+		_blackout_and_drop()
 	elif random_float < 0.95:
 		pass
 	else:
@@ -194,17 +233,13 @@ func _reset_glitch() -> void:
 	glitch_check_timer = 0.0
 	glitch_recover_timer = 0.0
 
-func _place_object(object) -> void:
-	object.collision_shape_3d.disabled = false
-	
-	if place_ray_cast.is_colliding():
-		var hit_point = place_ray_cast.get_collision_point()
-		var hit_normal = place_ray_cast.get_collision_normal()
-		# lift it slightly off the surface so it doesn't clip into it
-		object.global_position = hit_point + hit_normal * 0.05
-	else:
-		# fallback: just drop it a bit in front if the ray finds nothing
-		object.global_position = place_ray_cast.global_position
-	
-	object.freeze = false
-	
+func _blackout_and_drop() -> void:
+	if not pickedObject:
+		return
+
+	color_rect.color.a = 1.0
+	_drop_object()
+	_drop_sponge()
+
+	await get_tree().create_timer(0.4).timeout
+	color_rect.color.a = 0.0

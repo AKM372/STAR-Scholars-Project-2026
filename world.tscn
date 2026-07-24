@@ -46,6 +46,7 @@ transform = Transform3D(40, 0, 0, 0, 0.5, 0, 0, 0, 40, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_f3sb7")
 
 [node name="player" parent="." unique_id=1351330524 instance=ExtResource("2_tlwt5")]
+world = null
 
 [node name="sponge" parent="." unique_id=132052505 instance=ExtResource("3_aqk2v")]
 transform = Transform3D(-0.80753726, 0, -0.5898167, 0, 1, 0, 0.5898167, 0, -0.80753726, -1.9431211, 0.7875285, -5.083469)
@@ -181,6 +182,10 @@ offset_top = 89.0
 offset_right = 209.0
 offset_bottom = 112.0
 text = "Wash the dishes"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1601733920]
+offset_right = 1171.0
+offset_bottom = 671.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=290487916]
 transform = Transform3D(1, 0, 0, 0, 0.90439856, 0.42668876, 0, -0.42668876, 0.90439856, 0, 4.890602, 3.581727)
