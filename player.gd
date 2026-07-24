@@ -42,7 +42,7 @@ var glitch_recover_timer := 0.0
 @export var glitch_max_radius := 1.4
 @export var glitch_recover_min := 2.0      # seconds before auto-reset
 @export var glitch_recover_max := 6.0
-@export var world: GDScript
+@export var world: Node3D
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
 
 func _ready() -> void:
@@ -109,7 +109,8 @@ func _input(event: InputEvent) -> void:
 		pickedObject = null
 		
 	if event.is_action_pressed('testing'):
-		_blackout_and_drop()
+		world._plate_rain()
+		print('testing')
 	
 func _physics_process(delta: float) -> void:
 	#basic gravity for jumping and falling
@@ -240,9 +241,23 @@ func _blackout_and_drop() -> void:
 	if not pickedObject:
 		return
 
+	# hard snap to black
 	color_rect.color.a = 1.0
 	_drop_object()
 	_drop_sponge()
 
-	await get_tree().create_timer(0.4).timeout
-	color_rect.color.a = 0.0
+	# dampen sound instantly
+	var bus_idx = AudioServer.get_bus_index("Master")
+	var original_volume = AudioServer.get_bus_volume_db(bus_idx)
+	AudioServer.set_bus_volume_db(bus_idx, original_volume + -24)
+	
+	var blackout_fade_time = 0.7
+	var tween = create_tween()
+	tween.tween_interval(0.4)
+	tween.set_parallel(true)
+	tween.tween_property(color_rect, "color:a", 0.0, blackout_fade_time)
+	tween.tween_method(
+		func(db): AudioServer.set_bus_volume_db(bus_idx, db),
+		original_volume + -24,
+		original_volume,
+		blackout_fade_time)
