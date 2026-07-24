@@ -8,7 +8,7 @@ var rain_spawn_points: Array[Node3D] = []
 var plates_cleaned := 0
 @onready var instructions: Label = $CanvasLayer/Instructions
 @onready var label: Label = $CanvasLayer/Label
-
+var rain_active := false
 
 
 func _ready() -> void:
@@ -40,14 +40,29 @@ func _spawn_new_plates():
 		new_plate.cleaned.connect(_on_plate_cleaned)
 
 func _plate_rain():
-	print(rain_spawn_points)
-	for point in rain_spawn_points:
+	var rain_area_min := Vector2(-5, -5)
+	var rain_area_max := Vector2(5, 5)
+	
+	if rain_active:
+		return
+	rain_active = true
+	var duration := 5.0
+	var interval := 0.3
+	var elapsed := 0.0
+
+	while elapsed < duration:
 		var new_plate = plate.instantiate()
 		add_child(new_plate)
 		new_plate.add_to_group("dish")
-		new_plate.global_position = point.global_position
+		var rand_x = randf_range(rain_area_min.x, rain_area_max.x)
+		var rand_z = randf_range(rain_area_min.y, rain_area_max.y)
+		new_plate.global_position = Vector3(rand_x, 4, rand_z)
 		new_plate.cleaned.connect(_on_plate_cleaned)
-		print('rain_spawn_point')
+
+		await get_tree().create_timer(interval).timeout
+		elapsed += interval
+
+	rain_active = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("reset"):
