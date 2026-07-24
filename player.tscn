@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dsy42utnjd7xx"]
 
 [ext_resource type="Script" uid="uid://ofutcl58k8m" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://12lruquss4bg" path="res://world.gd" id="2_hqtel"]
 [ext_resource type="AudioStream" uid="uid://cg2ob3vcsq6hu" path="res://sfx/scrubbing.mp3" id="2_onrkg"]
 [ext_resource type="AudioStream" uid="uid://dg2kl7xq10gkh" path="res://sfx/pick_up.mp3" id="3_i3pqv"]
 
@@ -8,6 +9,7 @@
 
 [node name="player" type="CharacterBody3D" unique_id=1722317622 groups=["player"]]
 script = ExtResource("1_4flbx")
+world = ExtResource("2_hqtel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1618573191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

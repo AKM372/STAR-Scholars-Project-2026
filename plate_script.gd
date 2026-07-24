@@ -1,7 +1,7 @@
 extends RigidBody3D
 @onready var plate: RigidBody3D = $"."
 @onready var plate_color: MeshInstance3D = $MeshInstance3D
-var normal_color:= Color(1,0.8,0.6)
+var normal_color:= Color(0.5,0.4,0.9)
 var glitch_color := Color(1.0, 0.2, 0.2)
 var plate_material: StandardMaterial3D
 

@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://dfq2x8qcjmxh8"]
+[gd_scene format=4 uid="uid://dfq2x8qcjmxh8"]
 
-[ext_resource type="Script" path="res://sponge_script.gd" id="1_s48kf"]
+[ext_resource type="Script" uid="uid://3i74tjwqf1fk" path="res://sponge_script.gd" id="1_s48kf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dgjir"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txb15"]
-albedo_color = Color(0, 0.49019608, 1, 1)
+albedo_color = Color(9.746477e-07, 0.3564887, 0.13746247, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_r3hyt"]
 _surfaces = [{
@@ -28,28 +28,28 @@ size = Vector3(0.62, 0.18, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s48kf"]
 
-[node name="sponge" type="RigidBody3D" groups=["sponge"]]
+[node name="sponge" type="RigidBody3D" unique_id=1187282305 groups=["sponge"]]
 transform = Transform3D(-0.007853948, 0, -0.9999692, 0, 1, 0, 0.9999692, 0, -0.007853948, 0, 0, 0)
 collision_layer = 2
 freeze_mode = 1
 contact_monitor = true
 script = ExtResource("1_s48kf")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=898562853]
 transform = Transform3D(0.62333024, 0, 0, 0, 0.15837538, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_dgjir")
 surface_material_override/0 = SubResource("StandardMaterial3D_txb15")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=64804754]
 mesh = SubResource("ArrayMesh_r3hyt")
 surface_material_override/0 = SubResource("StandardMaterial3D_7m5fo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["sponge"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1308833674 groups=["sponge"]]
 shape = SubResource("BoxShape3D_st82r")
 
-[node name="DirtDetectingArea" type="Area3D" parent="." groups=["sponge"]]
+[node name="DirtDetectingArea" type="Area3D" parent="." unique_id=366793171 groups=["sponge"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtDetectingArea" groups=["sponge"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtDetectingArea" unique_id=573709119 groups=["sponge"]]
 transform = Transform3D(0.6982605, 0, 0, 0, 0.23664477, 0, 0, 0, 1.00237, 0, 0, 0)
 shape = SubResource("BoxShape3D_s48kf")
 

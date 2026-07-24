@@ -42,7 +42,7 @@ var glitch_recover_timer := 0.0
 @export var glitch_max_radius := 1.4
 @export var glitch_recover_min := 2.0      # seconds before auto-reset
 @export var glitch_recover_max := 6.0
-@export var world: PackedScene
+@export var world: GDScript
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
 
 func _ready() -> void:
@@ -107,6 +107,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('throw') and pickedObject:
 		_throw_object(pickedObject)
 		pickedObject = null
+		
+	if event.is_action_pressed('testing'):
+		_blackout_and_drop()
 	
 func _physics_process(delta: float) -> void:
 	#basic gravity for jumping and falling
