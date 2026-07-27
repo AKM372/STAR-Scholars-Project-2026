@@ -108,7 +108,7 @@ func _setup_material() -> void:
 			mat = StandardMaterial3D.new()
 		plate_color.set_surface_override_material(0, mat)
 	plate_material = mat
-	normal_color = plate_material.albedo_color
+	plate_material.albedo_color = normal_color
 
 func _set_plate_color(color: Color) -> void:
 	var mat = plate_color.get_surface_override_material(0)
