@@ -7,6 +7,7 @@
 [ext_resource type="ArrayMesh" uid="uid://qu5poco0g2h7" path="res://sink.obj" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://c6tyrltih4m8m" path="res://door.gd" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://bhtyy3p8e0sks" path="res://background_music.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://u7tjrq2rnpy1" path="res://broken_plate.tscn" id="8_gbfbk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 
@@ -58,7 +59,7 @@ plate = ExtResource("4_036b0")
 transform = Transform3D(-0.8660254, -0.4330128, 0.25000003, 0.2196067, 0.119781405, 0.96820736, -0.4491915, 0.89339375, -0.0086412225, 0, 18.618744, 0)
 shadow_enabled = true
 
-[node name="Floor" type="StaticBody3D" parent="." unique_id=280324015 groups=["world"]]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=280324015 groups=["ground", "world"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1837787373 groups=["world"]]
 transform = Transform3D(41, 0, 0, 0, 0.5, 0, 0, 0, 41, 0, -0.5, 0)
@@ -273,3 +274,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_pkg7o")
 shape = SubResource("BoxShape3D_ulpex")
 
 [node name="BackgroundMusic" parent="." unique_id=1967050840 instance=ExtResource("7_pkg7o")]
+
+[node name="BrokenPlate" parent="." unique_id=688467520 instance=ExtResource("8_gbfbk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72168255, -2.23771)

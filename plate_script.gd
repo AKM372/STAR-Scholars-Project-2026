@@ -1,7 +1,7 @@
 extends RigidBody3D
 @onready var plate: RigidBody3D = $"."
 @onready var plate_color: MeshInstance3D = $MeshInstance3D
-var normal_color:= Color(0.5,0.4,0.9)
+var normal_color:= Color(0.5, 0.4, 0.9, 1.0)
 var glitch_color := Color(1.0, 0.2, 0.2)
 var plate_material: StandardMaterial3D
 
@@ -29,6 +29,11 @@ var displayed_dirt := 1.0    # what's shown, eases toward dirt_amount
 #glitch mechanics
 signal cleaned
 var cleaned_num: int = 0
+
+#breaking
+@export var broken_plate_scene: PackedScene
+var break_velocity_threshold := 3.5
+var broken := false
 
 func _ready():
 	#connects raycast to selection
@@ -96,6 +101,27 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 func _on_ground_detector_body_entered(body: Node3D) -> void:
 	if linear_velocity.length() > 1.0 and (body.is_in_group("world") or body.is_in_group("dish")):
 		impact_sound.play()
+	#if linear_velocity.length() > 1.0 and body.is_in_group('ground'):
+		#body.queue_free()
+	if not broken and body.is_in_group("ground") and linear_velocity.length() > break_velocity_threshold:
+		_break_plate()
+
+func _break_plate() -> void:
+	if broken or not broken_plate_scene:
+		return
+	broken = true
+
+	var shards := broken_plate_scene.instantiate()
+	get_parent().add_child(shards)
+	shards.global_transform = global_transform
+
+	# carry the plate's motion into the shards so it doesn't look like it teleports still
+	for shard in shards.get_children():
+		if shard is RigidBody3D:
+			shard.linear_velocity = linear_velocity + Vector3(randf_range(-1.0, 1.0), randf_range(0.0, 1.0), randf_range(-1.0, 1.0))
+			shard.angular_velocity = angular_velocity + Vector3(randf_range(-2.0, 2.0), randf_range(-2.0, 2.0), randf_range(-2.0, 2.0))
+
+	queue_free()
 
 func _setup_material() -> void:
 	var mat = plate_color.get_surface_override_material(0)

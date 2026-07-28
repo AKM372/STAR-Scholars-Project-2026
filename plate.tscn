@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://36bodevpebph"]
 
 [ext_resource type="Script" uid="uid://bp58fokg7exlq" path="res://plate_script.gd" id="1_s5yhh"]
+[ext_resource type="PackedScene" uid="uid://u7tjrq2rnpy1" path="res://broken_plate.tscn" id="2_ffgcv"]
 [ext_resource type="ArrayMesh" uid="uid://doja3tu2ql8va" path="res://assets/SM_plate.obj" id="2_jcf13"]
 [ext_resource type="AudioStream" uid="uid://bptvv5ye5gyuk" path="res://sfx/dish_dropping.mp3" id="3_g4jty"]
 [ext_resource type="Texture2D" uid="uid://byndxecrewrjq" path="res://assets/Dirt_PNG_2.png" id="3_jcf13"]
@@ -32,6 +33,7 @@ freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_s5yhh")
+broken_plate_scene = ExtResource("2_ffgcv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=250967154]
 transform = Transform3D(0.055, 0, 0, 0, 0.011, 0, 0, 0, 0.055, 0, 0, 0)
