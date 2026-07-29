@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://12lruquss4bg" path="res://world.gd" id="1_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dsy42utnjd7xx" path="res://player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://dfq2x8qcjmxh8" path="res://sponge.tscn" id="3_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://dc2oq5v6ys733" path="res://sfx_dialouge.tscn" id="3_ioo17"]
 [ext_resource type="PackedScene" uid="uid://36bodevpebph" path="res://plate.tscn" id="4_036b0"]
 [ext_resource type="ArrayMesh" uid="uid://qu5poco0g2h7" path="res://sink.obj" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://c6tyrltih4m8m" path="res://door.gd" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://bhtyy3p8e0sks" path="res://background_music.tscn" id="7_pkg7o"]
-[ext_resource type="PackedScene" uid="uid://u7tjrq2rnpy1" path="res://broken_plate.tscn" id="8_gbfbk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 
@@ -197,27 +197,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.237, 1.295, -8.486)
 [node name="Marker3D3" type="Marker3D" parent="PlateMarkers" unique_id=856997436]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43, 0.783, -8.505)
 
-[node name="PlateRainMarkers" type="Node3D" parent="." unique_id=267091309]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0167174, 0, 2.8857412)
-
-[node name="Marker3D" type="Marker3D" parent="PlateRainMarkers" unique_id=141702048]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1859403, 4.5613604, -4.3330393)
-
-[node name="Marker3D2" type="Marker3D" parent="PlateRainMarkers" unique_id=705499684]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.237, 3.8480449, -4.033146)
-
-[node name="Marker3D3" type="Marker3D" parent="PlateRainMarkers" unique_id=1102990957]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1909404, 3.8672533, -7.722343)
-
-[node name="Marker3D4" type="Marker3D" parent="PlateRainMarkers" unique_id=1410035582]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1909404, 3.4714494, -2.9754062)
-
-[node name="Marker3D6" type="Marker3D" parent="PlateRainMarkers" unique_id=135313945]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4868593, 7.12538, -2.9754062)
-
-[node name="Marker3D5" type="Marker3D" parent="PlateRainMarkers" unique_id=204216523]
-transform = Transform3D(0.7759763, -0.6307621, 0, 0.6307621, 0.7759763, 0, 0, 0, 1, 1.0594337, 3.9054508, -2.9754062)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=154761196]
 
 [node name="Instructions" type="Label" parent="CanvasLayer" unique_id=1023766442]
@@ -228,13 +207,6 @@ offset_bottom = 336.0
 text = "WASD / arrrows
 right click to scrub
 left click to pick up/put down"
-
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=1039937584]
-offset_left = 83.0
-offset_top = 89.0
-offset_right = 209.0
-offset_bottom = 112.0
-text = "Wash the dishes"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1601733920]
 offset_right = 1171.0
@@ -275,5 +247,4 @@ shape = SubResource("BoxShape3D_ulpex")
 
 [node name="BackgroundMusic" parent="." unique_id=1967050840 instance=ExtResource("7_pkg7o")]
 
-[node name="BrokenPlate" parent="." unique_id=688467520 instance=ExtResource("8_gbfbk")]
-transform = Transform3D(1, 0, 0, 0, 0.567332, -0.8234891, 0, 0.8234891, 0.567332, 0, 1.0183598, -2.34516)
+[node name="SFXDialouge" parent="." unique_id=1286400756 instance=ExtResource("3_ioo17")]

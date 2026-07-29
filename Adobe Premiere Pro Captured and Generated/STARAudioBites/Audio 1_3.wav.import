@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqwewm2hc2u2t"
+path="res://.godot/imported/Audio 1_3.wav-984d806a6526c34fed9efc68a13bc2ee.sample"
+
+[deps]
+
+source_file="res://Adobe Premiere Pro Captured and Generated/STARAudioBites/Audio 1_3.wav"
+dest_files=["res://.godot/imported/Audio 1_3.wav-984d806a6526c34fed9efc68a13bc2ee.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -109,7 +109,7 @@ func _input(event: InputEvent) -> void:
 		pickedObject = null
 		
 	if event.is_action_pressed('testing'):
-		world._plate_rain()
+		world.play_random_sfx()
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
@@ -215,8 +215,7 @@ func _roll_glitch() -> void:
 		# bigger glitch offset — still fairly common
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
 	elif random_float < 0.85:
-		# nothing happens this roll
-		pass
+		world.play_random_sfx()
 	elif random_float < 0.92:
 		# blackout + drop — disruptive, less frequent
 		_blackout_and_drop()

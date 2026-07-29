@@ -3,27 +3,25 @@ extends Node3D
 @export var plate: PackedScene
 @onready var plate_markers: Node3D = $PlateMarkers
 var spawn_points: Array[Node3D] = []
-@onready var plate_rain_markers: Node3D = $PlateRainMarkers
-var rain_spawn_points: Array[Node3D] = []
+
 var plates_cleaned := 0
 @onready var instructions: Label = $CanvasLayer/Instructions
 @onready var label: Label = $CanvasLayer/Label
 var rain_active := false
 
+#sfx and dialouge
+@onready var WashTheDishes: AudioStreamPlayer3D = $SFXDialouge/WashTheDishes
+@onready var sfx_dialouge: Node = $SFXDialouge
 
 func _ready() -> void:
-	print()
-	label.hide()
+	WashTheDishes.play()
 	await get_tree().create_timer(3.0).timeout
 	instructions.hide()
-	label.show()
-	for child in plate_markers.get_children():
-		if child is Marker3D:
-			spawn_points.append(child)
-	for child in plate_rain_markers.get_children():
-		if child is Marker3D:
-			rain_spawn_points.append(child)
+	for point in plate_markers.get_children():
+		spawn_points.append(point)
+		
 	_spawn_new_plates()
+	
 
 func _on_plate_cleaned():
 	plates_cleaned += 1
@@ -71,3 +69,11 @@ func _input(event: InputEvent) -> void:
 		for dish in dishes:
 			dish.queue_free()
 		_spawn_new_plates()
+
+func play_random_sfx() -> void:
+	var players := []
+	for child in $SFXDialouge.get_children():
+		if child is AudioStreamPlayer3D:
+			players.append(child)
+	if players.size() > 0:
+		players[randi() % players.size()].play()

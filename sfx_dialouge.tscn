@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dc2oq5v6ys733"]
+
+[ext_resource type="AudioStream" uid="uid://bleqvqdiw34qm" path="res://sfx/WashTheDishes.mp3" id="1_anht5"]
+[ext_resource type="AudioStream" uid="uid://ibk4nmak22ho" path="res://sfx/StopMessingAround.mp3" id="2_anht5"]
+[ext_resource type="AudioStream" uid="uid://bh6eqn60fonwl" path="res://sfx/NotEvenTrying.mp3" id="3_rrx5x"]
+[ext_resource type="AudioStream" uid="uid://dmjfxb78gk4b4" path="res://sfx/JustDoTheDishes.mp3" id="4_7g7a1"]
+[ext_resource type="AudioStream" uid="uid://blotb4p1wb735" path="res://sfx/ChoosingNotTo.mp3" id="5_s82p4"]
+
+[node name="SFXDialogue" type="Node" unique_id=943841762]
+
+[node name="WashTheDishes" type="AudioStreamPlayer3D" parent="." unique_id=2033865986]
+stream = ExtResource("1_anht5")
+volume_db = 2.0
+
+[node name="StopMessingAround" type="AudioStreamPlayer3D" parent="." unique_id=2044937941]
+stream = ExtResource("2_anht5")
+
+[node name="NotEvenTrying" type="AudioStreamPlayer3D" parent="." unique_id=491231373]
+stream = ExtResource("3_rrx5x")
+
+[node name="JustDoTheDishes" type="AudioStreamPlayer3D" parent="." unique_id=1846840803]
+stream = ExtResource("4_7g7a1")
+
+[node name="ChoosingNotTo" type="AudioStreamPlayer3D" parent="." unique_id=659495252]
+stream = ExtResource("5_s82p4")

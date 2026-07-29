@@ -9,6 +9,7 @@ var plate_material: StandardMaterial3D
 @onready var outlineMesh: MeshInstance3D = $MeshInstance3D/outlineMesh
 var selected = false
 var outlineWidth = 0.05
+var held := false
 
 #for scrubbing
 var player
@@ -49,7 +50,7 @@ func _set_selected(object):
 
 func _process(delta):
 	#checks to see if the plate is being held
-	var held = (player.pickedObject == self)
+	held = (player.pickedObject == self)
 	
 	#makes outline not visible when raycast is hitting the plate and it's not held
 	outlineMesh.visible = selected and not held
@@ -99,6 +100,8 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		sponge_touching = false
 
 func _on_ground_detector_body_entered(body: Node3D) -> void:
+	if held:
+		return
 	if linear_velocity.length() > 1.0 and (body.is_in_group("world") or body.is_in_group("dish")):
 		impact_sound.play()
 	if linear_velocity.length() > break_velocity_threshold and (body.is_in_group("world")):
