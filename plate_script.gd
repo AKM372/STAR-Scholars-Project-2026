@@ -121,7 +121,7 @@ func _break_plate() -> void:
 		if shard is RigidBody3D:
 			shard.linear_velocity = linear_velocity * 0.5 + Vector3(randf_range(-0.3, 0.3), randf_range(0.0, 0.3), randf_range(-0.3, 0.3))
 			shard.angular_velocity = angular_velocity * 0.3 + Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), randf_range(-0.5, 0.5))
-
+	cleaned.emit()
 	queue_free()
 
 func _setup_material() -> void:
