@@ -101,9 +101,7 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 func _on_ground_detector_body_entered(body: Node3D) -> void:
 	if linear_velocity.length() > 1.0 and (body.is_in_group("world") or body.is_in_group("dish")):
 		impact_sound.play()
-	#if linear_velocity.length() > 1.0 and body.is_in_group('ground'):
-		#body.queue_free()
-	if not broken and body.is_in_group("ground") and linear_velocity.length() > break_velocity_threshold:
+	if linear_velocity.length() > break_velocity_threshold and (body.is_in_group("world")):
 		_break_plate()
 
 func _break_plate() -> void:
@@ -118,8 +116,8 @@ func _break_plate() -> void:
 	# carry the plate's motion into the shards so it doesn't look like it teleports still
 	for shard in shards.get_children():
 		if shard is RigidBody3D:
-			shard.linear_velocity = linear_velocity + Vector3(randf_range(-1.0, 1.0), randf_range(0.0, 1.0), randf_range(-1.0, 1.0))
-			shard.angular_velocity = angular_velocity + Vector3(randf_range(-2.0, 2.0), randf_range(-2.0, 2.0), randf_range(-2.0, 2.0))
+			shard.linear_velocity = linear_velocity * 0.5 + Vector3(randf_range(-0.3, 0.3), randf_range(0.0, 0.3), randf_range(-0.3, 0.3))
+			shard.angular_velocity = angular_velocity * 0.3 + Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), randf_range(-0.5, 0.5))
 
 	queue_free()
 
