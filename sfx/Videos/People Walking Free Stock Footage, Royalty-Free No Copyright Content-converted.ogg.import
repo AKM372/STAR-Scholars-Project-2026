@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ctpp71i4jrvgm"
+path="res://.godot/imported/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogg-8de03f63bd6e8a6573a5f908a70035a9.oggvorbisstr"
+
+[deps]
+
+source_file="res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogg"
+dest_files=["res://.godot/imported/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogg-8de03f63bd6e8a6573a5f908a70035a9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

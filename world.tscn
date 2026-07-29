@@ -51,6 +51,18 @@ albedo_color = Color(0.48235294, 0.23137255, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ulpex"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_554ww"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gbfbk"]
+viewport_path = NodePath("Windows/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulpex"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_gbfbk")
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_eqetu"]
+file = "res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogg"
+
 [node name="World" type="Node3D" unique_id=1850648427]
 script = ExtResource("1_aqk2v")
 plate = ExtResource("4_036b0")
@@ -248,3 +260,25 @@ shape = SubResource("BoxShape3D_ulpex")
 [node name="BackgroundMusic" parent="." unique_id=1967050840 instance=ExtResource("7_pkg7o")]
 
 [node name="SFXDialouge" parent="." unique_id=1286400756 instance=ExtResource("3_ioo17")]
+
+[node name="Windows" type="Node" parent="." unique_id=1313299411]
+
+[node name="Window1" type="MeshInstance3D" parent="Windows" unique_id=988862274]
+transform = Transform3D(-7.430936e-08, 1, 0, 7.430936e-08, 1.9106855e-15, -1, -1.7, -4.371139e-08, -4.371139e-08, -5.738122, 2.469697, 0)
+mesh = SubResource("PlaneMesh_554ww")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ulpex")
+
+[node name="SubViewport" type="SubViewport" parent="Windows" unique_id=1557001269]
+size = Vector2i(720, 1280)
+render_target_update_mode = 4
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Windows/SubViewport" unique_id=1118159663]
+offset_left = -40.0
+offset_right = 680.0
+offset_bottom = 1280.0
+audio_track = 2
+stream = SubResource("VideoStreamTheora_eqetu")
+autoplay = true
+expand = true
+loop = true
