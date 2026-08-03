@@ -13,6 +13,9 @@ var rain_active := false
 #sfx and dialouge
 @onready var WashTheDishes: AudioStreamPlayer3D = $SFXDialouge/WashTheDishes
 @onready var sfx_dialouge: Node = $SFXDialouge
+@onready var sfx_dialouge_timer: Timer = $SFXDialougeTimer
+
+
 
 func _ready() -> void:
 	WashTheDishes.play()
@@ -22,8 +25,7 @@ func _ready() -> void:
 		spawn_points.append(point)
 		
 	_spawn_new_plates()
-	
-	
+	sfx_dialouge_timer.timeout.connect(_on_timeout)
 
 func _on_plate_cleaned():
 	plates_cleaned += 1
@@ -73,9 +75,13 @@ func _input(event: InputEvent) -> void:
 		_spawn_new_plates()
 
 func play_random_sfx() -> void:
+	print('sfx playing')
 	var players := []
 	for child in $SFXDialouge.get_children():
 		if child is AudioStreamPlayer3D:
 			players.append(child)
 	if players.size() > 0:
 		players[randi() % players.size()].play()
+
+func _on_timeout() -> void:
+	play_random_sfx()

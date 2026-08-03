@@ -282,6 +282,10 @@ shape = SubResource("BoxShape3D_ulpex")
 
 [node name="BackgroundMusic" parent="." unique_id=1967050840 instance=ExtResource("7_pkg7o")]
 
+[node name="SFXDialougeTimer" type="Timer" parent="." unique_id=704791324]
+wait_time = 10.0
+autostart = true
+
 [node name="SFXDialouge" parent="." unique_id=1286400756 instance=ExtResource("3_ioo17")]
 
 [node name="Windows" type="Node" parent="." unique_id=1313299411]
