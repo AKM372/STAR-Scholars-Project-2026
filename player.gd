@@ -110,8 +110,6 @@ func _input(event: InputEvent) -> void:
 				_place_object(pickedObject)
 			pickedObject = null
 	
-	
-	
 	#initiates scrubbing animation for the scrub click
 	if event.is_action_pressed('scrub') and offhandObject and not scrubbing:
 		scrubbing = true
@@ -121,10 +119,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released('scrub'):
 		scrub_held = false
 	
-	if event.is_action_pressed('throw') and pickedObject:
-		_throw_object(pickedObject)
-		pickedObject = null
-		
 	if event.is_action_pressed('testing'):
 		_blackout_and_drop()
 		print('testing')

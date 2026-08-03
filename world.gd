@@ -6,7 +6,6 @@ var spawn_points: Array[Node3D] = []
 
 var plates_cleaned := 0
 @onready var instructions: Label = $CanvasLayer/Instructions
-@onready var label: Label = $CanvasLayer/Label
 var rain_active := false
 @onready var glitch_screen: ColorRect = $CanvasLayer/GlitchScreen
 
@@ -14,17 +13,28 @@ var rain_active := false
 @onready var WashTheDishes: AudioStreamPlayer3D = $SFXDialouge/WashTheDishes
 @onready var sfx_dialouge: Node = $SFXDialouge
 @onready var sfx_dialouge_timer: Timer = $SFXDialougeTimer
-
-
+var players := []
 
 func _ready() -> void:
+	#play opening sfx
 	WashTheDishes.play()
+	
+	#make sfx list with a loop for random choice later
+	for child in $SFXDialouge.get_children():
+		if child is AudioStreamPlayer3D:
+			players.append(child)
+	
+	#3 seconds of silence for the instructions
 	await get_tree().create_timer(3.0).timeout
 	instructions.hide()
+	
+	#makes a list of callable points so the plates spawn right
 	for point in plate_markers.get_children():
 		spawn_points.append(point)
 		
 	_spawn_new_plates()
+	
+	#connects 10s sfx player timer
 	sfx_dialouge_timer.timeout.connect(_on_timeout)
 
 func _on_plate_cleaned():
@@ -75,12 +85,11 @@ func _input(event: InputEvent) -> void:
 		_spawn_new_plates()
 
 func play_random_sfx() -> void:
-	var players := []
-	for child in $SFXDialouge.get_children():
-		if child is AudioStreamPlayer3D:
-			players.append(child)
-	if players.size() > 0:
-		players[randi() % players.size()].play()
+	# don't interrupt if something is already playing
+	for p in players:
+		if p.playing:
+			return
+	players[randi() % players.size()].play()
 
 func _on_timeout() -> void:
 	play_random_sfx()
