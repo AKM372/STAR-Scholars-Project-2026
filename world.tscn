@@ -45,6 +45,10 @@ albedo_color = Color(0.9999955, 0.49287075, 0.23957124, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ioo17"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_i3pqv"]
+paragraph_spacing = -0.955
+font_size = 55
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hh1c6"]
 shader = ExtResource("6_ioo17")
 shader_parameter/intensity = 0.0
@@ -230,13 +234,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43, 0.783, -8.505)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=154761196]
 
 [node name="Instructions" type="Label" parent="CanvasLayer" unique_id=1023766442]
-offset_left = 433.0
-offset_top = 261.0
-offset_right = 658.0
-offset_bottom = 336.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 306.0
+offset_top = -485.0
+offset_right = 995.0
+offset_bottom = -111.0
+grow_vertical = 0
 text = "WASD / arrrows
 right click to scrub
-left click to pick up/put down"
+left click hold to pick up"
+label_settings = SubResource("LabelSettings_i3pqv")
 
 [node name="GlitchScreen" type="ColorRect" parent="CanvasLayer" unique_id=1601733920]
 material = SubResource("ShaderMaterial_hh1c6")
