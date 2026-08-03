@@ -20,6 +20,10 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 #throwing
 @export var throw_force := 8.0
 @export var throw_upward_boost := 1.5
+@export var fling_speed_threshold := 1500.0   # tune this — mouse pixels/sec to count as a "fling"
+@export var fling_max_speed := 4000.0          # speed at which throw force maxes out
+var mouse_delta_accum := Vector2.ZERO
+var mouse_fling_speed := 0.0
 
 #for the scrub animation
 var scrubbing := false
@@ -51,7 +55,12 @@ func _ready() -> void:
 func _process(delta):
 	# selection raycast
 	interact_object.emit(ray_cast_3d.get_collider() if ray_cast_3d.is_colliding() else null)
-
+	
+	# track mouse fling speed (smoothed so single-frame noise doesn't false-trigger)
+	var instant_speed = mouse_delta_accum.length() / delta
+	mouse_fling_speed = lerp(mouse_fling_speed, instant_speed, 0.5)
+	mouse_delta_accum = Vector2.ZERO
+	
 	# keep held objects glued to their markers every frame
 	if pickedObject:
 		pickedObject.global_transform = hand_marker.global_transform.translated_local(glitch_offset)
@@ -80,19 +89,29 @@ func _input(event: InputEvent) -> void:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-65), deg_to_rad(65))
-
+		mouse_delta_accum += event.relative
+		
 	#releases mouse for testing purposes
 	if event.is_action_pressed("cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	#makes the pick up action happen?
 	if event.is_action_pressed('interact'):
-		if pickedObject:
-			_place_object(pickedObject)
-			pickedObject = null
-		elif ray_cast_3d.is_colliding():
+		if ray_cast_3d.is_colliding():
 			pick_up_object(ray_cast_3d.get_collider())
-
+		else:
+			return
+	
+	if event.is_action_released('interact'):
+		if pickedObject:
+			if mouse_fling_speed > fling_speed_threshold:
+				_throw_object(pickedObject, mouse_fling_speed)
+			else:
+				_place_object(pickedObject)
+			pickedObject = null
+	
+	
+	
 	#initiates scrubbing animation for the scrub click
 	if event.is_action_pressed('scrub') and offhandObject and not scrubbing:
 		scrubbing = true
@@ -160,17 +179,21 @@ func pick_up_object(object):
 	else:
 		return
 
-func _throw_object(object) -> void:
+func _throw_object(object, fling_speed: float = -1.0) -> void:
 	object.collision_shape_3d.disabled = false
 	object.freeze = false
 
 	# throw in the direction the camera is facing, with a slight upward arc
 	var throw_direction = -head.get_node("Camera3D").global_transform.basis.z
-	throw_direction.y += throw_upward_boost * 0.1  # nudge trajectory upward
+	throw_direction.y += throw_upward_boost * 0.1
 	throw_direction = throw_direction.normalized()
 
-	object.linear_velocity = throw_direction * throw_force
+	var force = throw_force
+	if fling_speed > 0.0:
+		var t = clamp(fling_speed / fling_max_speed, 0.0, 1.0)
+		force = lerp(throw_force, throw_force * 2.5, t)  # tune the multiplier to taste
 
+	object.linear_velocity = throw_direction * force
 func _place_object(object) -> void:
 	object.collision_shape_3d.disabled = false
 	

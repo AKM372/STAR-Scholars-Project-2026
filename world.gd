@@ -75,7 +75,6 @@ func _input(event: InputEvent) -> void:
 		_spawn_new_plates()
 
 func play_random_sfx() -> void:
-	print('sfx playing')
 	var players := []
 	for child in $SFXDialouge.get_children():
 		if child is AudioStreamPlayer3D:
