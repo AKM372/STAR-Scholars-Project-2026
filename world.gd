@@ -8,6 +8,7 @@ var plates_cleaned := 0
 @onready var instructions: Label = $CanvasLayer/Instructions
 @onready var label: Label = $CanvasLayer/Label
 var rain_active := false
+@onready var glitch_screen: ColorRect = $CanvasLayer/GlitchScreen
 
 #sfx and dialouge
 @onready var WashTheDishes: AudioStreamPlayer3D = $SFXDialouge/WashTheDishes
@@ -21,6 +22,7 @@ func _ready() -> void:
 		spawn_points.append(point)
 		
 	_spawn_new_plates()
+	
 	
 
 func _on_plate_cleaned():

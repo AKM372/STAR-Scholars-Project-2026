@@ -15,7 +15,6 @@ var offhandObject #the sponge
 @export var mouse_sensitivity := 0.003
 @onready var head: Node3D = $Head
 @export var speed := 3.0
-@export var jump_velocity := 4.5
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #throwing
@@ -43,12 +42,11 @@ var glitch_recover_timer := 0.0
 @export var glitch_recover_min := 2.0      # seconds before auto-reset
 @export var glitch_recover_max := 6.0
 @export var world: Node3D
-@onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
+@onready var glitch_rect: ColorRect = $"../CanvasLayer/GlitchScreen"
 
 func _ready() -> void:
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	color_rect.color.a = 0.0
 
 func _process(delta):
 	# selection raycast
@@ -109,15 +107,13 @@ func _input(event: InputEvent) -> void:
 		pickedObject = null
 		
 	if event.is_action_pressed('testing'):
-		world.play_random_sfx()
+		_blackout_and_drop()
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
 	#basic gravity for jumping and falling
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	#makes the player walk the direction the camera is facing
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -254,22 +250,20 @@ func _reset_glitch() -> void:
 func _blackout_and_drop() -> void:
 	if not pickedObject:
 		return
-
-	# hard snap to black
-	color_rect.color.a = 1.0
+	# hard snap to full glitch
+	glitch_rect.material.set_shader_parameter("intensity", 1.0)
 	_drop_object()
 	_drop_sponge()
-
 	# dampen sound instantly
 	var bus_idx = AudioServer.get_bus_index("Master")
 	var original_volume = AudioServer.get_bus_volume_db(bus_idx)
 	AudioServer.set_bus_volume_db(bus_idx, original_volume + -24)
-	
+
 	var blackout_fade_time = 0.7
 	var tween = create_tween()
 	tween.tween_interval(0.4)
 	tween.set_parallel(true)
-	tween.tween_property(color_rect, "color:a", 0.0, blackout_fade_time)
+	tween.tween_property(glitch_rect.material, "shader_parameter/intensity", 0.0, blackout_fade_time)
 	tween.tween_method(
 		func(db): AudioServer.set_bus_volume_db(bus_idx, db),
 		original_volume + -24,

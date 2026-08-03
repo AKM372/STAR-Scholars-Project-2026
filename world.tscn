@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://36bodevpebph" path="res://plate.tscn" id="4_036b0"]
 [ext_resource type="ArrayMesh" uid="uid://qu5poco0g2h7" path="res://sink.obj" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://c6tyrltih4m8m" path="res://door.gd" id="6_dwbse"]
+[ext_resource type="Shader" uid="uid://jikbhcpyy1sk" path="res://glitch_screen.gdshader" id="6_ioo17"]
 [ext_resource type="PackedScene" uid="uid://bhtyy3p8e0sks" path="res://background_music.tscn" id="7_pkg7o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
@@ -43,6 +44,12 @@ albedo_color = Color(0.9999955, 0.49287075, 0.23957124, 1)
 albedo_color = Color(0.9999955, 0.49287075, 0.23957124, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ioo17"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hh1c6"]
+shader = ExtResource("6_ioo17")
+shader_parameter/intensity = 0.0
+shader_parameter/glitch_speed = 12.0
+shader_parameter/block_size = 14.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_554ww"]
 
@@ -231,9 +238,14 @@ text = "WASD / arrrows
 right click to scrub
 left click to pick up/put down"
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1601733920]
-offset_right = 1171.0
-offset_bottom = 671.0
+[node name="GlitchScreen" type="ColorRect" parent="CanvasLayer" unique_id=1601733920]
+material = SubResource("ShaderMaterial_hh1c6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.99607843, 1, 1, 1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=290487916]
 transform = Transform3D(1, 0, 0, 0, 0.90439856, 0.42668876, 0, -0.42668876, 0.90439856, -0.009744935, 5.0268707, 2.2062743)
