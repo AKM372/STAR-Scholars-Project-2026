@@ -1,10 +1,31 @@
-[gd_scene format=3 uid="uid://dsy42utnjd7xx"]
+[gd_scene format=4 uid="uid://dsy42utnjd7xx"]
 
 [ext_resource type="Script" uid="uid://ofutcl58k8m" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="AudioStream" uid="uid://cg2ob3vcsq6hu" path="res://sfx/scrubbing.mp3" id="2_onrkg"]
 [ext_resource type="AudioStream" uid="uid://dg2kl7xq10gkh" path="res://sfx/pick_up.mp3" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3pqv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqtel"]
+albedo_color = Color(9.746477e-07, 0.3564887, 0.13746247, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_sweqy"]
+_surfaces = [{
+"aabb": AABB(-0.5288675, -0.5288675, -0.5288675, 1.057735, 1.057735, 1.057735),
+"attribute_data": PackedByteArray("AAAAAAAAAACrqio/AAAAAKuqqj4AAAAAAACAPwAAAAAAAAAAAAAAP6uqKj8AAAA/q6qqPgAAAD8AAIA/AAAAP6uqqj4AAAAAAAAAAAAAAD+rqio/AAAAAKuqqj4AAAA/q6qqPgAAAD8AAAAAAACAP6uqKj8AAAA/q6qqPgAAgD+rqqo+AAAAP6uqKj8AAAA/q6oqPwAAAD8AAIA/AAAAP6uqqj4AAIA/q6oqPwAAgD+rqio/AACAPwAAgD8AAIA/"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAAEAAIAAgAEAAYAAQAFAAMAAwAFAAcACAAMAAoACgAMAA4ACQANAAsACwANAA8AEAAUABIAEgAUABYAEQAVABMAEwAVABcA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("3GMHv9xjBz/cYwc/3GMHP9xjBz/cYwe/3GMHP9xjBz/cYwc/3GMHv9xjBz/cYwe/3GMHv9xjB7/cYwc/3GMHP9xjB7/cYwe/3GMHP9xjB7/cYwc/3GMHv9xjB7/cYwe/3GMHP9xjBz/cYwc/3GMHv9xjBz/cYwe/3GMHP9xjBz/cYwe/3GMHv9xjBz/cYwc/3GMHP9xjB7/cYwc/3GMHv9xjB7/cYwe/3GMHP9xjB7/cYwe/3GMHv9xjB7/cYwc/3GMHP9xjBz/cYwc/3GMHv9xjB7/cYwc/3GMHv9xjBz/cYwc/3GMHP9xjB7/cYwc/3GMHP9xjBz/cYwe/3GMHv9xjB7/cYwe/3GMHv9xjBz/cYwe/3GMHP9xjB7/cYwe//3//f////7//////AAD/v/9//3////+//////wAA/7//f/9/////v/////8AAP+//3//f////7//////AAD/v///AID/////AAAAgP9//7///wCA/////wAAAID/f/+///8AgP////8AAACA/3//v///AID/////AAAAgP9//78AgP//AAD/vwCAAAD///+/AID//wAA/78AgAAA////vwCA//8AAP+/AIAAAP///78AgP//AAD/vwCAAAD///+/")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hs0m"]
+albedo_color = Color(18.892157, 18.892157, 18.892157, 1)
 
 [node name="player" type="CharacterBody3D" unique_id=1722317622 groups=["player"]]
 script = ExtResource("1_4flbx")
@@ -17,7 +38,8 @@ shape = SubResource("CapsuleShape3D_onrkg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1215454605 groups=["player_camera"]]
-fov = 88.616035
+fov = 70.0
+near = 0.105
 
 [node name="PlaceRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=1287670593]
 transform = Transform3D(1, 0, 0, 0, 0.9390583, 0.34375802, 0, -0.34375802, 0.9390583, 0, -0.029190898, -0.9374193)
@@ -45,3 +67,13 @@ stream = ExtResource("3_i3pqv")
 
 [node name="ScrubbingSound" type="AudioStreamPlayer3D" parent="." unique_id=1723501482]
 stream = ExtResource("2_onrkg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1893632152]
+transform = Transform3D(0.62333024, 0, 0, 0, 0.15837538, 0, 0, 0, 1, 0, 1.4248004, -1.9862757)
+visible = false
+mesh = SubResource("BoxMesh_i3pqv")
+surface_material_override/0 = SubResource("StandardMaterial3D_hqtel")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=220809114]
+mesh = SubResource("ArrayMesh_sweqy")
+surface_material_override/0 = SubResource("StandardMaterial3D_2hs0m")

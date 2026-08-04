@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c6tyrltih4m8m" path="res://door.gd" id="6_dwbse"]
 [ext_resource type="Shader" uid="uid://jikbhcpyy1sk" path="res://glitch_screen.gdshader" id="6_ioo17"]
 [ext_resource type="PackedScene" uid="uid://bhtyy3p8e0sks" path="res://background_music.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://bhpx3raf4ukby" path="res://wall.tscn" id="8_ikiii"]
 [ext_resource type="ArrayMesh" uid="uid://47twihdsajib" path="res://assets/SM_door.obj" id="8_udxuc"]
 [ext_resource type="Material" uid="uid://5jh3qqm0kaos" path="res://M_Door.tres" id="9_ikiii"]
 [ext_resource type="ArrayMesh" uid="uid://bd0qgklitfue7" path="res://assets/SM_window.obj" id="10_hiqwa"]
@@ -25,22 +26,7 @@
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_k3n1d"]
 albedo_color = Color(0.99999887, 0.60216695, 0.42104003, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_036b0"]
-size = Vector3(1, 1, 0.62976074)
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_gbfbk"]
-albedo_color = Color(0.21568628, 0.078431375, 0.44705883, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dwbse"]
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_ioo17"]
-albedo_color = Color(0.21441713, 0.08024175, 0.44873035, 1)
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_wse8f"]
-albedo_color = Color(0.21441713, 0.08024175, 0.44873035, 1)
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_ic0uy"]
-albedo_color = Color(0.21441713, 0.08024175, 0.44873035, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ikiii"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pkg7o"]
 
@@ -63,8 +49,6 @@ shader = ExtResource("6_ioo17")
 shader_parameter/intensity = 0.0
 shader_parameter/glitch_speed = 12.0
 shader_parameter/block_size = 14.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ulpex"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_554ww"]
 transparency = 1
@@ -104,10 +88,6 @@ file = "res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copy
 script = ExtResource("1_aqk2v")
 plate = ExtResource("4_036b0")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=187175185]
-transform = Transform3D(-0.8660254, -0.4330128, 0.25000003, 0.2196067, 0.119781405, 0.96820736, -0.4491915, 0.89339375, -0.0086412225, 0, 18.618744, 0)
-shadow_enabled = true
-
 [node name="Floor" type="StaticBody3D" parent="." unique_id=280324015 groups=["ground", "world"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1837787373 groups=["world"]]
@@ -121,80 +101,74 @@ mesh = SubResource("BoxMesh_f3sb7")
 surface_material_override/0 = SubResource("ORMMaterial3D_k3n1d")
 
 [node name="player" parent="." unique_id=1351330524 node_paths=PackedStringArray("world") instance=ExtResource("2_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19288015, -2.7318678)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43284976, 0)
 world = NodePath("..")
 
 [node name="sponge" parent="." unique_id=132052505 instance=ExtResource("3_aqk2v")]
-transform = Transform3D(-0.80753726, 0, -0.5898167, 0, 1, 0, 0.5898167, 0, -0.80753726, -1.9431211, 0.7875285, -5.083469)
+transform = Transform3D(-0.40376857, 0, -0.29490837, 0, 0.5, 0, 0.29490837, 0, -0.40376857, -1.1126424, 0.43610704, -2.2327044)
 
 [node name="Room" type="Node3D" parent="." unique_id=2117490028 groups=["world"]]
 
+[node name="Door" type="StaticBody3D" parent="Room" unique_id=313434056 node_paths=PackedStringArray("door_mesh")]
+transform = Transform3D(1.26, 0, 0, 0, 2.08, 0, 0, 0, 0.177, 0.0003528595, 0.81819975, -3.0653646)
+script = ExtResource("6_dwbse")
+door_mesh = NodePath("DoorMesh")
+
+[node name="DoorMesh" type="MeshInstance3D" parent="Room/Door" unique_id=360665683]
+transform = Transform3D(-0.01, 0, -9.814727e-09, 0, 0.006, 0, 1.5099579e-09, 0, -0.065, 5.184668e-06, 0.08465261, 28.604462)
+mesh = ExtResource("8_udxuc")
+surface_material_override/0 = ExtResource("9_ikiii")
+surface_material_override/1 = ExtResource("9_ikiii")
+surface_material_override/2 = ExtResource("9_ikiii")
+
 [node name="Walls" type="Node3D" parent="Room" unique_id=284520398]
 
-[node name="Wall" type="StaticBody3D" parent="Room/Walls" unique_id=1949417623 groups=["world"]]
-transform = Transform3D(0.58473295, 0, 0, 0, 1, 0, 0, 0, 1, -1.0663548, 2.4356594, 3.7165017)
+[node name="Wall" parent="Room/Walls" unique_id=731084596 instance=ExtResource("8_ikiii")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Walls/Wall" unique_id=1839063672 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.9326038, 0, -4.378633)
-mesh = SubResource("BoxMesh_036b0")
-surface_material_override/0 = SubResource("ORMMaterial3D_gbfbk")
+[node name="WallMesh" parent="Room/Walls/Wall" index="0" unique_id=1361700596]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, -3.4513617, 1.2, -0.9166022)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Walls/Wall" unique_id=1362153832 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 2.0236769, 0, 0)
-shape = SubResource("BoxShape3D_dwbse")
+[node name="CollisionShape3D" parent="Room/Walls/Wall" index="1" unique_id=111759479]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, -3.4513617, 1.2, -0.9166022)
 
-[node name="Wall2" type="StaticBody3D" parent="Room/Walls" unique_id=2010821339 groups=["world"]]
-transform = Transform3D(0.58473295, 0, 0, 0, 1, 0, 0, 0, 1, -1.0663548, 2.4356594, -6.883247)
+[node name="Wall2" parent="Room/Walls" unique_id=1807266003 instance=ExtResource("8_ikiii")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Walls/Wall2" unique_id=2133366753 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.9326038, 0, 0)
-mesh = SubResource("BoxMesh_036b0")
-surface_material_override/0 = SubResource("ORMMaterial3D_ioo17")
+[node name="WallMesh" parent="Room/Walls/Wall2" index="0" unique_id=1361700596]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, 3.3326497, 1.2, -0.70120955)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Walls/Wall2" unique_id=4371053 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.9279895, 0, 0)
-shape = SubResource("BoxShape3D_dwbse")
+[node name="CollisionShape3D" parent="Room/Walls/Wall2" index="1" unique_id=111759479]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, 3.3326497, 1.2, -0.70120955)
 
-[node name="Wall3" type="StaticBody3D" parent="Room/Walls" unique_id=1932885033 groups=["world"]]
-transform = Transform3D(-2.5559489e-08, 0, 1, 0, 1, 0, -0.58473295, 0, -4.371139e-08, -6.2513123, 2.4356594, -0.44034338)
+[node name="Wall3" parent="Room/Walls" unique_id=1825972199 instance=ExtResource("8_ikiii")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Walls/Wall3" unique_id=1044303994 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.9329422, -0.0038790703, 2.4849987)
-mesh = SubResource("BoxMesh_036b0")
-surface_material_override/0 = SubResource("ORMMaterial3D_wse8f")
+[node name="WallMesh" parent="Room/Walls/Wall3" index="0" unique_id=1361700596]
+transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, -1.7968938e-07, 1.2, -4.110814)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Walls/Wall3" unique_id=1394778332 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.928328, -0.0038790703, 0.0003528595)
-shape = SubResource("BoxShape3D_dwbse")
+[node name="CollisionShape3D" parent="Room/Walls/Wall3" index="1" unique_id=111759479]
+transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, -1.7968938e-07, 1.2, -4.110814)
 
-[node name="Wall4" type="StaticBody3D" parent="Room/Walls" unique_id=257272294 groups=["world"]]
-transform = Transform3D(-2.5559489e-08, 0, 1, 0, 1, 0, -0.58473295, 0, -4.371139e-08, 6.3316565, 2.4317803, -0.44054127)
+[node name="Wall4" parent="Room/Walls" unique_id=6104196 instance=ExtResource("8_ikiii")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Walls/Wall4" unique_id=1025691120 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.9326038, 0, -3.155178)
-mesh = SubResource("BoxMesh_036b0")
-surface_material_override/0 = SubResource("ORMMaterial3D_ic0uy")
+[node name="WallMesh" parent="Room/Walls/Wall4" index="0" unique_id=1361700596]
+transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, 1.10690756e-07, 1.2, 2.532309)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Walls/Wall4" unique_id=70259855 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.9279895, 0, 0)
-shape = SubResource("BoxShape3D_dwbse")
+[node name="CollisionShape3D" parent="Room/Walls/Wall4" index="1" unique_id=111759479]
+transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, 1.10690756e-07, 1.2, 2.532309)
 
-[node name="Ceiling" type="StaticBody3D" parent="Room/Walls" unique_id=861214097 groups=["world"]]
-transform = Transform3D(-2.5559487e-08, 2.198268, -4.3711385e-08, 0, -9.6089344e-08, -0.99999994, -0.5847329, -9.6089344e-08, 1.9106853e-15, 0.12607479, 5.968035, -0.44054127)
+[node name="Cieling" parent="Room/Walls" unique_id=410168647 instance=ExtResource("8_ikiii")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Walls/Ceiling" unique_id=1651329030 groups=["world"]]
-transform = Transform3D(20, 0, 0, 2.842171e-14, 6, 1.7763568e-15, 0, 5.684342e-14, 1, 1.9011166, 0.002378311, 2.752549)
-mesh = SubResource("BoxMesh_036b0")
+[node name="WallMesh" parent="Room/Walls/Cieling" index="0" unique_id=1361700596]
+transform = Transform3D(-4.371139e-08, -6.370797, 0, 1, -2.784764e-07, 0, 0, 0, 6.765709, -2.9009612e-08, 3.1959715, -0.6952884)
+surface_material_override/0 = SubResource("StandardMaterial3D_ikiii")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Walls/Ceiling" unique_id=120311932 groups=["world"]]
-transform = Transform3D(20, 0, 0, 0, 6, 0, 0, 0, 1, 1.9279895, 0, 0)
-shape = SubResource("BoxShape3D_dwbse")
+[node name="CollisionShape3D" parent="Room/Walls/Cieling" index="1" unique_id=111759479]
+transform = Transform3D(-4.371139e-08, -6.370797, 0, 1, -2.784764e-07, 0, 0, 0, 6.765709, -2.9009612e-08, 3.1959715, -0.6952884)
 
 [node name="Counters" type="Node3D" parent="Room" unique_id=1706454921]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0003528595, -0.0038790703, -0.00019788742)
 
 [node name="Counter" type="StaticBody3D" parent="Room/Counters" unique_id=440819307 groups=["world"]]
-transform = Transform3D(0.6127335, 0, 0, 0, 1, 0, 0, 0, 1, -3.5244734, 0, -5.697894)
+transform = Transform3D(0.29258776, 0, 0, 0, 1, 0, 0, 0, 1, -1.995117, -0.1781869, -2.7937262)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Counters/Counter" unique_id=569222065]
 transform = Transform3D(7.3470025, 0, 0, 0, 1, 0, 0, 0, 1.747736, 0, 0.035544395, 0)
@@ -206,7 +180,7 @@ transform = Transform3D(8.099991, 0, 0, 0, 1, 0, 0, 0, 1.7238448, 0.31459332, 0.
 shape = SubResource("BoxShape3D_gbfbk")
 
 [node name="Counter2" type="StaticBody3D" parent="Room/Counters" unique_id=783591454]
-transform = Transform3D(0.6776758, 0, 0, 0, 1, 0, 0, 0, 1, 3.703329, 0.031633496, -5.6999097)
+transform = Transform3D(0.30950442, 0, 0, 0, 1, 0, 0, 0, 1, 2.2595959, -0.1679126, -2.7388048)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Counters/Counter2" unique_id=1751561187]
 transform = Transform3D(7.3470025, 0, 0, 0, 1, 0, 0, 0, 1.747736, 0, 0, 0)
@@ -218,7 +192,7 @@ transform = Transform3D(8.100489, 0, 0, 0, 1, 0, 0, 0, 1.7238448, -0.26555586, 0
 shape = SubResource("BoxShape3D_gbfbk")
 
 [node name="Sink" type="StaticBody3D" parent="Room/Counters" unique_id=2096819903]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2898853, -0.6318455, -6.3834543)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.155992, -0.8226228, -3.523954)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Counters/Sink" unique_id=1185638390]
 transform = Transform3D(0.024909219, 0, 0, 0, 0.023484161, 0, 0, 0, -0.031550262, 0, 0, 0)
@@ -240,13 +214,13 @@ shape = SubResource("BoxShape3D_ioo17")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0170703, -0.0038790703, 2.8855433)
 
 [node name="Marker3D" type="Marker3D" parent="PlateMarkers" unique_id=428807202]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.748, 0.783, -8.531)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5955182, 0.783, -5.7336373)
 
 [node name="Marker3D2" type="Marker3D" parent="PlateMarkers" unique_id=507462027]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.237, 1.295, -8.486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0845182, 1.295, -5.6886373)
 
 [node name="Marker3D3" type="Marker3D" parent="PlateMarkers" unique_id=856997436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43, 0.783, -8.505)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2775182, 0.783, -5.7076373)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=154761196]
 
@@ -274,7 +248,7 @@ grow_vertical = 2
 color = Color(0.99607843, 1, 1, 1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=290487916]
-transform = Transform3D(1, 0, 0, 0, 0.90439856, 0.42668876, 0, -0.42668876, 0.90439856, -0.009392075, 5.0229917, 2.2060764)
+transform = Transform3D(1, 0, 0, 0, 0.90439856, 0.42668876, 0, -0.42668876, 0.90439856, -0.009392075, 3.372337, 2.9848433)
 light_color = Color(1, 0.76162654, 0.6663052, 1)
 light_energy = 2.788
 light_indirect_energy = 12.011
@@ -288,28 +262,12 @@ spot_range = 4096.0
 spot_angle = 22.742197
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1376735963]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21864319, 0.7970934, -3.408629)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81107783, 2.0230746, 0.018447042)
 light_color = Color(1, 0.8980392, 0.76862746, 1)
 light_energy = 9.122
 light_indirect_energy = 10.271
 shadow_enabled = true
 omni_range = 9.394414
-
-[node name="Door" type="StaticBody3D" parent="." unique_id=313434056 node_paths=PackedStringArray("door_mesh", "door_collision")]
-transform = Transform3D(1.26, 0, 0, 0, 2.08, 0, 0, 0, 0.177, 0.0003528595, 0.81819975, -1.262367)
-script = ExtResource("6_dwbse")
-door_mesh = NodePath("DoorMesh")
-door_collision = NodePath("DoorCollision")
-
-[node name="DoorMesh" type="MeshInstance3D" parent="Door" unique_id=360665683]
-transform = Transform3D(-0.01, 0, -9.814727e-09, 0, 0.006, 0, 1.5099579e-09, 0, -0.065, 9.287111e-07, 0.12031676, 0.41853404)
-mesh = ExtResource("8_udxuc")
-surface_material_override/0 = ExtResource("9_ikiii")
-surface_material_override/1 = ExtResource("9_ikiii")
-surface_material_override/2 = ExtResource("9_ikiii")
-
-[node name="DoorCollision" type="CollisionShape3D" parent="Door" unique_id=1860246482]
-shape = SubResource("BoxShape3D_ulpex")
 
 [node name="BackgroundMusic" parent="." unique_id=1967050840 instance=ExtResource("7_pkg7o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0003528595, -0.0038790703, -0.00019788742)
@@ -324,6 +282,7 @@ autostart = true
 
 [node name="Window1Mesh" type="MeshInstance3D" parent="Windows" unique_id=1174758012]
 transform = Transform3D(-2.3745461e-09, 0, 0.055, 0, 0.055, 0, -0.05432328, 0, -2.4041265e-09, -3.765977, 2.4615808, -2.8061988)
+visible = false
 mesh = ExtResource("10_hiqwa")
 surface_material_override/0 = SubResource("StandardMaterial3D_554ww")
 surface_material_override/1 = ExtResource("15_26xuy")
@@ -334,6 +293,7 @@ surface_material_override/5 = ExtResource("15_26xuy")
 
 [node name="Window1" type="MeshInstance3D" parent="Windows" unique_id=988862274]
 transform = Transform3D(-6.9128525e-08, 1, 0, 6.9128525e-08, 1.9106855e-15, -1, -1.5814763, -4.371139e-08, -4.371139e-08, -3.7728634, 2.4475126, -2.8287568)
+visible = false
 mesh = SubResource("PlaneMesh_554ww")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ulpex")
@@ -343,6 +303,7 @@ size = Vector2i(720, 1280)
 render_target_update_mode = 4
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Windows/SubViewport" unique_id=1118159663]
+visible = false
 offset_left = -40.0
 offset_right = 680.0
 offset_bottom = 1280.0
@@ -354,6 +315,7 @@ loop = true
 
 [node name="Window2" type="MeshInstance3D" parent="Windows" unique_id=591642030]
 transform = Transform3D(-6.881181e-08, -0.99999994, 4.5103096e-08, 0, -4.3711385e-08, -1.0318385, 1.5742308, -4.3711385e-08, 1.971519e-15, 3.9681025, 1.6622834, -2.6649084)
+visible = false
 mesh = SubResource("PlaneMesh_554ww")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_gbfbk")
@@ -374,6 +336,7 @@ loop = true
 
 [node name="Window2Mesh" type="MeshInstance3D" parent="Windows" unique_id=1196769414]
 transform = Transform3D(1.5298985e-09, 0, 0.035, 0, -0.035, 0, -0.035, 0, 1.5298985e-09, 2.6848693, 1.1858469, -3.2515357)
+visible = false
 mesh = ExtResource("10_hiqwa")
 surface_material_override/0 = SubResource("StandardMaterial3D_554ww")
 surface_material_override/1 = ExtResource("15_26xuy")
@@ -381,3 +344,9 @@ surface_material_override/2 = ExtResource("15_26xuy")
 surface_material_override/3 = ExtResource("15_26xuy")
 surface_material_override/4 = ExtResource("15_26xuy")
 surface_material_override/5 = ExtResource("15_26xuy")
+
+[editable path="Room/Walls/Wall"]
+[editable path="Room/Walls/Wall2"]
+[editable path="Room/Walls/Wall3"]
+[editable path="Room/Walls/Wall4"]
+[editable path="Room/Walls/Cieling"]
