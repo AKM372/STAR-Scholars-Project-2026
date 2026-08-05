@@ -26,6 +26,8 @@ points = PackedVector3Array(-9.059025, 0.692081, -6.9930234, 2.981072, 0.2196022
 [node name="BrokenPlate" type="Node3D" unique_id=688467520]
 
 [node name="Shard1" type="RigidBody3D" parent="." unique_id=943425343]
+collision_layer = 2
+collision_mask = 2
 mass = 0.785
 physics_material_override = SubResource("PhysicsMaterial_gbfbk")
 gravity_scale = 5.0
@@ -43,8 +45,8 @@ transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_8q6eb")
 
 [node name="Shard2" type="RigidBody3D" parent="." unique_id=1897434628]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_ioo17")
 gravity_scale = 5.0
@@ -62,6 +64,8 @@ transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_h0ut0")
 
 [node name="Shard3" type="RigidBody3D" parent="." unique_id=539483623]
+collision_layer = 2
+collision_mask = 2
 mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_wse8f")
 gravity_scale = 5.667

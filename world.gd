@@ -52,8 +52,8 @@ func _spawn_new_plates():
 		new_plate.cleaned.connect(_on_plate_cleaned)
 
 func _plate_rain():
-	var rain_area_min := Vector2(-5, -5)
-	var rain_area_max := Vector2(5, 5)
+	var rain_area_min := Vector2(-2, -2)
+	var rain_area_max := Vector2(2, 2)
 	
 	if rain_active:
 		return
@@ -68,7 +68,7 @@ func _plate_rain():
 		new_plate.add_to_group("dish")
 		var rand_x = randf_range(rain_area_min.x, rain_area_max.x)
 		var rand_z = randf_range(rain_area_min.y, rain_area_max.y)
-		new_plate.global_position = Vector3(rand_x, 4, rand_z)
+		new_plate.global_position = Vector3(rand_x, 2.5, rand_z)
 		new_plate.cleaned.connect(_on_plate_cleaned)
 
 		await get_tree().create_timer(interval).timeout
