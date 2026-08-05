@@ -67,7 +67,8 @@ func _process(delta):
 		var c := DirtSprite.modulate
 		c.a = displayed_dirt
 		DirtSprite.modulate = c
-		
+	
+	#raycast selection outline
 	if held:
 		return
 	elif selected:

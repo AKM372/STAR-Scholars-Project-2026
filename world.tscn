@@ -126,15 +126,18 @@ surface_material_override/2 = ExtResource("9_ikiii")
 [node name="Walls" type="Node3D" parent="Room" unique_id=284520398]
 
 [node name="Wall" parent="Room/Walls" unique_id=731084596 instance=ExtResource("8_ikiii")]
+collision_layer = 3
+collision_mask = 3
 
 [node name="WallMesh" parent="Room/Walls/Wall" index="0" unique_id=1361700596]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, -3.4513617, 1.2, -0.9166022)
 
 [node name="CollisionShape3D" parent="Room/Walls/Wall" index="1" unique_id=111759479]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, -3.4513617, 1.2, -0.9166022)
-disabled = true
 
 [node name="Wall2" parent="Room/Walls" unique_id=1807266003 instance=ExtResource("8_ikiii")]
+collision_layer = 3
+collision_mask = 3
 
 [node name="WallMesh" parent="Room/Walls/Wall2" index="0" unique_id=1361700596]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, 3.3326497, 1.2, -0.70120955)
@@ -143,6 +146,8 @@ transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, 3.3326497, 1.2, -0.70120955)
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, 3.3326497, 1.2, -0.70120955)
 
 [node name="Wall3" parent="Room/Walls" unique_id=1825972199 instance=ExtResource("8_ikiii")]
+collision_layer = 3
+collision_mask = 3
 
 [node name="WallMesh" parent="Room/Walls/Wall3" index="0" unique_id=1361700596]
 transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, -1.7968938e-07, 1.2, -4.110814)
@@ -151,6 +156,8 @@ transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, -1.
 transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, -1.7968938e-07, 1.2, -4.110814)
 
 [node name="Wall4" parent="Room/Walls" unique_id=6104196 instance=ExtResource("8_ikiii")]
+collision_layer = 3
+collision_mask = 3
 
 [node name="WallMesh" parent="Room/Walls/Wall4" index="0" unique_id=1361700596]
 transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, 1.10690756e-07, 1.2, 2.532309)
@@ -159,6 +166,8 @@ transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, 1.1
 transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, 1.10690756e-07, 1.2, 2.532309)
 
 [node name="Cieling" parent="Room/Walls" unique_id=410168647 instance=ExtResource("8_ikiii")]
+collision_layer = 3
+collision_mask = 3
 
 [node name="WallMesh" parent="Room/Walls/Cieling" index="0" unique_id=1361700596]
 transform = Transform3D(-4.371139e-08, -6.370797, 0, 1, -2.784764e-07, 0, 0, 0, 6.765709, -2.9009612e-08, 3.1959715, -0.6952884)

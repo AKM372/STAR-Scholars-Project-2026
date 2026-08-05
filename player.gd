@@ -14,7 +14,7 @@ var offhandObject #the sponge
 #stuff for 1st person pov basic controls
 @export var mouse_sensitivity := 0.003
 @onready var head: Node3D = $Head
-@export var speed := 3.0
+@export var speed := 1.3
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #throwing
@@ -38,6 +38,7 @@ var scrub_held := false
 # for the glitches
 var glitch_offset := Vector3.ZERO
 var is_glitched := false
+var holding := false
 var glitch_check_timer := 0.0
 var glitch_recover_timer := 0.0
 @export var glitch_check_interval := 3.0   # how often we re-roll while NOT glitched
@@ -99,17 +100,21 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('interact'):
 		if ray_cast_3d.is_colliding():
 			pick_up_object(ray_cast_3d.get_collider())
-		else:
-			return
+			holding = true
 	
 	if event.is_action_released('interact'):
+		if is_glitched:
+			return
 		if pickedObject:
 			if mouse_fling_speed > fling_speed_threshold:
 				_throw_object(pickedObject, mouse_fling_speed)
 			else:
 				_place_object(pickedObject)
-			pickedObject = null
-	
+				pickedObject = null
+			holding = false
+		else:
+			return
+			
 	#initiates scrubbing animation for the scrub click
 	if event.is_action_pressed('scrub') and offhandObject and not scrubbing:
 		scrubbing = true
@@ -120,7 +125,7 @@ func _input(event: InputEvent) -> void:
 		scrub_held = false
 	
 	if event.is_action_pressed('testing'):
-		world._plate_rain()
+		_blackout_and_drop()
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
@@ -224,19 +229,24 @@ func _roll_glitch() -> void:
 	if random_float < 0.55:
 		# small glitch offset — most common outcome
 		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
+		print('1')
 	elif random_float < 0.75:
 		# bigger glitch offset — still fairly common
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
+		print('2')
 	elif random_float < 0.85:
 		world.play_random_sfx()
+		print('3')
 	elif random_float < 0.92:
 		# blackout + drop — disruptive, less frequent
 		_blackout_and_drop()
+		print('4')
 	elif random_float < 0.97:
 		# throw — disruptive, rare
 		if pickedObject:
 			_throw_object(pickedObject)
 			pickedObject = null
+		print('5')
 	else:
 		# plate rain — rarest, most disruptive
 		world._plate_rain()
