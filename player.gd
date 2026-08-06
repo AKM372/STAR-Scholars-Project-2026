@@ -48,6 +48,7 @@ var glitch_recover_timer := 0.0
 @export var glitch_recover_max := 6.0
 @export var world: Node3D
 @onready var glitch_rect: ColorRect = $"../CanvasLayer/GlitchScreen"
+signal glitch_ends
 
 func _ready() -> void:
 	add_to_group("player")
@@ -103,6 +104,7 @@ func _input(event: InputEvent) -> void:
 			holding = true
 	
 	if event.is_action_released('interact'):
+		holding = false
 		if is_glitched:
 			return
 		if pickedObject:
@@ -111,7 +113,6 @@ func _input(event: InputEvent) -> void:
 			else:
 				_place_object(pickedObject)
 				pickedObject = null
-			holding = false
 		else:
 			return
 			
@@ -149,6 +150,7 @@ func _physics_process(delta: float) -> void:
 			glitch_recover_timer -= delta
 			if glitch_recover_timer <= 0.0:
 				_reset_glitch()
+				glitch_ends.emit()
 	#if is_glitched is false, rolls to apply glitch
 		else:
 			glitch_check_timer += delta
@@ -235,7 +237,7 @@ func _roll_glitch() -> void:
 		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
 		print('2')
 	elif random_float < 0.85:
-		world.play_random_sfx()
+		world._spawn_new_plates()
 		print('3')
 	elif random_float < 0.92:
 		# blackout + drop — disruptive, less frequent
@@ -296,3 +298,8 @@ func _blackout_and_drop() -> void:
 		original_volume + -24,
 		original_volume,
 		blackout_fade_time)
+
+func _on_glitch_ends() -> void:
+	if not holding:
+		_place_object(pickedObject)
+		pickedObject = null

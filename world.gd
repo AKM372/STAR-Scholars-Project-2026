@@ -83,7 +83,12 @@ func _input(event: InputEvent) -> void:
 		for dish in dishes:
 			dish.queue_free()
 		_spawn_new_plates()
-
+	
+	if event.is_action_pressed("fullscreen"):
+		var mode := DisplayServer.window_get_mode()
+		var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
+		
 func play_random_sfx() -> void:
 	# don't interrupt if something is already playing
 	for p in players:

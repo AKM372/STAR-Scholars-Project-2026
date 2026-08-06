@@ -29,7 +29,18 @@ albedo_color = Color(18.892157, 18.892157, 18.892157, 1)
 
 [node name="player" type="CharacterBody3D" unique_id=1722317622 groups=["player"]]
 script = ExtResource("1_4flbx")
-speed = 1.3
+mouse_sensitivity = null
+speed = null
+throw_force = null
+throw_upward_boost = null
+fling_speed_threshold = null
+fling_max_speed = null
+dirt_removed_per_scrub = null
+glitch_check_interval = null
+glitch_min_radius = null
+glitch_max_radius = null
+glitch_recover_min = null
+glitch_recover_max = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1618573191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -78,3 +89,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hqtel")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=220809114]
 mesh = SubResource("ArrayMesh_sweqy")
 surface_material_override/0 = SubResource("StandardMaterial3D_2hs0m")
+
+[connection signal="glitch_ends" from="." to="." method="_on_glitch_ends"]

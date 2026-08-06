@@ -7,7 +7,6 @@ extends StaticBody3D
 func _ready() -> void:
 	await get_tree().create_timer(300).timeout
 	door_mesh.visible = false
-	door_collision.disabled = true
 	
 func _process(delta: float) -> void:
 	pass
