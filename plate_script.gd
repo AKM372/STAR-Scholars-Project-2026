@@ -112,11 +112,11 @@ func _break_plate() -> void:
 	if broken or not broken_plate_scene:
 		return
 	broken = true
-
+	
 	var shards := broken_plate_scene.instantiate()
 	get_parent().add_child(shards)
 	shards.global_transform = global_transform
-
+	shards.add_to_group("dish")
 	# carry the plate's motion into the shards so it doesn't look like it teleports still
 	for shard in shards.get_children():
 		if shard is RigidBody3D:

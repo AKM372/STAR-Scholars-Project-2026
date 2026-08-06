@@ -126,7 +126,7 @@ func _input(event: InputEvent) -> void:
 		scrub_held = false
 	
 	if event.is_action_pressed('testing'):
-		_blackout_and_drop()
+		world._spawn_new_plates()
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
