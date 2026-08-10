@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dfq2x8qcjmxh8" path="res://sponge.tscn" id="3_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dc2oq5v6ys733" path="res://sfx_dialouge.tscn" id="3_ioo17"]
 [ext_resource type="PackedScene" uid="uid://36bodevpebph" path="res://plate.tscn" id="4_036b0"]
-[ext_resource type="ArrayMesh" uid="uid://qu5poco0g2h7" path="res://sink.obj" id="4_aqk2v"]
+[ext_resource type="ArrayMesh" uid="uid://qu5poco0g2h7" path="res://assets/sink.obj" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://c6tyrltih4m8m" path="res://door.gd" id="6_dwbse"]
 [ext_resource type="Shader" uid="uid://jikbhcpyy1sk" path="res://glitch_screen.gdshader" id="6_ioo17"]
 [ext_resource type="PackedScene" uid="uid://bhtyy3p8e0sks" path="res://background_music.tscn" id="7_pkg7o"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://dtw5qi3s0ywch" path="res://assets/textures/SM_window_M_Window_Pane_Normal.png" id="13_ikiii"]
 [ext_resource type="Texture2D" uid="uid://b71unvovm2i8k" path="res://assets/textures/SM_window_M_Window_Pane_Roughness.png" id="14_cbp6q"]
 [ext_resource type="Material" uid="uid://c6o5ph3dvv6so" path="res://M_Window_Frame.tres" id="15_26xuy"]
+[ext_resource type="VideoStream" uid="uid://bfhxy2o0rkgg2" path="res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogv" id="19_26xuy"]
+[ext_resource type="VideoStream" uid="uid://dlt4n1devyq35" path="res://sfx/Videos/People Walking Past the Camera - Free Stock Footage For Commercial Projects-converted.ogv" id="20_bc84e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 
@@ -70,19 +72,12 @@ albedo_texture = SubResource("ViewportTexture_gbfbk")
 emission_enabled = true
 emission_energy_multiplier = 8.11
 
-[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_eqetu"]
-file = "res://sfx/Videos/People Walking Past the Camera - Free Stock Footage For Commercial Projects-converted.ogg"
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_ioo17"]
 viewport_path = NodePath("Windows/SubViewport2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbfbk"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_ioo17")
-
-[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_gbfbk"]
-resource_local_to_scene = true
-file = "res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogg"
 
 [node name="World" type="Node3D" unique_id=1850648427]
 script = ExtResource("1_aqk2v")
@@ -317,7 +312,7 @@ offset_left = -40.0
 offset_right = 680.0
 offset_bottom = 1280.0
 audio_track = 2
-stream = SubResource("VideoStreamTheora_eqetu")
+stream = ExtResource("19_26xuy")
 autoplay = true
 expand = true
 loop = true
@@ -337,7 +332,7 @@ offset_left = -40.0
 offset_right = 680.0
 offset_bottom = 1280.0
 audio_track = 2
-stream = SubResource("VideoStreamTheora_gbfbk")
+stream = ExtResource("20_bc84e")
 autoplay = true
 expand = true
 loop = true
