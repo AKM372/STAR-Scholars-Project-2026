@@ -52,7 +52,6 @@ signal glitch_ends
 
 func _ready() -> void:
 	add_to_group("player")
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(delta):
 	# selection raycast
@@ -87,15 +86,20 @@ func _process(delta):
 
 func _input(event: InputEvent) -> void:
 	#looking around
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-65), deg_to_rad(65))
 		mouse_delta_accum += event.relative
 		
-	#releases mouse for testing purposes
+	#releases mouse
 	if event.is_action_pressed("cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if event is InputEventMouseButton and event.pressed:
+		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			return
 
 	#makes the pick up action happen?
 	if event.is_action_pressed('interact'):
