@@ -66,8 +66,6 @@ func _process(delta):
 	#makes outline not visible when raycast is hitting the plate and it's not held
 	outlineMesh.visible = selected and not held
 	collision_shape_3d.disabled = held
-	
-	
 
 	# fade only the front (active) dirt layer toward its target while scrubbing
 	if not dirt_layers.is_empty() and player.scrubbing:

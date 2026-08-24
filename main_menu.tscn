@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bg8q638qo4sis"]
+
+[ext_resource type="Script" uid="uid://dsk4s5200dsue" path="res://main_menu.gd" id="1_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://5nfo56ll8ykn" path="res://assets/WashTheDishesWatercolor.jpg" id="2_fu7sn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_554ww"]
+font_size = 230
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_eqetu"]
+default_font_size = 150
+
+[node name="MainMenu" type="Node2D" unique_id=1076933529]
+script = ExtResource("1_7vrkn")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=336097483]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="WashTheDishesWatercolor" type="Sprite2D" parent="." unique_id=857197640]
+position = Vector2(907, 588)
+scale = Vector2(0.42, 0.42)
+texture = ExtResource("2_fu7sn")
+
+[node name="Label" type="Label" parent="." unique_id=1556871927]
+offset_left = 18.0
+offset_top = -22.0
+offset_right = 1890.0
+offset_bottom = 292.0
+text = "Wash The Dishes"
+label_settings = SubResource("LabelSettings_554ww")
+
+[node name="StartButton" type="Button" parent="." unique_id=1062189448]
+offset_left = 541.0
+offset_top = 928.0
+offset_right = 1761.0
+offset_bottom = 1133.0
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_eqetu")
+text = "START"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

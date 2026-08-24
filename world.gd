@@ -83,32 +83,9 @@ func _plate_rain():
 	rain_active = false
 
 func _input(event: InputEvent) -> void:
+	
 	if event.is_action_pressed("reset"):
-		var dishes
-		dishes = get_tree().get_nodes_in_group('dish')
-		for dish in dishes:
-			dish.queue_free()
-		
-		player.pickedObject = null
-		
-		player.global_position = Vector3(0,0.5,0)
-		
-		if player.offhandObject:
-			player.offhandObject.freeze = false
-			player.offhandObject.collision_shape_3d.disabled = false
-			player.offhandObject = null
-		
-		sponge.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-		sponge.freeze = true
-		sponge.collision_shape_3d.disabled = false
-		sponge.global_position = Vector3(-1.1, 0.5, -2.2)
-		
-		await get_tree().create_timer(2.0).timeout
-		instructions.show()
-		WashTheDishes.play()
-		await get_tree().create_timer(3.0).timeout
-		instructions.hide()
-		_spawn_new_plates()
+		get_tree().change_scene_to_file("res://main_menu.tscn")
 	
 	if event.is_action_pressed("fullscreen"):
 		var mode := DisplayServer.window_get_mode()
