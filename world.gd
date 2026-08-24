@@ -17,11 +17,12 @@ var players := []
 
 @onready var player: CharacterBody3D = $player
 @onready var sponge: RigidBody3D = $sponge
+@onready var sink_water: AnimatedSprite3D = $Room/Counters/Sink/Sink_Water
 
 func _ready() -> void:
 	#play opening sfx
 	WashTheDishes.play()
-	
+	sink_water.play('nothing_burger')
 	#make sfx list with a loop for random choice later
 	for child in $SFXDialouge.get_children():
 		if child is AudioStreamPlayer3D:
@@ -34,8 +35,10 @@ func _ready() -> void:
 	#makes a list of callable points so the plates spawn right
 	for point in plate_markers.get_children():
 		spawn_points.append(point)
-		
+	
+	sink_water.play('sink_running')
 	_spawn_new_plates()
+	
 	
 	#connects 10s sfx player timer
 	sfx_dialouge_timer.timeout.connect(_on_timeout)

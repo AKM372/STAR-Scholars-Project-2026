@@ -12,8 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://bhpx3raf4ukby" path="res://wall.tscn" id="8_ikiii"]
 [ext_resource type="ArrayMesh" uid="uid://47twihdsajib" path="res://assets/SM_door.obj" id="8_udxuc"]
 [ext_resource type="Material" uid="uid://5jh3qqm0kaos" path="res://M_Door.tres" id="9_ikiii"]
+[ext_resource type="Texture2D" uid="uid://bydaq6vuyctd8" path="res://assets/nothing_burger.png" id="9_il2jm"]
 [ext_resource type="ArrayMesh" uid="uid://bd0qgklitfue7" path="res://assets/SM_window.obj" id="10_hiqwa"]
+[ext_resource type="Texture2D" uid="uid://c2ujyy8a7ey3c" path="res://assets/Faucet_running1.png" id="10_wjb0r"]
 [ext_resource type="Texture2D" uid="uid://bsd1iypcxu3kh" path="res://assets/textures/SM_window_M_Window_Pane_BaseColor.png" id="11_2u3nc"]
+[ext_resource type="Texture2D" uid="uid://c6vm1kpjj7j6a" path="res://assets/Faucet_running2.png" id="11_mc2jv"]
 [ext_resource type="Texture2D" uid="uid://b1dyqjl2lrehf" path="res://assets/textures/SM_window_M_Window_Pane_Metallic.png" id="12_udxuc"]
 [ext_resource type="Texture2D" uid="uid://dtw5qi3s0ywch" path="res://assets/textures/SM_window_M_Window_Pane_Normal.png" id="13_ikiii"]
 [ext_resource type="Texture2D" uid="uid://b71unvovm2i8k" path="res://assets/textures/SM_window_M_Window_Pane_Roughness.png" id="14_cbp6q"]
@@ -41,6 +44,38 @@ albedo_color = Color(0.9999955, 0.49287075, 0.23957124, 1)
 albedo_color = Color(0.9999955, 0.49287075, 0.23957124, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ioo17"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_554ww"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqetu"]
+transparency = 1
+albedo_color = Color(0.2081193, 0.41839916, 0.35522375, 0.5647059)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ulpex"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_26xuy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_554ww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_il2jm")
+}],
+"loop": 1,
+"name": &"nothing_burger",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_wjb0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mc2jv")
+}],
+"loop": 1,
+"name": &"sink_running",
+"speed": 5.0
+}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i3pqv"]
 paragraph_spacing = -0.955
@@ -214,17 +249,45 @@ shape = SubResource("BoxShape3D_ioo17")
 transform = Transform3D(2.6069336, 0, 0, 0, 1.1754922, 0, 0, 0, 0.10539116, 1.2780398, 0.61157167, 1.5499806)
 shape = SubResource("BoxShape3D_ioo17")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room/Counters/Sink" unique_id=623353563]
+transform = Transform3D(1.7032417, 0, 0, 0, 1, 0, 0, 0, 1.3419646, 1.2930617, 0.53804415, 0.7405586)
+mesh = SubResource("BoxMesh_554ww")
+surface_material_override/0 = SubResource("StandardMaterial3D_eqetu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Room/Counters/Sink" unique_id=2027426208]
+transform = Transform3D(0.1, 0, 0, 0, 0.349, 0, 0, 0, 0.1, 1.2703767, 1.2152711, 0.07125664)
+mesh = SubResource("CylinderMesh_ulpex")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Room/Counters/Sink" unique_id=214988973]
+transform = Transform3D(0.1, 0, 0, 0, 0.349, 0, 0, 0, 0.1, 1.2703767, 1.2152711, 0.07125664)
+shape = SubResource("CylinderShape3D_26xuy")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Room/Counters/Sink" unique_id=1440248775]
+transform = Transform3D(0.1, 0, 0, 0, 0.006001228, -0.09995555, 0, 0.20121506, 0.002981169, 1.2703767, 1.5779333, 0.15537302)
+mesh = SubResource("CylinderMesh_ulpex")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Room/Counters/Sink" unique_id=837764727]
+transform = Transform3D(0.1, 0, 0, 0, 0.006001228, -0.09995555, 0, 0.20121506, 0.002981169, 1.2703767, 1.5779333, 0.15537302)
+shape = SubResource("CylinderShape3D_26xuy")
+
+[node name="Sink_Water" type="AnimatedSprite3D" parent="Room/Counters/Sink" unique_id=1021202921]
+transform = Transform3D(0.022234194, 0, 0, 0, 0.055, 0, 0, 0, 0.055, 1.2712878, 1.1555097, 0.28938127)
+sprite_frames = SubResource("SpriteFrames_554ww")
+animation = &"sink_running"
+frame = 1
+frame_progress = 0.7085392
+
 [node name="PlateMarkers" type="Node3D" parent="." unique_id=422454012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0170703, -0.0038790703, 2.8855433)
 
 [node name="Marker3D" type="Marker3D" parent="PlateMarkers" unique_id=428807202]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5955182, 0.783, -5.7336373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5955182, 0.783, -5.5134516)
 
 [node name="Marker3D2" type="Marker3D" parent="PlateMarkers" unique_id=507462027]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0845182, 1.295, -5.6886373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0845182, 1.295, -5.4249163)
 
 [node name="Marker3D3" type="Marker3D" parent="PlateMarkers" unique_id=856997436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2775182, 0.783, -5.7076373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2775182, 0.783, -5.3703074)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=154761196]
 
