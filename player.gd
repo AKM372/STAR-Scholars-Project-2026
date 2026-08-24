@@ -22,8 +22,6 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var throw_upward_boost := 1.5
 @export var fling_speed_threshold := 1500.0   # tune this — mouse pixels/sec to count as a "fling"
 @export var fling_max_speed := 4000.0          # speed at which throw force maxes out
-var mouse_delta_accum := Vector2.ZERO
-var mouse_fling_speed := 0.0
 
 #for the scrub animation
 var scrubbing := false
@@ -58,10 +56,6 @@ func _process(delta):
 	# selection raycast
 	interact_object.emit(ray_cast_3d.get_collider() if ray_cast_3d.is_colliding() else null)
 	
-	# track mouse fling speed (smoothed so single-frame noise doesn't false-trigger)
-	var instant_speed = mouse_delta_accum.length() / delta
-	mouse_fling_speed = lerp(mouse_fling_speed, instant_speed, 0.5)
-	mouse_delta_accum = Vector2.ZERO
 	
 	# keep held objects glued to their markers every frame
 	if pickedObject:
@@ -105,7 +99,6 @@ func _input(event: InputEvent) -> void:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-65), deg_to_rad(65))
-		mouse_delta_accum += event.relative
 		
 	#releases mouse
 	if event.is_action_pressed("cancel"):
@@ -127,8 +120,10 @@ func _input(event: InputEvent) -> void:
 		if is_glitched:
 			return
 		if pickedObject:
-			if mouse_fling_speed > fling_speed_threshold:
-				_throw_object(pickedObject, mouse_fling_speed)
+			var fling_speed = Input.get_last_mouse_velocity().length()
+			if fling_speed > fling_speed_threshold:
+				_throw_object(pickedObject, fling_speed)
+				_clear_picked_object()
 			else:
 				_place_object(pickedObject)
 				pickedObject = null
