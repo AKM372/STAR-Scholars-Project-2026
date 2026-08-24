@@ -30,6 +30,9 @@ var displayed_dirt := 1.0    # what's shown, eases toward dirt_amount
 #glitch mechanics
 signal cleaned
 var cleaned_num: int = 0
+@export var glitch_shader: Shader
+var glitch_material: ShaderMaterial
+
 
 #breaking
 @export var broken_plate_scene: PackedScene
@@ -42,6 +45,10 @@ func _ready():
 	if player:
 		player.interact_object.connect(_set_selected)
 	outlineMesh.visible = false
+	
+	 # prepare glitch material
+	glitch_material = ShaderMaterial.new()
+	glitch_material.shader = glitch_shader
 	
 	_setup_material()
 	
@@ -58,9 +65,9 @@ func _process(delta):
 	
 	# glitch visual + sponge-detection lockout
 	if held and player.is_glitched:
-		_set_plate_color(glitch_color)
+		_apply_glitch_material()
 	else:
-		_set_plate_color(normal_color)
+		_apply_normal_material()
 			
 	if displayed_dirt != dirt_amount and DirtSprite.visible and player.scrubbing:
 		displayed_dirt = move_toward(displayed_dirt, dirt_amount, fade_speed * delta)
@@ -137,7 +144,13 @@ func _setup_material() -> void:
 	plate_material = mat
 	plate_material.albedo_color = normal_color
 
-func _set_plate_color(color: Color) -> void:
-	var mat = plate_color.get_surface_override_material(0)
-	if mat:
-		mat.albedo_color = color
+func _apply_glitch_material() -> void:
+	if plate_color.get_surface_override_material(0) != glitch_material:
+		glitch_material.set_shader_parameter("base_color", plate_material.albedo_color)
+		plate_color.set_surface_override_material(0, glitch_material)
+	DirtSprite.material_override = glitch_material
+
+func _apply_normal_material() -> void:
+	if plate_color.get_surface_override_material(0) != plate_material:
+		plate_color.set_surface_override_material(0, plate_material)
+	DirtSprite.material_override = null

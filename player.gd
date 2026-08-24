@@ -44,8 +44,9 @@ var glitch_recover_timer := 0.0
 @export var glitch_check_interval := 3.0   # how often we re-roll while NOT glitched
 @export var glitch_min_radius := 0.8       # must be > scrub_radius (0.3)
 @export var glitch_max_radius := 1.4
-@export var glitch_recover_min := 2.0      # seconds before auto-reset
-@export var glitch_recover_max := 6.0
+@export var glitch_recover_min := 4.0      # seconds before auto-reset
+@export var glitch_recover_max := 8.0
+var shake_time := 0.0
 @export var world: Node3D
 @onready var glitch_rect: ColorRect = $"../CanvasLayer/GlitchScreen"
 signal glitch_ends
@@ -64,8 +65,22 @@ func _process(delta):
 	
 	# keep held objects glued to their markers every frame
 	if pickedObject:
-		pickedObject.global_transform = hand_marker.global_transform.translated_local(glitch_offset)
+		var target_transform = hand_marker.global_transform.translated_local(glitch_offset)  # <-- defined here
 
+		if is_glitched:
+			shake_time += delta * 2
+			var shake_offset = Vector3(
+				sin(shake_time * 1.3),
+				sin(shake_time * 2.1) * 0.5,
+				sin(shake_time * 1.7)
+			) * 0.03
+
+			target_transform = target_transform.translated_local(shake_offset)
+			target_transform = target_transform.rotated_local(Vector3.RIGHT, sin(shake_time * 1.9) * deg_to_rad(5))
+			target_transform = target_transform.rotated_local(Vector3.FORWARD, sin(shake_time * 2.3) * deg_to_rad(5))
+
+		pickedObject.global_transform = target_transform
+		
 #animates the scrub animation
 	if offhandObject:
 		if scrubbing:
@@ -130,7 +145,7 @@ func _input(event: InputEvent) -> void:
 		scrub_held = false
 	
 	if event.is_action_pressed('testing'):
-		world._spawn_new_plates()
+		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
@@ -218,7 +233,7 @@ func _drop_object() -> void:
 		return
 	pickedObject.collision_shape_3d.disabled = false
 	pickedObject.freeze = false
-	pickedObject = null
+	_clear_picked_object()
 	
 func _drop_sponge() -> void:
 	if not offhandObject:
@@ -251,7 +266,7 @@ func _roll_glitch() -> void:
 		# throw — disruptive, rare
 		if pickedObject:
 			_throw_object(pickedObject)
-			pickedObject = null
+			_clear_picked_object()
 		print('5')
 	else:
 		# plate rain — rarest, most disruptive
@@ -262,7 +277,7 @@ func _roll_glitch() -> void:
 
 #defines the glitch offset
 func _start_glitch(min_r: float, max_r: float) -> void:
-	var angle := randf() * TAU
+	var angle := randf_range(-PI, 0)
 	var radius := randf_range(min_r, max_r)
 	var target_offset = Vector3(cos(angle), 0, sin(angle)) * radius
 
@@ -270,15 +285,20 @@ func _start_glitch(min_r: float, max_r: float) -> void:
 	glitch_recover_timer = randf_range(glitch_recover_min, glitch_recover_max)
 
 	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "glitch_offset", target_offset, 0.6)
+	tween.set_ease(Tween.EASE_OUT_IN)
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, "glitch_offset", target_offset, glitch_recover_timer)
 	
 func _reset_glitch() -> void:
 	glitch_offset = Vector3.ZERO
 	is_glitched = false
 	glitch_check_timer = 0.0
 	glitch_recover_timer = 0.0
+
+func _on_glitch_ends() -> void:
+	if not holding:
+		_place_object(pickedObject)
+		pickedObject = null
 
 func _blackout_and_drop() -> void:
 	if not pickedObject:
@@ -303,7 +323,9 @@ func _blackout_and_drop() -> void:
 		original_volume,
 		blackout_fade_time)
 
-func _on_glitch_ends() -> void:
-	if not holding:
-		_place_object(pickedObject)
-		pickedObject = null
+func _clear_picked_object() -> void:
+	pickedObject = null
+	is_glitched = false
+	glitch_offset = Vector3.ZERO
+	glitch_check_timer = 0.0
+	glitch_recover_timer = 0.0
