@@ -101,9 +101,6 @@ surface_material_override/0 = SubResource("ORMMaterial3D_k3n1d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43284976, 0)
 world = NodePath("..")
 
-[node name="sponge" parent="." unique_id=132052505 instance=ExtResource("3_aqk2v")]
-transform = Transform3D(-0.40376857, 0, -0.29490837, 0, 0.5, 0, 0.29490837, 0, -0.40376857, -1.1126424, 0.43610704, -2.2327044)
-
 [node name="Room" type="Node3D" parent="." unique_id=2117490028 groups=["world"]]
 
 [node name="Door" type="StaticBody3D" parent="Room" unique_id=313434056 node_paths=PackedStringArray("door_mesh")]
@@ -346,6 +343,9 @@ surface_material_override/2 = ExtResource("15_26xuy")
 surface_material_override/3 = ExtResource("15_26xuy")
 surface_material_override/4 = ExtResource("15_26xuy")
 surface_material_override/5 = ExtResource("15_26xuy")
+
+[node name="sponge" parent="." unique_id=1187282305 instance=ExtResource("3_aqk2v")]
+transform = Transform3D(-0.80483466, 0, -0.59349906, 0, 1, 0, 0.59349906, 0, -0.80483466, -0.9231764, 0.4183975, -2.2716978)
 
 [editable path="Room/Walls/Wall"]
 [editable path="Room/Walls/Wall2"]

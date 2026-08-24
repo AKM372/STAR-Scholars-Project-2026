@@ -2,7 +2,6 @@ extends RigidBody3D
 @onready var plate: RigidBody3D = $"."
 @onready var plate_color: MeshInstance3D = $MeshInstance3D
 var normal_color:= Color(0.5, 0.4, 0.9, 1.0)
-var glitch_color := Color(1.0, 0.2, 0.2)
 var plate_material: StandardMaterial3D
 
 #selection variables
@@ -19,10 +18,13 @@ var sponge_touching
 @onready var DirtSprite: Sprite3D = $Dirt/DirtSprite
 @onready var DirtCollision: CollisionShape3D = $Dirt/Area3D/DirtCollision
 
-#for dirt fade
-var dirt_amount := 1.0       # actual cleanliness state, drops in discrete steps
-var displayed_dirt := 1.0    # what's shown, eases toward dirt_amount
+#for dirt layering / fade
 @export var fade_speed := 8.0
+@export var max_dirt_layers := 3
+@export var extra_dirt_chance := 0.1          # chance a new overlapping layer spawns on sponge contact
+@export var dirt_layer_rotation_range := 30.0 # degrees, kept small so layers stay overlapping, not spread out
+var dirt_layers: Array = []  # each entry: {sprite: Sprite3D, dirt_amount: float, displayed_dirt: float}
+
 
 #sfx 
 @onready var impact_sound: AudioStreamPlayer3D = $ImpactSound
@@ -30,8 +32,6 @@ var displayed_dirt := 1.0    # what's shown, eases toward dirt_amount
 #glitch mechanics
 signal cleaned
 var cleaned_num: int = 0
-@export var glitch_shader: Shader
-var glitch_material: ShaderMaterial
 
 
 #breaking
@@ -46,11 +46,15 @@ func _ready():
 		player.interact_object.connect(_set_selected)
 	outlineMesh.visible = false
 	
-	 # prepare glitch material
-	glitch_material = ShaderMaterial.new()
-	glitch_material.shader = glitch_shader
-	
 	_setup_material()
+	
+	
+	
+	dirt_layers.append({
+		"sprite": DirtSprite,
+		"dirt_amount": 1.0,
+		"displayed_dirt": 1.0,
+	})
 	
 func _set_selected(object):
 	selected = self == object
@@ -63,12 +67,16 @@ func _process(delta):
 	outlineMesh.visible = selected and not held
 	collision_shape_3d.disabled = held
 	
+	
 
-	if displayed_dirt != dirt_amount and DirtSprite.visible and player.scrubbing:
-		displayed_dirt = move_toward(displayed_dirt, dirt_amount, fade_speed * delta)
-		var c := DirtSprite.modulate
-		c.a = displayed_dirt
-		DirtSprite.modulate = c
+	# fade only the front (active) dirt layer toward its target while scrubbing
+	if not dirt_layers.is_empty() and player.scrubbing:
+		var layer = dirt_layers[0]
+		if layer["displayed_dirt"] != layer["dirt_amount"]:
+			layer["displayed_dirt"] = move_toward(layer["displayed_dirt"], layer["dirt_amount"], fade_speed * delta)
+			var c: Color = layer["sprite"].modulate
+			c.a = layer["displayed_dirt"]
+			layer["sprite"].modulate = c
 	
 	#raycast selection outline
 	if held:
@@ -82,9 +90,41 @@ func _process(delta):
 func reduce_dirt(amount: float) -> void:
 	if not sponge_touching or player.is_glitched:
 		return
-	dirt_amount = clamp(dirt_amount - amount, 0.0, 1.0)
-	if dirt_amount <= 0.0:
+	if dirt_layers.is_empty():
+		return
+	
+	# only the front (most recently active) layer gets cleaned at a time
+	var layer = dirt_layers[0]
+	layer["dirt_amount"] = clamp(layer["dirt_amount"] - amount, 0.0, 1.0)
+	if layer["dirt_amount"] <= 0.0:
+		_remove_dirt_layer(layer)
+
+func _remove_dirt_layer(layer: Dictionary) -> void:
+	var sprite: Sprite3D = layer["sprite"]
+	if sprite:
+		sprite.visible = false
+		if sprite != DirtSprite:
+			sprite.queue_free()
+	dirt_layers.erase(layer)
+	if dirt_layers.is_empty():
 		_on_fully_clean()
+
+func _add_dirt_layer() -> void:
+	var new_sprite: Sprite3D = DirtSprite.duplicate()
+	DirtSprite.get_parent().add_child(new_sprite)
+	
+	# rotate in place only — no position offset — so it overlaps the existing sprite instead of spreading
+	new_sprite.rotation_degrees.z += randf_range(-dirt_layer_rotation_range, dirt_layer_rotation_range)
+	new_sprite.modulate.a = 1.0
+	new_sprite.visible = true
+	
+	# newest layer goes to the front, so it's the one that gets scrubbed off first
+	dirt_layers.push_front({
+		"sprite": new_sprite,
+		"dirt_amount": 1.0,
+		"displayed_dirt": 1.0,
+	})
+
 
 func _on_fully_clean() -> void:
 	DirtSprite.visible = false
@@ -96,6 +136,10 @@ func _on_fully_clean() -> void:
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area.get_parent().is_in_group('sponge') and randf() > 0.4:
 		sponge_touching = true
+		
+		if dirt_layers.size() < max_dirt_layers and randf() < extra_dirt_chance:
+			_add_dirt_layer()
+	
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	if area.get_parent().is_in_group('sponge'):

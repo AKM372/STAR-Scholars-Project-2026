@@ -1,6 +1,9 @@
 [gd_scene format=4 uid="uid://dfq2x8qcjmxh8"]
 
 [ext_resource type="Script" uid="uid://3i74tjwqf1fk" path="res://sponge_script.gd" id="1_s48kf"]
+[ext_resource type="Texture2D" uid="uid://bydaq6vuyctd8" path="res://assets/nothing_burger.png" id="2_r3hyt"]
+[ext_resource type="Texture2D" uid="uid://bwp58xfv1wxnn" path="res://assets/Scrub_Bubbles1.png" id="2_txb15"]
+[ext_resource type="Texture2D" uid="uid://dwgvnvtfdf4bo" path="res://assets/Scrub_Bubbles2.png" id="3_r3hyt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dgjir"]
 
@@ -28,6 +31,28 @@ size = Vector3(0.62, 0.18, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s48kf"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_554ww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r3hyt")
+}],
+"loop": 1,
+"name": &"nothing_burger",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_txb15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r3hyt")
+}],
+"loop": 1,
+"name": &"scrubbing",
+"speed": 3.0
+}]
+
 [node name="sponge" type="RigidBody3D" unique_id=1187282305 groups=["sponge"]]
 transform = Transform3D(-0.007853948, 0, -0.9999692, 0, 1, 0, 0.9999692, 0, -0.007853948, 0, 0, 0)
 collision_layer = 2
@@ -36,7 +61,7 @@ contact_monitor = true
 script = ExtResource("1_s48kf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=898562853]
-transform = Transform3D(0.62333024, 0, 0, 0, 0.15837538, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.312, 0, 0, 0, 0.079, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("BoxMesh_dgjir")
 surface_material_override/0 = SubResource("StandardMaterial3D_txb15")
 
@@ -45,12 +70,19 @@ mesh = SubResource("ArrayMesh_r3hyt")
 surface_material_override/0 = SubResource("StandardMaterial3D_7m5fo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1308833674 groups=["sponge"]]
+transform = Transform3D(0.4804768, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("BoxShape3D_st82r")
 
 [node name="DirtDetectingArea" type="Area3D" parent="." unique_id=366793171 groups=["sponge"]]
+transform = Transform3D(0.7540683, 0, 0, 0, 1.1237035, 0, 0, 0, 0.5895202, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DirtDetectingArea" unique_id=573709119 groups=["sponge"]]
-transform = Transform3D(0.6982605, 0, 0, 0, 0.23664477, 0, 0, 0, 1.00237, 0, 0, 0)
+transform = Transform3D(0.348, 0, 0, 0, 0.118, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("BoxShape3D_s48kf")
+
+[node name="ScrubAnimation" type="AnimatedSprite3D" parent="." unique_id=1259569577]
+transform = Transform3D(0.06, 0, 0, 0, -2.6226832e-09, -0.06, 0, 0.06, -2.6226832e-09, 0.08536157, -0.0174143, -7.6120327e-10)
+sprite_frames = SubResource("SpriteFrames_554ww")
+animation = &"nothing_burger"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

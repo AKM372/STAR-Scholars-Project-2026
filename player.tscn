@@ -60,7 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70
 
 [node name="ScrubMarker" type="Marker3D" parent="Head/Camera3D" unique_id=187435172]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -0.3099671, -0.16427958, -0.9416443)
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -0.3749933, -0.2045232, -0.80910444)
 
 [node name="PickUpSound" type="AudioStreamPlayer3D" parent="." unique_id=19912423]
 stream = ExtResource("3_i3pqv")

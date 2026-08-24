@@ -28,10 +28,10 @@ var mouse_fling_speed := 0.0
 #for the scrub animation
 var scrubbing := false
 var scrub_progress := 0.0
-var scrub_radius := 0.3
+var scrub_radius := 0.25
 var scrub_speed := 6.0
 @onready var scrub_marker: Marker3D = $Head/Camera3D/ScrubMarker
-@export var dirt_removed_per_scrub := 0.35
+@export var dirt_removed_per_scrub := 0.4
 var scrub_held := false
 @onready var scrubbing_sound: AudioStreamPlayer3D = $ScrubbingSound
 
@@ -250,7 +250,7 @@ func _roll_glitch() -> void:
 	var random_float = randf()
 
 	if random_float < 0.55:
-
+		
 		print('1')
 	elif random_float < 0.75:
 		if pickedObject and pickedObject.has_method("break_plate"):
