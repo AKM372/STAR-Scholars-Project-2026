@@ -33,7 +33,6 @@ var dirt_layers: Array = []  # each entry: {sprite: Sprite3D, dirt_amount: float
 signal cleaned
 var cleaned_num: int = 0
 
-
 #breaking
 @export var broken_plate_scene: PackedScene
 var break_velocity_threshold := 3.5
