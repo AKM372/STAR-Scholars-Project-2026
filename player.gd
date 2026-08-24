@@ -145,7 +145,7 @@ func _input(event: InputEvent) -> void:
 		scrub_held = false
 	
 	if event.is_action_pressed('testing'):
-		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
+		
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
@@ -168,7 +168,7 @@ func _physics_process(delta: float) -> void:
 		if is_glitched:
 			glitch_recover_timer -= delta
 			if glitch_recover_timer <= 0.0:
-				_reset_glitch()
+				is_glitched = false
 				glitch_ends.emit()
 	#if is_glitched is false, rolls to apply glitch
 		else:
@@ -214,6 +214,7 @@ func _throw_object(object, fling_speed: float = -1.0) -> void:
 		force = lerp(throw_force, throw_force * 2.5, t)  # tune the multiplier to taste
 
 	object.linear_velocity = throw_direction * force
+
 func _place_object(object) -> void:
 	object.collision_shape_3d.disabled = false
 	
@@ -245,15 +246,16 @@ func _drop_sponge() -> void:
 #####--------------GLITCH INPUTS AND CHANCE----------######
 #random float generation for weighted chance
 func _roll_glitch() -> void:
+	is_glitched = true
 	var random_float = randf()
 
 	if random_float < 0.55:
-		# small glitch offset — most common outcome
-		_start_glitch(glitch_min_radius, glitch_min_radius + 0.2)
+
 		print('1')
 	elif random_float < 0.75:
-		# bigger glitch offset — still fairly common
-		_start_glitch(glitch_min_radius + 0.2, glitch_max_radius)
+		if pickedObject and pickedObject.has_method("break_plate"):
+			pickedObject.break_plate()
+			_clear_picked_object()
 		print('2')
 	elif random_float < 0.85:
 		world._spawn_new_plates()
@@ -274,31 +276,6 @@ func _roll_glitch() -> void:
 
 	# randomize the wait until the next roll, so glitches feel irregular
 	glitch_check_interval = randf_range(1.5, 6.0)
-
-#defines the glitch offset
-func _start_glitch(min_r: float, max_r: float) -> void:
-	var angle := randf_range(-PI, 0)
-	var radius := randf_range(min_r, max_r)
-	var target_offset = Vector3(cos(angle), 0, sin(angle)) * radius
-
-	is_glitched = true
-	glitch_recover_timer = randf_range(glitch_recover_min, glitch_recover_max)
-
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT_IN)
-	tween.set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(self, "glitch_offset", target_offset, glitch_recover_timer)
-	
-func _reset_glitch() -> void:
-	glitch_offset = Vector3.ZERO
-	is_glitched = false
-	glitch_check_timer = 0.0
-	glitch_recover_timer = 0.0
-
-func _on_glitch_ends() -> void:
-	if not holding:
-		_place_object(pickedObject)
-		pickedObject = null
 
 func _blackout_and_drop() -> void:
 	if not pickedObject:

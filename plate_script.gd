@@ -63,12 +63,7 @@ func _process(delta):
 	outlineMesh.visible = selected and not held
 	collision_shape_3d.disabled = held
 	
-	# glitch visual + sponge-detection lockout
-	if held and player.is_glitched:
-		_apply_glitch_material()
-	else:
-		_apply_normal_material()
-			
+
 	if displayed_dirt != dirt_amount and DirtSprite.visible and player.scrubbing:
 		displayed_dirt = move_toward(displayed_dirt, dirt_amount, fade_speed * delta)
 		var c := DirtSprite.modulate
@@ -112,9 +107,9 @@ func _on_ground_detector_body_entered(body: Node3D) -> void:
 	if linear_velocity.length() > 1.0 and (body.is_in_group("world") or body.is_in_group("dish")):
 		impact_sound.play()
 	if linear_velocity.length() > break_velocity_threshold and (body.is_in_group("world")):
-		_break_plate()
+		break_plate()
 
-func _break_plate() -> void:
+func break_plate() -> void:
 	if broken or not broken_plate_scene:
 		return
 	broken = true
@@ -143,14 +138,3 @@ func _setup_material() -> void:
 		plate_color.set_surface_override_material(0, mat)
 	plate_material = mat
 	plate_material.albedo_color = normal_color
-
-func _apply_glitch_material() -> void:
-	if plate_color.get_surface_override_material(0) != glitch_material:
-		glitch_material.set_shader_parameter("base_color", plate_material.albedo_color)
-		plate_color.set_surface_override_material(0, glitch_material)
-	DirtSprite.material_override = glitch_material
-
-func _apply_normal_material() -> void:
-	if plate_color.get_surface_override_material(0) != plate_material:
-		plate_color.set_surface_override_material(0, plate_material)
-	DirtSprite.material_override = null
