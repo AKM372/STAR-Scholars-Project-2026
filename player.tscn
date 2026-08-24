@@ -42,7 +42,7 @@ fov = 70.0
 near = 0.105
 
 [node name="PlaceRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=1287670593]
-transform = Transform3D(1, 0, 0, 0, 0.9390583, 0.34375802, 0, -0.34375802, 0.9390583, 0, -0.029190898, -0.9374193)
+transform = Transform3D(-1.478155, 0, 0, 0, 0.23664647, 0.3986672, 0, -0.16061151, 0.58739984, 0, -0.029190898, -0.9374193)
 target_position = Vector3(0, -1, -2)
 hit_back_faces = false
 
