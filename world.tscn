@@ -17,12 +17,19 @@
 [ext_resource type="Texture2D" uid="uid://c2ujyy8a7ey3c" path="res://assets/Faucet_running1.png" id="10_wjb0r"]
 [ext_resource type="Texture2D" uid="uid://bsd1iypcxu3kh" path="res://assets/textures/SM_window_M_Window_Pane_BaseColor.png" id="11_2u3nc"]
 [ext_resource type="Texture2D" uid="uid://c6vm1kpjj7j6a" path="res://assets/Faucet_running2.png" id="11_mc2jv"]
+[ext_resource type="Texture2D" uid="uid://dxrmm7bsgxiqi" path="res://assets/HowToPoster.jpg" id="12_mc2jv"]
 [ext_resource type="Texture2D" uid="uid://b1dyqjl2lrehf" path="res://assets/textures/SM_window_M_Window_Pane_Metallic.png" id="12_udxuc"]
+[ext_resource type="Texture2D" uid="uid://cvmw2v53luyy5" path="res://assets/CartoonHowTo.jpg" id="13_bo7i5"]
 [ext_resource type="Texture2D" uid="uid://dtw5qi3s0ywch" path="res://assets/textures/SM_window_M_Window_Pane_Normal.png" id="13_ikiii"]
 [ext_resource type="Texture2D" uid="uid://b71unvovm2i8k" path="res://assets/textures/SM_window_M_Window_Pane_Roughness.png" id="14_cbp6q"]
+[ext_resource type="Texture2D" uid="uid://c8neccb2u203l" path="res://assets/HowToPerson.jpg" id="14_qktwf"]
 [ext_resource type="Material" uid="uid://c6o5ph3dvv6so" path="res://M_Window_Frame.tres" id="15_26xuy"]
+[ext_resource type="Texture2D" uid="uid://b4ack4yuf764w" path="res://assets/HowToPerson2.jpg" id="15_bh8nc"]
+[ext_resource type="Texture2D" uid="uid://m6jv51vdn6v0" path="res://assets/HowToPerson3.jpg" id="16_jjr1n"]
+[ext_resource type="Texture2D" uid="uid://dra4rkphyl2dn" path="res://assets/DontWashThemselves.jpg" id="17_gggvi"]
 [ext_resource type="VideoStream" uid="uid://bfhxy2o0rkgg2" path="res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogv" id="19_26xuy"]
 [ext_resource type="VideoStream" uid="uid://dlt4n1devyq35" path="res://sfx/Videos/People Walking Past the Camera - Free Stock Footage For Commercial Projects-converted.ogv" id="20_bc84e"]
+[ext_resource type="Texture2D" uid="uid://hyfewji6wxj5" path="res://assets/Curtain.png" id="23_wjb0r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 
@@ -189,7 +196,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="WallMesh" parent="Room/Walls/Wall4" index="0" unique_id=1361700596]
-transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, 1.10690756e-07, 1.2, 2.532309)
+transform = Transform3D(-4.3659167e-08, 0, 5.992832, 0, 2.996416, 0, -0.99880534, 0, -2.61955e-07, 1.10690756e-07, 1.2, 2.532309)
 
 [node name="CollisionShape3D" parent="Room/Walls/Wall4" index="1" unique_id=111759479]
 transform = Transform3D(-4.371139e-08, 0, 6, 0, 3, 0, -1, 0, -2.6226832e-07, 1.10690756e-07, 1.2, 2.532309)
@@ -281,17 +288,43 @@ transform = Transform3D(0.022234194, 0, 0, 0, 0.055, 0, 0, 0, 0.055, 1.2858148, 
 sprite_frames = SubResource("SpriteFrames_554ww")
 animation = &"sink_running"
 
+[node name="Posters" type="Node" parent="Room" unique_id=571213632]
+
+[node name="HowToPoster" type="Sprite3D" parent="Room/Posters" unique_id=1159944115]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 1.155971, 1.162605, -3.5746946)
+texture = ExtResource("12_mc2jv")
+
+[node name="HowToPoster2" type="Sprite3D" parent="Room/Posters" unique_id=1873194923]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -0.7575357, 1.162605, -3.5746946)
+texture = ExtResource("13_bo7i5")
+
+[node name="HowToPoster3" type="Sprite3D" parent="Room/Posters" unique_id=1921369126]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -1.9139724, 1.6445608, -3.5746946)
+texture = ExtResource("14_qktwf")
+
+[node name="HowToPoster4" type="Sprite3D" parent="Room/Posters" unique_id=1602693318]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -1.6096475, 1.4268141, -3.5746946)
+texture = ExtResource("15_bh8nc")
+
+[node name="HowToPoster5" type="Sprite3D" parent="Room/Posters" unique_id=1329573491]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0.21376193, 1.5684638, -3.6074467)
+texture = ExtResource("16_jjr1n")
+
+[node name="HowToPoster6" type="Sprite3D" parent="Room/Posters" unique_id=1305673364]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -0.5136875, 1.7760549, -3.605332)
+texture = ExtResource("17_gggvi")
+
 [node name="PlateMarkers" type="Node3D" parent="." unique_id=422454012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0170703, -0.0038790703, 2.8855433)
 
 [node name="Marker3D" type="Marker3D" parent="PlateMarkers" unique_id=428807202]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5955182, 0.783, -5.5134516)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5955182, 0.783, -5.7264857)
 
 [node name="Marker3D2" type="Marker3D" parent="PlateMarkers" unique_id=507462027]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0845182, 1.295, -5.4249163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0845182, 1.295, -5.436671)
 
 [node name="Marker3D3" type="Marker3D" parent="PlateMarkers" unique_id=856997436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2775182, 0.783, -5.3703074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2775182, 0.783, -5.633334)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=154761196]
 
@@ -320,7 +353,7 @@ color = Color(0.99607843, 1, 1, 1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=290487916]
 transform = Transform3D(1, 0, 0, 0, 0.90439856, 0.42668876, 0, -0.42668876, 0.90439856, -0.009392075, 3.372337, 2.9848433)
-light_color = Color(1, 0.76162654, 0.6663052, 1)
+light_color = Color(0.7199216, 0.84519947, 0.9149443, 1)
 light_energy = 2.788
 light_indirect_energy = 12.011
 light_volumetric_fog_energy = 4.345
@@ -329,14 +362,15 @@ shadow_enabled = true
 shadow_bias = 2.927
 shadow_normal_bias = 8.29
 shadow_blur = 3.864
-spot_range = 4096.0
-spot_angle = 22.742197
+spot_range = 880.064
+spot_angle = 10.15599
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1376735963]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81107783, 2.0230746, 0.018447042)
 light_color = Color(1, 0.8980392, 0.76862746, 1)
-light_energy = 9.122
-light_indirect_energy = 10.271
+light_energy = 1.691
+light_indirect_energy = 9.437
+light_specular = 0.75
 shadow_enabled = true
 omni_range = 9.394414
 
@@ -353,6 +387,7 @@ autostart = true
 
 [node name="Window1Mesh" type="MeshInstance3D" parent="Windows" unique_id=1174758012]
 transform = Transform3D(-1.5298985e-09, 0, 0.04, 0, 0.04, 0, -0.035, 0, -1.7484555e-09, -2.934766, 1.2437148, -0.22677468)
+visible = false
 mesh = ExtResource("10_hiqwa")
 surface_material_override/0 = SubResource("StandardMaterial3D_554ww")
 surface_material_override/1 = ExtResource("15_26xuy")
@@ -363,6 +398,7 @@ surface_material_override/5 = ExtResource("15_26xuy")
 
 [node name="Window1" type="MeshInstance3D" parent="Windows" unique_id=988862274]
 transform = Transform3D(-4.3455344e-08, 1, 0, 4.3455344e-08, 1.9106855e-15, -0.74737626, -0.99414253, -4.371139e-08, -3.2668858e-08, -2.9301708, 1.2609345, -0.27417508)
+visible = false
 mesh = SubResource("PlaneMesh_554ww")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ulpex")
@@ -383,6 +419,7 @@ loop = true
 
 [node name="Window2" type="MeshInstance3D" parent="Windows" unique_id=591642030]
 transform = Transform3D(-4.858495e-08, -0.99999994, 3.2878216e-08, 0, -4.3711385e-08, -0.75216585, 1.1114943, -4.3711385e-08, 1.4371525e-15, 2.7745721, 1.2790824, -0.052156854)
+visible = false
 mesh = SubResource("PlaneMesh_554ww")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_gbfbk")
@@ -403,6 +440,7 @@ loop = true
 
 [node name="Window2Mesh" type="MeshInstance3D" parent="Windows" unique_id=1196769414]
 transform = Transform3D(-1.5298985e-09, 0, -0.04, 0, 0.04, 0, 0.035, 0, -1.7484555e-09, 2.7617586, 1.25834, -0.041677117)
+visible = false
 mesh = ExtResource("10_hiqwa")
 surface_material_override/0 = SubResource("StandardMaterial3D_554ww")
 surface_material_override/1 = ExtResource("15_26xuy")
@@ -410,6 +448,36 @@ surface_material_override/2 = ExtResource("15_26xuy")
 surface_material_override/3 = ExtResource("15_26xuy")
 surface_material_override/4 = ExtResource("15_26xuy")
 surface_material_override/5 = ExtResource("15_26xuy")
+
+[node name="Curtain" type="Sprite3D" parent="Windows" unique_id=1661759245]
+transform = Transform3D(-1.639177e-08, 0, 0.375, 0, 0.227, 0, -0.375, 0, -1.639177e-08, -2.7805207, 1.2787004, -0.20827675)
+gi_mode = 2
+gi_lightmap_texel_scale = 5.06
+texture = ExtResource("23_wjb0r")
+
+[node name="Curtain2" type="Sprite3D" parent="Windows" unique_id=1644292275]
+transform = Transform3D(-1.639177e-08, 0, 0.375, 0, 0.227, 0, -0.375, 0, -1.639177e-08, 2.8316867, 1.2787004, -0.20827699)
+gi_mode = 2
+gi_lightmap_texel_scale = 5.06
+texture = ExtResource("23_wjb0r")
+
+[node name="AreaLight3D" type="OmniLight3D" parent="Windows" unique_id=81235164]
+transform = Transform3D(-5.7459197e-08, 0, -1, 0, 1, 0, 1.3145132, 0, -4.371139e-08, 3.5744944, 1.1696146, -0.19704622)
+light_color = Color(0.9999997, 0.93881637, 0.88511515, 1)
+light_energy = 1.228
+light_indirect_energy = 8.583
+light_specular = 2.365
+shadow_enabled = true
+omni_range = 11.021
+
+[node name="AreaLight3D2" type="OmniLight3D" parent="Windows" unique_id=862453213]
+transform = Transform3D(-5.7459197e-08, 0, -1, 0, 1, 0, 1.3145132, 0, -4.371139e-08, -3.0497322, 1.1696146, -0.1970465)
+light_color = Color(0.9999997, 0.93881637, 0.88511515, 1)
+light_energy = 0.015
+light_indirect_energy = 12.602
+light_specular = 4.034
+shadow_enabled = true
+omni_range = 11.021
 
 [node name="sponge" parent="." unique_id=1187282305 instance=ExtResource("3_aqk2v")]
 transform = Transform3D(-0.80483466, 0, -0.59349906, 0, 1, 0, 0.59349906, 0, -0.80483466, -0.9231764, 0.4183975, -2.2716978)

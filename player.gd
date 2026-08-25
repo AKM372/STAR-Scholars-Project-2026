@@ -136,7 +136,7 @@ func _input(event: InputEvent) -> void:
 		scrub_progress = 0.0
 	
 	if event.is_action_pressed('testing'):
-		_blackout_and_drop()
+		world._spawn_poster()
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
@@ -241,7 +241,7 @@ func _roll_glitch() -> void:
 	var random_float = randf()
 
 	if random_float < 0.55:
-		
+		world._spawn_poster()
 		print('1')
 	elif random_float < 0.75:
 		if pickedObject and pickedObject.has_method("break_plate"):

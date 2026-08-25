@@ -3,6 +3,9 @@ extends Node3D
 @export var plate: PackedScene
 @onready var plate_markers: Node3D = $PlateMarkers
 var spawn_points: Array[Node3D] = []
+var posters: Array[Node3D] = []
+@onready var Posters: Node = $Room/Posters
+
 
 var plates_cleaned := 0
 @onready var instructions: Label = $CanvasLayer/Instructions
@@ -28,6 +31,10 @@ func _ready() -> void:
 		if child is AudioStreamPlayer3D:
 			players.append(child)
 	
+	for poster in Posters.get_children():
+		posters.append(poster)
+		poster.visible = false
+		
 	#3 seconds of silence for the instructions
 	await get_tree().create_timer(3.0).timeout
 	instructions.hide()
@@ -35,7 +42,7 @@ func _ready() -> void:
 	#makes a list of callable points so the plates spawn right
 	for point in plate_markers.get_children():
 		spawn_points.append(point)
-	
+		
 	sink_water.play('sink_running')
 	_spawn_new_plates()
 	
@@ -101,3 +108,12 @@ func play_random_sfx() -> void:
 
 func _on_timeout() -> void:
 	play_random_sfx()
+
+func _spawn_poster():
+	var poster
+	if posters.size() > 0:
+		poster = posters[0]
+		poster.visible = true
+		posters.pop_front()
+	else:
+		return
