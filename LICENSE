@@ -1,8 +1,8 @@
-## License
+# License
 
 This project uses a dual-license structure: source code is licensed under the MIT License, and all non-code creative assets (art, audio, models, textures, and other media) are licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
 
-### Code — MIT License
+## Code — MIT License
 
 Copyright (c) 2026 Ashlynne McBride
 
@@ -24,7 +24,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-### Assets — CC BY-SA 4.0
+## Assets — CC BY-SA 4.0
 
 All non-code assets in this repository (including but not limited to 3D models, textures, sprites, sound effects, music, and written word) are licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
