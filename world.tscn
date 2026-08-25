@@ -166,7 +166,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="WallMesh" parent="Room/Walls/Wall" index="0" unique_id=1361700596 groups=["world"]]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, -3.4513617, 1.2, -0.9166022)
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, -3.4517035, 1.1991568, -0.9148827)
 
 [node name="CollisionShape3D" parent="Room/Walls/Wall" index="1" unique_id=111759479 groups=["world"]]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 6, -3.4513617, 1.2, -0.9166022)
@@ -314,6 +314,38 @@ texture = ExtResource("16_jjr1n")
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -0.5136875, 1.7760549, -3.605332)
 texture = ExtResource("17_gggvi")
 
+[node name="HowToPoster7" type="Sprite3D" parent="Room/Posters" unique_id=1627429021]
+transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, -2.37299, 1.9868164, -3.5746946)
+texture = ExtResource("12_mc2jv")
+
+[node name="HowToPoster8" type="Sprite3D" parent="Room/Posters" unique_id=1571673759]
+transform = Transform3D(0.37, 0, 0, 0, -1.6173214e-08, -0.37, 0, 0.37, -1.6173214e-08, -0.7575357, 2.6892314, -2.520442)
+texture = ExtResource("13_bo7i5")
+
+[node name="HowToPoster9" type="Sprite3D" parent="Room/Posters" unique_id=944521782]
+transform = Transform3D(-5.6824803e-09, 0, -0.13, 0, 0.13, 0, 0.13, 0, -5.6824803e-09, 2.8165529, 1.7760549, -2.5846019)
+texture = ExtResource("17_gggvi")
+
+[node name="HowToPoster10" type="Sprite3D" parent="Room/Posters" unique_id=715936712]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.5207044, 1.8327174, -3.5728345)
+texture = ExtResource("16_jjr1n")
+
+[node name="HowToPoster11" type="Sprite3D" parent="Room/Posters" unique_id=21795119]
+transform = Transform3D(-6.119594e-09, 0, 0.14, 0, 0.14, 0, -0.14, 0, -6.119594e-09, -2.937492, 1.4268141, -2.3934503)
+texture = ExtResource("15_bh8nc")
+
+[node name="HowToPoster12" type="Sprite3D" parent="Room/Posters" unique_id=61978111]
+transform = Transform3D(0.185, 0, 0, 0, 0.185, 0, 0, 0, 0.185, 2.0852494, 1.6445608, -3.5746946)
+texture = ExtResource("14_qktwf")
+
+[node name="HowToPoster13" type="Sprite3D" parent="Room/Posters" unique_id=95531931]
+transform = Transform3D(-2.3385594e-08, -0.535, 2.3385594e-08, 0, -2.3385594e-08, -0.535, 0.535, -2.3385594e-08, 1.0222167e-15, 1.155971, 2.6818726, -1.4589515)
+texture = ExtResource("12_mc2jv")
+
+[node name="HowToPoster14" type="Sprite3D" parent="Room/Posters" unique_id=835656322]
+transform = Transform3D(0.595, 0, 0, 0, -2.6008276e-08, 0.595, 0, -0.595, -2.6008276e-08, -0.32063127, -0.20848095, -0.93352336)
+texture = ExtResource("13_bo7i5")
+
 [node name="PlateMarkers" type="Node3D" parent="." unique_id=422454012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0170703, -0.0038790703, 2.8855433)
 
@@ -359,9 +391,10 @@ light_indirect_energy = 12.011
 light_volumetric_fog_energy = 4.345
 light_specular = 1.368
 shadow_enabled = true
-shadow_bias = 2.927
+shadow_bias = 2.88
 shadow_normal_bias = 8.29
-shadow_blur = 3.864
+shadow_transmittance_bias = -16.0
+shadow_blur = 0.0
 spot_range = 880.064
 spot_angle = 10.15599
 
