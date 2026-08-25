@@ -51,6 +51,8 @@ albedo_color = Color(0.9999955, 0.49287075, 0.23957124, 1)
 transparency = 1
 albedo_color = Color(0.2081193, 0.41839916, 0.35522375, 0.5647059)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_il2jm"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_ulpex"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_26xuy"]
@@ -249,10 +251,14 @@ shape = SubResource("BoxShape3D_ioo17")
 transform = Transform3D(2.6069336, 0, 0, 0, 1.1754922, 0, 0, 0, 0.10539116, 1.2780398, 0.61157167, 1.5499806)
 shape = SubResource("BoxShape3D_ioo17")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room/Counters/Sink" unique_id=623353563]
+[node name="SinkWaterInSink" type="MeshInstance3D" parent="Room/Counters/Sink" unique_id=623353563]
 transform = Transform3D(1.7032417, 0, 0, 0, 1, 0, 0, 0, 1.3419646, 1.2930617, 0.53804415, 0.7405586)
+layers = 4096
 mesh = SubResource("BoxMesh_554ww")
 surface_material_override/0 = SubResource("StandardMaterial3D_eqetu")
+
+[node name="SinkWaterCollision" type="CollisionShape3D" parent="Room/Counters/Sink/SinkWaterInSink" unique_id=495380306]
+shape = SubResource("BoxShape3D_il2jm")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Room/Counters/Sink" unique_id=2027426208]
 transform = Transform3D(0.1, 0, 0, 0, 0.349, 0, 0, 0, 0.1, 1.2703767, 1.2152711, 0.07125664)

@@ -30,7 +30,6 @@ var scrub_radius := 0.25
 var scrub_speed := 6.0
 @onready var scrub_marker: Marker3D = $Head/Camera3D/ScrubMarker
 @export var dirt_removed_per_scrub := 0.4
-var scrub_held := false
 @onready var scrubbing_sound: AudioStreamPlayer3D = $ScrubbingSound
 
 # for the glitches
@@ -135,12 +134,9 @@ func _input(event: InputEvent) -> void:
 		scrubbing = true
 		scrubbing_sound.play()
 		scrub_progress = 0.0
-		scrub_held = true
-	if event.is_action_released('scrub'):
-		scrub_held = false
 	
 	if event.is_action_pressed('testing'):
-		
+		_blackout_and_drop()
 		print('testing')
 	
 func _physics_process(delta: float) -> void:
@@ -294,6 +290,9 @@ func _blackout_and_drop() -> void:
 		original_volume + -24,
 		original_volume,
 		blackout_fade_time)
+	if scrubbing:
+		scrubbing = false
+		scrubbing_sound.stop()
 
 func _clear_picked_object() -> void:
 	pickedObject = null
