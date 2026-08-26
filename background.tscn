@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bby0qbm0dujsa"]
+
+[ext_resource type="Script" uid="uid://bubssfplfqk3v" path="res://abstract.gd" id="1_oabld"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57ptp"]
+font_size = 100
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_x60go"]
+default_font_size = 100
+
+[node name="Background" type="Node2D" unique_id=465375715]
+script = ExtResource("1_oabld")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609448126]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label" type="Label" parent="." unique_id=863111996]
+offset_left = 90.0
+offset_top = 58.0
+offset_right = 1962.0
+offset_bottom = 207.0
+text = "Background"
+label_settings = SubResource("LabelSettings_57ptp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1253863134]
+offset_left = 106.0
+offset_top = 210.0
+offset_right = 1676.0
+offset_bottom = 796.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+text = " In their book Video Games Have Always Been Queer, Bo Ruberg defines queer game design as the “practice of deliberately using mechanics and other design elements to challenge normative expectations around gender, sexuality, and the established logics of digital gameplay” (Ruberg 2019, 113).  The term “queer” is a reclaimed slur that is sometimes used as an umbrella term for LGBTQ+ people, including both sexual and gender identities. However, it is also a political orientation categorized by disruption of social binaries and inclusion of identity and differences. To be queer is to exist outside of norms and traditional expectations. Therefore, queer design is to intentionally design against the existing standards. At the intersection of queer theory and game studies, queer game studies offers a unique perspective to designing against the dominant cultures and hegemonic expectations that exist within the gaming world. 
+
+ Queer games have been known to do this by exploiting a game’s rules, flaws, or glitches (Pelurson, 2020).  How does designing with intentional flaws cause the player to question and think deeply about the experience they are interacting with? Games are supposed to be fun. However, “fun” is subjective; a queer approach to game studies might include designing for “no fun” (Ruberg 2019). In line with Ruberg’s research on “no fun” games, I chose to design a new game with “no fun” in mind, hoping that this reversal of player expectations would promote player reflection."
+
+[node name="Back" type="Button" parent="." unique_id=2003789147]
+offset_left = 69.0
+offset_top = 937.0
+offset_right = 739.85205
+offset_bottom = 1099.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_x60go")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

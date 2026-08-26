@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c0ynqcofito4e"]
+
+[ext_resource type="Script" uid="uid://bubssfplfqk3v" path="res://abstract.gd" id="1_x60go"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57ptp"]
+font_size = 100
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_x60go"]
+default_font_size = 100
+
+[node name="Abstract" type="Node2D" unique_id=465375715]
+script = ExtResource("1_x60go")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609448126]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label" type="Label" parent="." unique_id=863111996]
+offset_left = 90.0
+offset_top = 58.0
+offset_right = 1962.0
+offset_bottom = 207.0
+text = "Abstract"
+label_settings = SubResource("LabelSettings_57ptp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1253863134]
+offset_left = 106.0
+offset_top = 210.0
+offset_right = 1676.0
+offset_bottom = 796.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+text = "Queer (noun): deviation from what is expected; strange. The standard in video game design is to create a fun, engaging, and addictive experience for players to spend hours and money on. Challenging the standards by which we design is an inherently queer act. “Fun” is subjective; a queer approach to game studies might include designing “not for fun.” Video games are expected to offer escapism, but can they be tools to explore and reflect on how we feel? My research is based on “reflective game design” (Khaled et al., 2018), prioritizing process, reflection, and documentation over product to challenge the ideal of immersive, escapist games. I created a demo called Wash the Dishes that uses lag, unexpected reactions, and “glitches” as deliberate gameplay to evoke frustration, unfairness, or boredom—“not fun” feelings (Ruberg 2015). The simple task becomes insurmountable, narrated by a judgmental voice, and with no end state, the player is offered the opposite of escapism: introspection. Wash the Dishes doesn’t condemn having fun, but instead invites players to question and reflect on personal experience and serves as an example of how reflective design and queer theory can influence the way we study and create games. "
+
+[node name="Back" type="Button" parent="." unique_id=2003789147]
+offset_left = 69.0
+offset_top = 937.0
+offset_right = 739.85205
+offset_bottom = 1099.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_x60go")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

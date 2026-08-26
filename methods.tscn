@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://8y2kyby6k54n"]
+
+[ext_resource type="Script" uid="uid://df0i8lktmwugq" path="res://methods.gd" id="1_ckt0i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57ptp"]
+font_size = 100
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_x60go"]
+default_font_size = 100
+
+[sub_resource type="Theme" id="Theme_ckt0i"]
+default_font_size = 100
+
+[node name="Methods" type="Node2D" unique_id=465375715]
+script = ExtResource("1_ckt0i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609448126]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label" type="Label" parent="." unique_id=863111996]
+offset_left = 90.0
+offset_top = 58.0
+offset_right = 1962.0
+offset_bottom = 207.0
+text = "Methods"
+label_settings = SubResource("LabelSettings_57ptp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1253863134]
+offset_left = 106.0
+offset_top = 210.0
+offset_right = 1676.0
+offset_bottom = 697.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+text = "First, I familiarized myself with existing research on queer games and queer game design. Then, in order to design my own queer game, I familiarized myself with the Godot game engine. I explored game feel, creating both “good” feeling games with responsive, polished mechanics, and “bad” feeling games, using unresponsive, halted gameplay. I designed in order to examine the questions: How does one design games that have intentional flaws in their mechanics, which cause the player to question and think deeply about the experience they are interacting with? How does one design games to describe bad feelings? Once I had an understanding of the engine, I began prototyping a queer game design, following the “reflective game design” process (Khaled et al. 2018). This process proposes an emphasis on process, reflection, and documentation over product to challenge the ideal of immersive, escapist games. Reflective design calls for “ambiguity of interpretation” and a provocation of players in order to reconsider their understandings of what a game is supposed to be and reflect on personal experience with the material (Khaled et al. 2018, 21)."
+
+[node name="Back" type="Button" parent="." unique_id=2003789147]
+offset_left = 69.0
+offset_top = 937.0
+offset_right = 739.85205
+offset_bottom = 1099.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_x60go")
+text = "Back"
+
+[node name="ReflectiveDesign" type="Button" parent="." unique_id=199278787]
+offset_left = 147.0
+offset_top = 720.0
+offset_right = 1108.4438
+offset_bottom = 882.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_ckt0i")
+text = "Reflective Design"
+
+[node name="Playtesting" type="Button" parent="." unique_id=1152769235]
+offset_left = 1029.0
+offset_top = 717.0
+offset_right = 1990.4438
+offset_bottom = 879.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_ckt0i")
+text = "Playtesting"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ReflectiveDesign" to="." method="_on_reflective_design_pressed"]
+[connection signal="pressed" from="Playtesting" to="." method="_on_playtesting_pressed"]

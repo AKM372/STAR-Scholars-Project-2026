@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ce2j7k7skbw32"]
+
+[ext_resource type="Script" uid="uid://bubssfplfqk3v" path="res://abstract.gd" id="1_amp1b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57ptp"]
+font_size = 100
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_x60go"]
+default_font_size = 100
+
+[node name="Results" type="Node2D" unique_id=465375715]
+script = ExtResource("1_amp1b")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609448126]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label" type="Label" parent="." unique_id=863111996]
+offset_left = 90.0
+offset_top = 58.0
+offset_right = 1962.0
+offset_bottom = 207.0
+text = "Results"
+label_settings = SubResource("LabelSettings_57ptp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1253863134]
+offset_left = 106.0
+offset_top = 210.0
+offset_right = 1676.0
+offset_bottom = 796.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+text = "Playtesting Wash The Dishes confirmed the success of “reflective game design”  — not by delivering a consistent experience, but by provoking genuinely personal ones. Reactions ranged widely: some players read the game literally, expressing boredom or frustration with the monotony of the task itself. Others used it as a springboard for disclosure, connecting the act of washing dishes to their own histories: one described it as echoing the feeling of never being good enough for her parents, another reflected on the gendered legacy of housework as a \"woman's job.\" That this range of response emerged from the same experience is evidence that the game achieved its goal: each player brought their own emotional and experiential context to the interaction, and the game gave them room to notice it. This also reframes what \"success\" means for a reflective game. Where conventional design metrics prize engagement, immersion, and fun, Wash The Dishes treats confusion, boredom, and discomfort as legitimate--even desirable--outcomes, because they signal that a player has stepped outside the escapist frame and toward self-reflection. 
+
+Wash the Dishes invites players to question and reflect on personal experience and serves as an example of how reflective design and queer theory can influence the way we study and create games. Being queer is both an identity and an experience, and viewing games with this different perspective can make the experience of interacting with them inherently meaningful because it is queer. By representing a non-conventional and fundamentally queer point of view, I hope to invite individuals of many different and intersecting identities to participate in the discussion of game studies. "
+
+[node name="Back" type="Button" parent="." unique_id=2003789147]
+offset_left = 69.0
+offset_top = 937.0
+offset_right = 739.85205
+offset_bottom = 1099.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_x60go")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

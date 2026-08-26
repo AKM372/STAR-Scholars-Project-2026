@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bhjmdnm76v7ph"]
+
+[ext_resource type="Script" uid="uid://bubssfplfqk3v" path="res://abstract.gd" id="1_oqkmi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57ptp"]
+font_size = 100
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_x60go"]
+default_font_size = 100
+
+[node name="Introduction" type="Node2D" unique_id=465375715]
+script = ExtResource("1_oqkmi")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609448126]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label" type="Label" parent="." unique_id=863111996]
+offset_left = 90.0
+offset_top = 58.0
+offset_right = 1962.0
+offset_bottom = 207.0
+text = "Introduction"
+label_settings = SubResource("LabelSettings_57ptp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1253863134]
+offset_left = 106.0
+offset_top = 210.0
+offset_right = 1676.0
+offset_bottom = 796.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+text = "Video games are designed to be fun, engaging, and addictive. When confronted with a new interaction, our brains have evolved to respond based on our past experiences with similar situations to inform our current reactions. This allows us to discover, learn, and improve certain skills. This process of past informed decisions is called reflection, and in this way, video games are uniquely suited to exploring reflective practices (Khaled et al 2018). 
+
+However, current design standards undermine the potential of reflective design. Industry success relies on player engagement: an immersive, replayable game is a successful one. For instance, take the classic game Pac-Man, which has inspired many other designs. Pac-Man is a brightly colored, fast-paced game where players  collect food and avoid ghosts to survive and earn points. The problem with immersion is that it lulls us into accepting the status quo, rather than questioning it (Khaled et al 2018). Why is Pac-Man a man? What, specifically, is fun about collecting little dots in a maze? Why is he hungry? Why does eating dots earn points? Why do we care about these points? 
+
+My project implements “reflective game design” as discussed by Khaled et al, which provides a framework for both the designer and the player to reflect on the experience of a video game. What does the game feel like?  By asking these questions, we can analyze our internal worlds, affects, and biases, which influence how we play and make games and how we view our lives. Khaled et al proposes that through intentional reflection, we might break down existing expectations in order to build new ones. 
+
+For this research, I developed a playable prototype. Wash the Dishes is an example of queer game design which subverts expectation, a game that isn’t made to be only for fun, but aims to create a reflective experience for the player. My goal with this project is to evoke frustration, unfairness, or boredom, feelings that are not traditionally associated with having fun, and to break down traditional ideals of the “perfect player” and what a “good game” has to be. This research explores how video games can be used as tools to explore and reflect on how we feel. Through using reflective game design, I am testing theories about how games can be made, and how a queer perspective can effect how a game is created. "
+
+[node name="Back" type="Button" parent="." unique_id=2003789147]
+offset_left = 69.0
+offset_top = 937.0
+offset_right = 739.85205
+offset_bottom = 1099.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_x60go")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dqqlivvdkoxe4"]
+
+[ext_resource type="Script" uid="uid://bum25ekp1dmdr" path="res://reflective_design.gd" id="1_lm6xc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57ptp"]
+font_size = 100
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_x60go"]
+default_font_size = 100
+
+[node name="Playtesting" type="Node2D" unique_id=465375715]
+script = ExtResource("1_lm6xc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609448126]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label" type="Label" parent="." unique_id=863111996]
+offset_left = 90.0
+offset_top = 58.0
+offset_right = 1962.0
+offset_bottom = 207.0
+text = "Playtesting"
+label_settings = SubResource("LabelSettings_57ptp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1253863134]
+offset_left = 106.0
+offset_top = 210.0
+offset_right = 1676.0
+offset_bottom = 796.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+text = "Once I had a playable prototype , I held playtesting sessions as part of the iterative design process of testing, data collecting, and improvement. During playtesting, I observed how players received Wash The Dishes, any unintended errors that arose through their actions, and accessed if the overall design was creating the intended effect. I did not time playtests in order to emphasize the lack of a win or lose state. I purposefully withheld information about the game concept from players, and as they played, any questions they asked went unanswered. I recorded each playtest, and from this documentation, I developed list of actionable items in order to inform the next phase of improvement.  
+
+When players expressed that they were done playing, I asked these questions: 
+
+Why did you stop playing when you did? How did playing this game make you feel? and What did you think this game was about?"
+
+[node name="Back" type="Button" parent="." unique_id=2003789147]
+offset_left = 69.0
+offset_top = 937.0
+offset_right = 739.85205
+offset_bottom = 1099.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_x60go")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

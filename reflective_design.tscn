@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://byhkhyv1odo8g"]
+
+[ext_resource type="Script" uid="uid://bum25ekp1dmdr" path="res://reflective_design.gd" id="1_pero6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57ptp"]
+font_size = 100
+font_color = Color(0.54901963, 0.10980392, 1, 1)
+outline_size = 14
+
+[sub_resource type="Theme" id="Theme_x60go"]
+default_font_size = 100
+
+[node name="ReflectiveDesign" type="Node2D" unique_id=465375715]
+script = ExtResource("1_pero6")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=609448126]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label" type="Label" parent="." unique_id=863111996]
+offset_left = 90.0
+offset_top = 58.0
+offset_right = 1962.0
+offset_bottom = 207.0
+text = "Reflective Design"
+label_settings = SubResource("LabelSettings_57ptp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1253863134]
+offset_left = 106.0
+offset_top = 210.0
+offset_right = 1676.0
+offset_bottom = 796.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+text = "During the design process, I used GitHub for version control to closely document my “no fun”  design choices and keep a reflective journal, prioritizing the recoverability of the design process over the product. Version control is a standard process in the game development industry, as it allows multiple people to make edits to many files, resolve conflicting edits, and access files from any stage of the development process. Commit notes, an optional description that can be added to each edit committed to the project, are usually brief and informative, like  “wall color changed.” In line with Khaled’s “reflective game design” process as well as to work against standard game design paradigms, my commit notes are detailed and explain the thoughts behind each change so that my documentation addresses both the “how” and “why” I designed this game.  
+
+As a result of this process, I created a prototype game called Wash The Dishes. This game is dish-washing simulator where the basic mechanics glitch, lag, and otherwise behave unexpectedly. The player can only interact with the dishes, either scrubbing them or breaking them, creating a very limited in-game worldview. I recorded voice note narrations, which insinuate that the insurmountable task at hand is simple and that the player is not trying hard enough. Main gameplay relies on glitch interactions which occur on a weighted random basis, from minor inconvenience such as the plate floating out of range of being scrubbed, to a major inconvenience, such as a rain of plates from the ceiling. No two playthroughs are the same, and as the room fills with dishes, movement is increasingly restricted by bad collision boxes. There is no end state nor anything else to discover; the player can stop whenever they wish to. These implementations were created to offer the player a frustrating, awkward experience, with many pauses within gameplay in order to promote personal reflection."
+
+[node name="Back" type="Button" parent="." unique_id=2003789147]
+offset_left = 69.0
+offset_top = 937.0
+offset_right = 739.85205
+offset_bottom = 1099.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_x60go")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

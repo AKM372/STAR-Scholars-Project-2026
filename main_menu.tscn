@@ -11,6 +11,10 @@ outline_size = 14
 [sub_resource type="Theme" id="Theme_eqetu"]
 default_font_size = 150
 
+[sub_resource type="Theme" id="Theme_ljt6e"]
+default_base_scale = 0.76
+default_font_size = 50
+
 [node name="MainMenu" type="Node2D" unique_id=1076933529]
 script = ExtResource("1_7vrkn")
 
@@ -20,8 +24,8 @@ offset_bottom = 40.0
 scale = Vector2(47.930573, 27.072067)
 
 [node name="WashTheDishesWatercolor" type="Sprite2D" parent="." unique_id=857197640]
-position = Vector2(907, 588)
-scale = Vector2(0.42, 0.42)
+position = Vector2(1362.7688, 652.85004)
+scale = Vector2(0.5934646, 0.59346455)
 texture = ExtResource("2_fu7sn")
 
 [node name="Label" type="Label" parent="." unique_id=1556871927]
@@ -33,12 +37,22 @@ text = "Wash The Dishes"
 label_settings = SubResource("LabelSettings_554ww")
 
 [node name="StartButton" type="Button" parent="." unique_id=1062189448]
-offset_left = 541.0
-offset_top = 928.0
-offset_right = 1761.0
-offset_bottom = 1133.0
+offset_left = 62.0
+offset_top = 533.0
+offset_right = 1282.0
+offset_bottom = 746.0
 scale = Vector2(0.6022192, 0.64)
 theme = SubResource("Theme_eqetu")
 text = "START"
 
+[node name="ResearchButton" type="Button" parent="." unique_id=1082136429]
+offset_left = 303.99997
+offset_top = 750.0
+offset_right = 646.0681
+offset_bottom = 827.0
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_ljt6e")
+text = "LEARN MORE"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ResearchButton" to="." method="_on_research_button_pressed"]

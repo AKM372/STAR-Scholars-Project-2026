@@ -240,33 +240,25 @@ func _roll_glitch() -> void:
 	is_glitched = true
 	var random_float = randf()
 
-	if random_float < 0.55:
+	if random_float < 0.50:
 		world._spawn_poster()
-		print('1')
 	elif random_float < 0.75:
 		if pickedObject and pickedObject.has_method("break_plate"):
 			pickedObject.break_plate()
 			_clear_picked_object()
-		print('2')
-	elif random_float < 0.85:
+	elif random_float < 0.87:
 		world._spawn_new_plates()
-		print('3')
-	elif random_float < 0.92:
-		# blackout + drop — disruptive, less frequent
+	elif random_float < 0.93:
 		_blackout_and_drop()
-		print('4')
 	elif random_float < 0.97:
-		# throw — disruptive, rare
 		if pickedObject:
 			_throw_object(pickedObject)
 			_clear_picked_object()
-		print('5')
 	else:
-		# plate rain — rarest, most disruptive
 		world._plate_rain()
 
 	# randomize the wait until the next roll, so glitches feel irregular
-	glitch_check_interval = randf_range(1.5, 6.0)
+	glitch_check_interval = randf_range(1.5, 8.0)
 
 func _blackout_and_drop() -> void:
 	if not pickedObject:

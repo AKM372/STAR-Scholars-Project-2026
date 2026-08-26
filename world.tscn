@@ -27,7 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://b4ack4yuf764w" path="res://assets/HowToPerson2.jpg" id="15_bh8nc"]
 [ext_resource type="Texture2D" uid="uid://m6jv51vdn6v0" path="res://assets/HowToPerson3.jpg" id="16_jjr1n"]
 [ext_resource type="Texture2D" uid="uid://dra4rkphyl2dn" path="res://assets/DontWashThemselves.jpg" id="17_gggvi"]
+[ext_resource type="Texture2D" uid="uid://eagavetkw6sk" path="res://assets/HowToPerson5.jpg" id="18_jjr1n"]
 [ext_resource type="VideoStream" uid="uid://bfhxy2o0rkgg2" path="res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogv" id="19_26xuy"]
+[ext_resource type="Texture2D" uid="uid://b1c8llf1ljtc5" path="res://assets/HowToPerson4.jpg" id="19_gggvi"]
 [ext_resource type="VideoStream" uid="uid://dlt4n1devyq35" path="res://sfx/Videos/People Walking Past the Camera - Free Stock Footage For Commercial Projects-converted.ogv" id="20_bc84e"]
 [ext_resource type="Texture2D" uid="uid://hyfewji6wxj5" path="res://assets/Curtain.png" id="23_wjb0r"]
 
@@ -291,60 +293,84 @@ animation = &"sink_running"
 [node name="Posters" type="Node" parent="Room" unique_id=571213632]
 
 [node name="HowToPoster" type="Sprite3D" parent="Room/Posters" unique_id=1159944115]
-transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 1.155971, 1.162605, -3.5746946)
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.3752389, 1.0981305, -3.5746946)
 texture = ExtResource("12_mc2jv")
-
-[node name="HowToPoster2" type="Sprite3D" parent="Room/Posters" unique_id=1873194923]
-transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -0.7575357, 1.162605, -3.5746946)
-texture = ExtResource("13_bo7i5")
-
-[node name="HowToPoster3" type="Sprite3D" parent="Room/Posters" unique_id=1921369126]
-transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -1.9139724, 1.6445608, -3.5746946)
-texture = ExtResource("14_qktwf")
 
 [node name="HowToPoster4" type="Sprite3D" parent="Room/Posters" unique_id=1602693318]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -1.6096475, 1.4268141, -3.5746946)
 texture = ExtResource("15_bh8nc")
 
-[node name="HowToPoster5" type="Sprite3D" parent="Room/Posters" unique_id=1329573491]
-transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0.21376193, 1.5684638, -3.6074467)
-texture = ExtResource("16_jjr1n")
+[node name="HowToPoster3" type="Sprite3D" parent="Room/Posters" unique_id=1921369126]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -2.1965377, 0.9766884, -3.5746946)
+texture = ExtResource("14_qktwf")
 
 [node name="HowToPoster6" type="Sprite3D" parent="Room/Posters" unique_id=1305673364]
-transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -0.5136875, 1.7760549, -3.605332)
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -0.94810355, 2.153813, -3.605332)
 texture = ExtResource("17_gggvi")
 
-[node name="HowToPoster7" type="Sprite3D" parent="Room/Posters" unique_id=1627429021]
-transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, -2.37299, 1.9868164, -3.5746946)
+[node name="HowToPoster13" type="Sprite3D" parent="Room/Posters" unique_id=95531931]
+transform = Transform3D(-5.0268096e-09, -0.115, 5.0268096e-09, 0, -5.0268096e-09, -0.115, 0.115, -5.0268096e-09, 2.1972883e-16, 1.7581863, 2.6818726, -1.4589515)
+texture = ExtResource("12_mc2jv")
+
+[node name="HowToPoster20" type="Sprite3D" parent="Room/Posters" unique_id=794248805]
+transform = Transform3D(-3.059797e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.059797e-09, -2.900621, 1.9868164, -1.9238516)
 texture = ExtResource("12_mc2jv")
 
 [node name="HowToPoster8" type="Sprite3D" parent="Room/Posters" unique_id=1571673759]
 transform = Transform3D(0.37, 0, 0, 0, -1.6173214e-08, -0.37, 0, 0.37, -1.6173214e-08, -0.7575357, 2.6892314, -2.520442)
 texture = ExtResource("13_bo7i5")
 
+[node name="HowToPoster10" type="Sprite3D" parent="Room/Posters" unique_id=715936712]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.5207044, 1.8327174, -3.5728345)
+texture = ExtResource("16_jjr1n")
+
 [node name="HowToPoster9" type="Sprite3D" parent="Room/Posters" unique_id=944521782]
 transform = Transform3D(-5.6824803e-09, 0, -0.13, 0, 0.13, 0, 0.13, 0, -5.6824803e-09, 2.8165529, 1.7760549, -2.5846019)
 texture = ExtResource("17_gggvi")
 
-[node name="HowToPoster10" type="Sprite3D" parent="Room/Posters" unique_id=715936712]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.5207044, 1.8327174, -3.5728345)
-texture = ExtResource("16_jjr1n")
+[node name="HowToPoster14" type="Sprite3D" parent="Room/Posters" unique_id=835656322]
+transform = Transform3D(0.595, 0, 0, 0, -2.6008276e-08, 0.595, 0, -0.595, -2.6008276e-08, -0.32063127, -0.2445334, -0.5732016)
+texture = ExtResource("13_bo7i5")
+
+[node name="HowToPoster17" type="Sprite3D" parent="Room/Posters" unique_id=706861755]
+transform = Transform3D(-0.13, 0, -1.13649605e-08, 0, 0.13, 0, 1.13649605e-08, 0, -0.13, 1.5380874, 0.76233506, 2.0303082)
+texture = ExtResource("17_gggvi")
+
+[node name="HowToPoster2" type="Sprite3D" parent="Room/Posters" unique_id=1873194923]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -0.7575357, 1.162605, -3.5746946)
+texture = ExtResource("13_bo7i5")
+
+[node name="HowToPoster16" type="Sprite3D" parent="Room/Posters" unique_id=1233465090]
+transform = Transform3D(-1.5298985e-09, 0, -0.035, 0, 0.035, 0, 0.035, 0, -1.5298985e-09, 2.8311036, 1.107348, 1.163466)
+texture = ExtResource("18_jjr1n")
 
 [node name="HowToPoster11" type="Sprite3D" parent="Room/Posters" unique_id=21795119]
 transform = Transform3D(-6.119594e-09, 0, 0.14, 0, 0.14, 0, -0.14, 0, -6.119594e-09, -2.937492, 1.4268141, -2.3934503)
 texture = ExtResource("15_bh8nc")
 
+[node name="HowToPoster5" type="Sprite3D" parent="Room/Posters" unique_id=1329573491]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0.21376193, 1.5684638, -3.6074467)
+texture = ExtResource("16_jjr1n")
+
+[node name="HowToPoster7" type="Sprite3D" parent="Room/Posters" unique_id=1627429021]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -2.37299, 1.9868164, -3.5746946)
+texture = ExtResource("12_mc2jv")
+
+[node name="HowToPoster18" type="Sprite3D" parent="Room/Posters" unique_id=335590137]
+transform = Transform3D(-0.14, 0, -1.2239188e-08, 0, 0.14, 0, 1.2239188e-08, 0, -0.14, 2.0289721, 2.0475202, 2.029295)
+texture = ExtResource("15_bh8nc")
+
+[node name="HowToPoster15" type="Sprite3D" parent="Room/Posters" unique_id=1434490762]
+transform = Transform3D(-0.07, 0, -6.119594e-09, 0, 0.07, 0, 6.119594e-09, 0, -0.07, -1.7379314, 1.4268141, 2.0286899)
+texture = ExtResource("19_gggvi")
+
+[node name="HowToPoster19" type="Sprite3D" parent="Room/Posters" unique_id=1848985994]
+transform = Transform3D(-0.07, 6.119594e-09, -2.6749597e-16, 0, -3.059797e-09, -0.07, -6.119594e-09, -0.07, 3.059797e-09, 0.40940666, 2.6729648, 0.52607185)
+texture = ExtResource("19_gggvi")
+
 [node name="HowToPoster12" type="Sprite3D" parent="Room/Posters" unique_id=61978111]
 transform = Transform3D(0.185, 0, 0, 0, 0.185, 0, 0, 0, 0.185, 2.0852494, 1.6445608, -3.5746946)
 texture = ExtResource("14_qktwf")
-
-[node name="HowToPoster13" type="Sprite3D" parent="Room/Posters" unique_id=95531931]
-transform = Transform3D(-2.3385594e-08, -0.535, 2.3385594e-08, 0, -2.3385594e-08, -0.535, 0.535, -2.3385594e-08, 1.0222167e-15, 1.155971, 2.6818726, -1.4589515)
-texture = ExtResource("12_mc2jv")
-
-[node name="HowToPoster14" type="Sprite3D" parent="Room/Posters" unique_id=835656322]
-transform = Transform3D(0.595, 0, 0, 0, -2.6008276e-08, 0.595, 0, -0.595, -2.6008276e-08, -0.32063127, -0.20848095, -0.93352336)
-texture = ExtResource("13_bo7i5")
 
 [node name="PlateMarkers" type="Node3D" parent="." unique_id=422454012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0170703, -0.0038790703, 2.8855433)

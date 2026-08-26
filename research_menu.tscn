@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://d111bvqbwdqug"]
+
+[ext_resource type="Script" uid="uid://vn0gidvmu8id" path="res://research_menu.gd" id="1_8ke6q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tby3g"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_8ke6q"]
+default_font_size = 100
+
+[node name="ResearchMenu" type="Node2D" unique_id=148547162]
+script = ExtResource("1_8ke6q")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=892256386]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(47.930573, 27.072067)
+
+[node name="Label2" type="Label" parent="." unique_id=2017596132]
+offset_left = 79.0
+offset_top = 85.0
+offset_right = 5663.0
+offset_bottom = 279.0
+text = "Wash The Dishes is part of an independent undergraduate research project 
+made possible by the 2026 STAR Scholars program at Drexel University. 
+
+This work was done by Ashlynne McBride in collaboration and mentorship from Dr. Ari Gass 
+and the Glitch Lab."
+label_settings = SubResource("LabelSettings_tby3g")
+
+[node name="Abstract" type="Button" parent="." unique_id=954863180]
+offset_left = 96.0
+offset_top = 447.0
+offset_right = 766.85205
+offset_bottom = 609.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_8ke6q")
+text = "What is it?"
+
+[node name="Back" type="Button" parent="." unique_id=1761834902]
+offset_left = 98.0
+offset_top = 738.0
+offset_right = 768.85205
+offset_bottom = 900.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_8ke6q")
+text = "Back"
+
+[node name="Introduction" type="Button" parent="." unique_id=69903891]
+offset_left = 1049.0
+offset_top = 436.0
+offset_right = 1719.852
+offset_bottom = 598.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_8ke6q")
+text = "Introduction"
+
+[node name="Background" type="Button" parent="." unique_id=1164743719]
+offset_left = 1055.0
+offset_top = 577.0
+offset_right = 1725.852
+offset_bottom = 739.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_8ke6q")
+text = "Background"
+
+[node name="Methods" type="Button" parent="." unique_id=946453204]
+offset_left = 1053.0
+offset_top = 715.0
+offset_right = 1723.852
+offset_bottom = 877.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_8ke6q")
+text = "Methods"
+
+[node name="Results" type="Button" parent="." unique_id=1554377500]
+offset_left = 1053.0
+offset_top = 855.0
+offset_right = 1723.852
+offset_bottom = 1017.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_8ke6q")
+text = "Results"
+
+[node name="WorksCited" type="Button" parent="." unique_id=371096597]
+offset_left = 98.0
+offset_top = 589.0
+offset_right = 768.85205
+offset_bottom = 751.5
+scale = Vector2(0.6022192, 0.64)
+theme = SubResource("Theme_8ke6q")
+text = "Works Cited"
+
+[connection signal="pressed" from="Abstract" to="." method="_on_abstract_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Introduction" to="." method="_on_introduction_pressed"]
+[connection signal="pressed" from="Background" to="." method="_on_background_pressed"]
+[connection signal="pressed" from="Methods" to="." method="_on_methods_pressed"]
+[connection signal="pressed" from="Results" to="." method="_on_results_pressed"]
+[connection signal="pressed" from="WorksCited" to="." method="_on_works_cited_pressed"]
