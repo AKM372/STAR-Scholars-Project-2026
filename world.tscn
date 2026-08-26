@@ -13,24 +13,16 @@
 [ext_resource type="ArrayMesh" uid="uid://47twihdsajib" path="res://assets/SM_door.obj" id="8_udxuc"]
 [ext_resource type="Material" uid="uid://5jh3qqm0kaos" path="res://M_Door.tres" id="9_ikiii"]
 [ext_resource type="Texture2D" uid="uid://bydaq6vuyctd8" path="res://assets/nothing_burger.png" id="9_il2jm"]
-[ext_resource type="ArrayMesh" uid="uid://bd0qgklitfue7" path="res://assets/SM_window.obj" id="10_hiqwa"]
 [ext_resource type="Texture2D" uid="uid://c2ujyy8a7ey3c" path="res://assets/Faucet_running1.png" id="10_wjb0r"]
-[ext_resource type="Texture2D" uid="uid://bsd1iypcxu3kh" path="res://assets/textures/SM_window_M_Window_Pane_BaseColor.png" id="11_2u3nc"]
 [ext_resource type="Texture2D" uid="uid://c6vm1kpjj7j6a" path="res://assets/Faucet_running2.png" id="11_mc2jv"]
 [ext_resource type="Texture2D" uid="uid://dxrmm7bsgxiqi" path="res://assets/HowToPoster.jpg" id="12_mc2jv"]
-[ext_resource type="Texture2D" uid="uid://b1dyqjl2lrehf" path="res://assets/textures/SM_window_M_Window_Pane_Metallic.png" id="12_udxuc"]
 [ext_resource type="Texture2D" uid="uid://cvmw2v53luyy5" path="res://assets/CartoonHowTo.jpg" id="13_bo7i5"]
-[ext_resource type="Texture2D" uid="uid://dtw5qi3s0ywch" path="res://assets/textures/SM_window_M_Window_Pane_Normal.png" id="13_ikiii"]
-[ext_resource type="Texture2D" uid="uid://b71unvovm2i8k" path="res://assets/textures/SM_window_M_Window_Pane_Roughness.png" id="14_cbp6q"]
 [ext_resource type="Texture2D" uid="uid://c8neccb2u203l" path="res://assets/HowToPerson.jpg" id="14_qktwf"]
-[ext_resource type="Material" uid="uid://c6o5ph3dvv6so" path="res://M_Window_Frame.tres" id="15_26xuy"]
 [ext_resource type="Texture2D" uid="uid://b4ack4yuf764w" path="res://assets/HowToPerson2.jpg" id="15_bh8nc"]
 [ext_resource type="Texture2D" uid="uid://m6jv51vdn6v0" path="res://assets/HowToPerson3.jpg" id="16_jjr1n"]
 [ext_resource type="Texture2D" uid="uid://dra4rkphyl2dn" path="res://assets/DontWashThemselves.jpg" id="17_gggvi"]
 [ext_resource type="Texture2D" uid="uid://eagavetkw6sk" path="res://assets/HowToPerson5.jpg" id="18_jjr1n"]
-[ext_resource type="VideoStream" uid="uid://bfhxy2o0rkgg2" path="res://sfx/Videos/People Walking Free Stock Footage, Royalty-Free No Copyright Content-converted.ogv" id="19_26xuy"]
 [ext_resource type="Texture2D" uid="uid://b1c8llf1ljtc5" path="res://assets/HowToPerson4.jpg" id="19_gggvi"]
-[ext_resource type="VideoStream" uid="uid://dlt4n1devyq35" path="res://sfx/Videos/People Walking Past the Camera - Free Stock Footage For Commercial Projects-converted.ogv" id="20_bc84e"]
 [ext_resource type="Texture2D" uid="uid://hyfewji6wxj5" path="res://assets/Curtain.png" id="23_wjb0r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
@@ -97,33 +89,6 @@ shader = ExtResource("6_ioo17")
 shader_parameter/intensity = 0.0
 shader_parameter/glitch_speed = 12.0
 shader_parameter/block_size = 14.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_554ww"]
-transparency = 1
-albedo_texture = ExtResource("11_2u3nc")
-metallic = 1.0
-metallic_texture = ExtResource("12_udxuc")
-roughness_texture = ExtResource("14_cbp6q")
-normal_enabled = true
-normal_texture = ExtResource("13_ikiii")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_554ww"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_gbfbk"]
-viewport_path = NodePath("Windows/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulpex"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_gbfbk")
-emission_enabled = true
-emission_energy_multiplier = 8.11
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_ioo17"]
-viewport_path = NodePath("Windows/SubViewport2")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbfbk"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_ioo17")
 
 [node name="World" type="Node3D" unique_id=1850648427]
 script = ExtResource("1_aqk2v")
@@ -443,70 +408,6 @@ autostart = true
 [node name="SFXDialouge" parent="." unique_id=1286400756 instance=ExtResource("3_ioo17")]
 
 [node name="Windows" type="Node" parent="." unique_id=1313299411]
-
-[node name="Window1Mesh" type="MeshInstance3D" parent="Windows" unique_id=1174758012]
-transform = Transform3D(-1.5298985e-09, 0, 0.04, 0, 0.04, 0, -0.035, 0, -1.7484555e-09, -2.934766, 1.2437148, -0.22677468)
-visible = false
-mesh = ExtResource("10_hiqwa")
-surface_material_override/0 = SubResource("StandardMaterial3D_554ww")
-surface_material_override/1 = ExtResource("15_26xuy")
-surface_material_override/2 = ExtResource("15_26xuy")
-surface_material_override/3 = ExtResource("15_26xuy")
-surface_material_override/4 = ExtResource("15_26xuy")
-surface_material_override/5 = ExtResource("15_26xuy")
-
-[node name="Window1" type="MeshInstance3D" parent="Windows" unique_id=988862274]
-transform = Transform3D(-4.3455344e-08, 1, 0, 4.3455344e-08, 1.9106855e-15, -0.74737626, -0.99414253, -4.371139e-08, -3.2668858e-08, -2.9301708, 1.2609345, -0.27417508)
-visible = false
-mesh = SubResource("PlaneMesh_554ww")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ulpex")
-
-[node name="SubViewport" type="SubViewport" parent="Windows" unique_id=1557001269]
-size = Vector2i(720, 1280)
-render_target_update_mode = 4
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Windows/SubViewport" unique_id=1118159663]
-offset_left = -40.0
-offset_right = 680.0
-offset_bottom = 1280.0
-audio_track = 2
-stream = ExtResource("19_26xuy")
-autoplay = true
-expand = true
-loop = true
-
-[node name="Window2" type="MeshInstance3D" parent="Windows" unique_id=591642030]
-transform = Transform3D(-4.858495e-08, -0.99999994, 3.2878216e-08, 0, -4.3711385e-08, -0.75216585, 1.1114943, -4.3711385e-08, 1.4371525e-15, 2.7745721, 1.2790824, -0.052156854)
-visible = false
-mesh = SubResource("PlaneMesh_554ww")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_gbfbk")
-
-[node name="SubViewport2" type="SubViewport" parent="Windows" unique_id=1302719218]
-size = Vector2i(720, 1280)
-render_target_update_mode = 4
-
-[node name="VideoStreamPlayer2" type="VideoStreamPlayer" parent="Windows/SubViewport2" unique_id=1540257689]
-offset_left = -40.0
-offset_right = 680.0
-offset_bottom = 1280.0
-audio_track = 2
-stream = ExtResource("20_bc84e")
-autoplay = true
-expand = true
-loop = true
-
-[node name="Window2Mesh" type="MeshInstance3D" parent="Windows" unique_id=1196769414]
-transform = Transform3D(-1.5298985e-09, 0, -0.04, 0, 0.04, 0, 0.035, 0, -1.7484555e-09, 2.7617586, 1.25834, -0.041677117)
-visible = false
-mesh = ExtResource("10_hiqwa")
-surface_material_override/0 = SubResource("StandardMaterial3D_554ww")
-surface_material_override/1 = ExtResource("15_26xuy")
-surface_material_override/2 = ExtResource("15_26xuy")
-surface_material_override/3 = ExtResource("15_26xuy")
-surface_material_override/4 = ExtResource("15_26xuy")
-surface_material_override/5 = ExtResource("15_26xuy")
 
 [node name="Curtain" type="Sprite3D" parent="Windows" unique_id=1661759245]
 transform = Transform3D(-1.639177e-08, 0, 0.375, 0, 0.227, 0, -0.375, 0, -1.639177e-08, -2.7805207, 1.2787004, -0.20827675)
